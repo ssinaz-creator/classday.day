@@ -79,6 +79,8 @@ open classday-photo-shoot-conti.html
 
 > macOS에서 VS Code를 쓰는 경우, `⌘ + J`를 누르면 터미널이 열립니다.
 
+> `⌘ + /`를 누르면 선택한 코드나 줄을 주석 처리하거나 주석 해제할 수 있습니다.
+
 > 또한 `⌘ ⇧ P`를 누른 뒤 `Developer: Reload Window`를 선택하면 개발자 창을 포함한 VS Code 창을 새로고칠 수 있습니다.
 
 ```bash
