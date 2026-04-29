@@ -1,0 +1,1408 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ClassDay — video shoot conti</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Pretendard:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --white:    #FFFFFF;
+    --surface:  #F5F5F7;
+    --ink:      #27282B;
+    --blue:     #2977FE;
+    --purple:   #8144FF;
+    --pink:     #E929FE;
+    --grad: linear-gradient(100deg, #2977FE -6.15%, #8144FF 49.54%, #E929FE 105.24%);
+    --mid-gray: #6E6E73;
+    --light-border: #E2E2E7;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+
+  body {
+    background: var(--white);
+    color: var(--ink);
+    font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.75;
+  }
+
+  /* ══════════════════════════════
+     COVER
+  ══════════════════════════════ */
+  .cover {
+    min-height: 100vh;
+    background: var(--ink);
+    color: var(--white);
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    padding: 56px 64px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cover-glow {
+    position: absolute;
+    top: -200px; right: -200px;
+    width: 700px; height: 700px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(41,119,254,0.18) 0%, rgba(129,68,255,0.1) 40%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .cover-glow-2 {
+    position: absolute;
+    bottom: -100px; left: -100px;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(233,41,254,0.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .cover-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cover-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+  }
+
+  .cover-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px 0;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cover-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 28px;
+  }
+
+  .cover-headline {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(44px, 6.5vw, 80px);
+    font-weight: 600;
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+    margin-bottom: 32px;
+  }
+
+  .cover-headline .grad-text {
+    background: var(--grad);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .cover-desc {
+    font-size: 16px;
+    color: rgba(255,255,255,0.5);
+    max-width: 520px;
+    line-height: 1.7;
+  }
+
+  .cover-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding-top: 36px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    position: relative; z-index: 1;
+  }
+
+  .cover-footer-l {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: rgba(255,255,255,0.25);
+    letter-spacing: 0.06em;
+    line-height: 1.9;
+    text-transform: uppercase;
+  }
+
+  .cover-meta-r {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: rgba(255,255,255,0.25);
+    letter-spacing: 0.06em;
+    text-align: right;
+    line-height: 1.9;
+    text-transform: uppercase;
+  }
+
+  .cover-meta-r span {
+    background: var(--grad);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    opacity: 0.8;
+  }
+
+  /* ══════════════════════════════
+     TOC
+  ══════════════════════════════ */
+  .toc-wrap {
+    background: var(--surface);
+    padding: 72px 64px;
+    border-bottom: 1px solid var(--light-border);
+  }
+
+  .toc-inner { max-width: 900px; margin: 0 auto; }
+
+  .sec-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 36px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .sec-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--light-border);
+  }
+
+  .toc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 0;
+  }
+
+  .toc-row {
+    padding: 18px 0;
+    border-bottom: 1px solid var(--light-border);
+    display: flex;
+    gap: 18px;
+    align-items: baseline;
+  }
+
+  .toc-n {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--blue);
+    min-width: 28px;
+    opacity: 0.7;
+  }
+
+  .toc-t {
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--ink);
+  }
+
+  /* ══════════════════════════════
+     SHARED SECTION STYLES
+  ══════════════════════════════ */
+  .section {
+    padding: 80px 64px;
+    border-bottom: 1px solid var(--light-border);
+  }
+
+  .section.alt { background: var(--surface); }
+
+  .sec-inner { max-width: 900px; margin: 0 auto; }
+
+  .sec-head { margin-bottom: 52px; }
+
+  .sec-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 12px;
+  }
+
+  .sec-title {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(28px, 4vw, 46px);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+  }
+
+  .sec-title .it { font-weight: 300; }
+
+  .grad-word {
+    background: var(--grad);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* ══════════════════════════════
+     OVERVIEW BLOCKS
+  ══════════════════════════════ */
+  .overview-block {
+    background: var(--ink);
+    color: var(--white);
+    padding: 52px;
+    margin-bottom: 40px;
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .overview-block::after {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(41,119,254,0.15) 0%, transparent 70%);
+  }
+
+  .ov-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+    margin-bottom: 20px;
+  }
+
+  .ov-text {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(17px, 2.2vw, 24px);
+    line-height: 1.65;
+    font-weight: 300;
+    position: relative; z-index: 1;
+  }
+
+  .ov-text .hi {
+    background: var(--grad);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* ══════════════════════════════
+     STAT GRID (overview numbers)
+  ══════════════════════════════ */
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--light-border);
+    border: 1px solid var(--light-border);
+    margin-bottom: 40px;
+  }
+
+  .stat-item {
+    background: var(--white);
+    padding: 28px 32px;
+    text-align: center;
+  }
+
+  .stat-item.dark { background: var(--ink); }
+
+  .stat-n {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(32px, 4vw, 48px);
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+
+  .stat-item.dark .stat-n {
+    background: var(--grad);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .stat-lbl {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--mid-gray);
+  }
+
+  .stat-item.dark .stat-lbl { color: rgba(255,255,255,0.3); }
+
+  /* ══════════════════════════════
+     TONE PILLS
+  ══════════════════════════════ */
+  .kw-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 40px;
+  }
+
+  .kw-pill {
+    padding: 9px 22px;
+    border: 1.5px solid var(--light-border);
+    font-size: 14px;
+    font-weight: 400;
+    border-radius: 0;
+    color: var(--mid-gray);
+    background: var(--white);
+    letter-spacing: -0.01em;
+  }
+
+  .kw-pill.on {
+    background: var(--ink);
+    color: var(--white);
+    border-color: var(--ink);
+  }
+
+  .kw-pill.grad-pill {
+    background: var(--grad);
+    color: #fff;
+    border: none;
+    font-weight: 500;
+  }
+
+  /* ══════════════════════════════
+     FLOW ROW
+  ══════════════════════════════ */
+  .flow-wrap {
+    padding: 36px 0;
+    border-top: 1px solid var(--light-border);
+    border-bottom: 1px solid var(--light-border);
+    margin-bottom: 40px;
+  }
+
+  .flow-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 20px;
+  }
+
+  .flow-row {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+  }
+
+  .flow-node {
+    border: 1px solid var(--light-border);
+    border-radius: 2px;
+    padding: 14px 20px;
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--ink);
+    background: var(--white);
+    white-space: nowrap;
+    text-align: center;
+    line-height: 1.4;
+  }
+
+  .flow-node .fn-sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: var(--mid-gray);
+    letter-spacing: 0.06em;
+    display: block;
+    margin-top: 3px;
+    text-transform: uppercase;
+  }
+
+  .flow-node.dark {
+    background: var(--ink);
+    color: var(--white);
+    border-color: var(--ink);
+  }
+
+  .flow-node.dark .fn-sub { color: rgba(255,255,255,0.35); }
+
+  .flow-node.accent {
+    background: rgba(41,119,254,0.06);
+    border-color: rgba(41,119,254,0.3);
+    color: var(--blue);
+  }
+
+  .flow-node.accent .fn-sub { color: rgba(41,119,254,0.6); }
+
+  .flow-arrow {
+    font-size: 14px;
+    color: var(--light-border);
+    padding: 0 10px;
+    flex-shrink: 0;
+  }
+
+  /* ══════════════════════════════
+     NOTE BLOCK
+  ══════════════════════════════ */
+  .note {
+    border: 1px solid var(--light-border);
+    padding: 20px 28px;
+    margin-bottom: 32px;
+    background: var(--surface);
+  }
+
+  .note-lbl {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 8px;
+  }
+
+  .note-body {
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--mid-gray);
+  }
+
+  .note-body strong { color: var(--ink); font-weight: 500; }
+
+  /* ══════════════════════════════
+     SCENE CARD
+  ══════════════════════════════ */
+  .scene-card {
+    border: 1px solid var(--light-border);
+    margin-bottom: 1px;
+  }
+
+  .scene-card.interview-card {
+    border-color: rgba(41,119,254,0.25);
+  }
+
+  .scene-header {
+    display: grid;
+    grid-template-columns: 56px 1fr auto;
+    align-items: center;
+    border-bottom: 1px solid var(--light-border);
+    background: var(--surface);
+  }
+
+  .scene-card.interview-card .scene-header {
+    background: rgba(41,119,254,0.04);
+    border-bottom-color: rgba(41,119,254,0.15);
+  }
+
+  .scene-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--blue);
+    padding: 14px 0 14px 20px;
+    letter-spacing: 0.08em;
+    opacity: 0.7;
+  }
+
+  .scene-title-wrap {
+    padding: 14px 16px;
+  }
+
+  .scene-title {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.3;
+    margin-bottom: 3px;
+  }
+
+  .scene-sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: var(--mid-gray);
+    letter-spacing: 0.06em;
+  }
+
+  .scene-badges {
+    display: flex;
+    gap: 6px;
+    padding: 14px 20px 14px 0;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    max-width: 200px;
+  }
+
+  .badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 100px;
+    white-space: nowrap;
+    border: 1px solid var(--light-border);
+    color: var(--mid-gray);
+    background: var(--white);
+  }
+
+  .badge.b-broll { color: var(--ink); border-color: var(--ink); }
+  .badge.b-interview { color: var(--blue); border-color: rgba(41,119,254,0.4); background: rgba(41,119,254,0.05); }
+  .badge.b-dur { color: var(--mid-gray); }
+  .badge.b-cam { color: var(--mid-gray); }
+
+  .scene-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+
+  .scene-body.three-col {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .scene-col {
+    padding: 24px 28px;
+  }
+
+  .scene-col + .scene-col {
+    border-left: 1px solid var(--light-border);
+  }
+
+  .scene-col-lbl {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 14px;
+    opacity: 0.7;
+  }
+
+  .scene-col-body {
+    font-size: 14px;
+    line-height: 1.8;
+    color: var(--mid-gray);
+  }
+
+  .scene-col-body strong { color: var(--ink); font-weight: 500; }
+  .scene-col-body em { font-size: 12px; color: var(--mid-gray); font-style: normal; display: block; margin-top: 10px; }
+
+  .feature-tag {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 100px;
+    border: 1px solid var(--light-border);
+    color: var(--mid-gray);
+    margin-top: 10px;
+    margin-right: 4px;
+  }
+
+  /* ══════════════════════════════
+     ACT DIVIDER
+  ══════════════════════════════ */
+  .act-divider {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 44px 0 16px;
+  }
+
+  .act-divider-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--blue);
+    white-space: nowrap;
+  }
+
+  .act-divider-line {
+    flex: 1;
+    height: 1px;
+    background: var(--light-border);
+  }
+
+  /* ══════════════════════════════
+     CHECKLIST
+  ══════════════════════════════ */
+  .checklist-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border: 1px solid var(--light-border);
+  }
+
+  .check-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--mid-gray);
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--light-border);
+  }
+
+  .check-item:nth-child(odd) { border-right: 1px solid var(--light-border); }
+  .check-item:nth-last-child(-n+2) { border-bottom: none; }
+
+  .check-box {
+    width: 14px; height: 14px;
+    border: 1px solid var(--light-border);
+    border-radius: 2px;
+    flex-shrink: 0;
+    margin-top: 3px;
+  }
+
+  hr.divider {
+    border: none;
+    border-top: 1px solid var(--light-border);
+    margin: 44px 0;
+  }
+
+  /* ══════════════════════════════
+     FOOTER
+  ══════════════════════════════ */
+  .doc-footer {
+    background: var(--ink);
+    color: var(--white);
+    padding: 56px 64px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .ft-tagline {
+    font-size: 13px;
+    color: rgba(255,255,255,0.3);
+    margin-top: 6px;
+  }
+
+  .ft-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: rgba(255,255,255,0.2);
+    text-align: right;
+    line-height: 1.9;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 720px) {
+    .cover, .toc-wrap, .section, .doc-footer { padding: 44px 24px; }
+    .stat-grid { grid-template-columns: repeat(2, 1fr); }
+    .scene-body, .scene-body.three-col { grid-template-columns: 1fr; }
+    .scene-body .scene-col + .scene-col { border-left: none; border-top: 1px solid var(--light-border); }
+    .checklist-grid { grid-template-columns: 1fr; }
+    .check-item:nth-child(odd) { border-right: none; }
+    .check-item:nth-last-child(-n+2) { border-bottom: 1px solid var(--light-border); }
+    .check-item:last-child { border-bottom: none; }
+    .flow-row { overflow-x: auto; padding-bottom: 8px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━
+     COVER
+━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<div class="cover">
+  <div class="cover-glow"></div>
+  <div class="cover-glow-2"></div>
+
+  <div class="cover-nav">
+    <svg width="137" height="30" viewBox="0 0 137 30" fill="none" xmlns="http://www.w3.org/2000/svg" style="height:22px;width:auto;">
+      <g clip-path="url(#ca)"><g clip-path="url(#cb)">
+      <path d="M27.6 8.44C27.6 11.18 25.38 13.4 22.64 13.4 21.15 13.4 19.82 12.75 18.91 11.71 17.98 10.63 16.6 9.94 15.06 9.94 12.26 9.94 9.93 12.2 9.93 15c0 .01 0 .02 0 .03C9.93 17.77 7.71 20 4.97 20 2.23 20 .01 17.77.01 15.03.01 6.73 6.74 0 15.04 0c4.36 0 8.27 1.87 11.02 4.84C27.01 5.74 27.6 7.02 27.6 8.44z" fill="white"/>
+      <path d="M4.96 10C7.7 10 9.92 12.22 9.93 14.96V15c0 2.8 2.33 5.06 5.12 5.06 1.54 0 2.93-.69 3.85-1.78.91-1.03 2.25-1.68 3.73-1.68 2.74 0 4.96 2.22 4.96 4.96 0 1.42-.59 2.7-1.54 3.6C23.3 28.13 19.39 30 15.03 30c-2.91 0-5.62-.83-7.92-2.26C5.83 28.28 3.78 28.81 1.83 28.08c-.02-.01-.76-.28-.13-.55.02-.01 1.81-1.15 1.7-3.04C1.28 21.9 0 18.58 0 15c0-2.78 2.22-5 4.96-5z" fill="white"/>
+      </g>
+      <path d="M51.53 10.1C49.82 8.26 47.43 7.12 44.77 7.12c-5.03 0-9.12 4.05-9.17 9.07v.16c0 5.03 4.09 9.07 9.17 9.07 2.66 0 5.05-1.14 6.73-2.95l.06-.06c.41-.39.67-.94.67-1.55 0-1.18-.96-2.14-2.13-2.14-.64 0-1.21.28-1.6.72C47.6 20.48 46.27 21.15 44.79 21.15c-2.67 0-4.92-2.16-4.92-4.88v-.01c0-2.72 2.25-4.88 4.92-4.88 1.48 0 2.81.66 3.7 1.71.39.44.96.72 1.6.72 1.18 0 2.13-.96 2.13-2.14 0-.61-.25-1.16-.63-1.56l-.06-.07z" fill="white"/>
+      <path d="M57.62 8.62v14.85c0 .61-.15 1.09-.49 1.43-.33.33-.82.47-1.39.47-.58 0-1.06-.14-1.37-.47-.33-.34-.48-.82-.48-1.43V8.62c0-.63.15-1.13.48-1.48.33-.35.8-.5 1.36-.5.6 0 1.09.15 1.43.5.33.35.48.85.48 1.48z" fill="white"/>
+      <path fill-rule="evenodd" d="M106.06 8.62v4.62c-.77-.62-1.94-.9-3.14-.9-1.81 0-3.28.72-4.3 1.91-1.01 1.19-1.57 2.83-1.57 4.67 0 1.81.56 3.46 1.58 4.65 1.02 1.19 2.49 1.92 4.29 1.92.8 0 1.57-.18 2.21-.45.46-.2.87-.46 1.16-.75.27.64.85 1.1 1.6 1.1.62 0 1.11-.17 1.43-.53.32-.36.45-.87.45-1.48V8.62c0-.63-.14-1.14-.47-1.48-.32-.35-.8-.5-1.38-.5-.58 0-1.06.15-1.39.5-.33.35-.47.85-.47 1.48zm-5.3 10.29c0-1.57 1.12-2.86 2.65-2.86 1.53 0 2.65 1.29 2.65 2.86 0 1.62-1.12 2.86-2.65 2.86s-2.65-1.24-2.65-2.86z" fill="white"/>
+      <path d="M133.31 13.08l-2.71 6.49-2.57-6.51c-.14-.35-.35-.63-.62-.84-.28-.23-.69-.33-1.19-.33-.59 0-1.09.13-1.47.4-.38.29-.57.68-.57 1.16 0 .12.01.25.03.4.02.18.1.4.21.65l4.2 9.42-1.52 3.23c-.08.17-.16.36-.24.57-.09.25-.14.48-.14.7 0 .41.17.77.48 1.07.34.34.81.5 1.38.5.46 0 .86-.13 1.17-.41.32-.27.57-.63.76-1.07l6.26-13.99c.09-.19.14-.38.16-.56.03-.18.05-.34.05-.48 0-.45-.17-.83-.5-1.13-.34-.32-.83-.46-1.42-.46-.44 0-.81.09-1.08.31-.25.19-.45.49-.62.88z" fill="white"/>
+      <path fill-rule="evenodd" d="M67.8 24.71c-.31-.24-.47-.61-.49-1.06-.08.08-.16.16-.23.24-.23.25-.51.46-.84.65-.33.19-.71.34-1.14.45-.44.12-.94.18-1.5.18-1.31 0-2.37-.34-3.16-1.04-.77-.73-1.15-1.68-1.15-2.84 0-.66.11-1.24.33-1.73.24-.48.56-.88.95-1.21.41-.31.87-.56 1.39-.74.53-.18 1.08-.32 1.65-.42.61-.12 1.22-.21 1.84-.27.57-.06 1.18-.11 1.82-.16v-.25c0-.22-.03-.43-.09-.64-.06-.21-.16-.4-.3-.57-.11-.15-.29-.28-.53-.38-.24-.09-.55-.15-.93-.15-.25 0-.48.02-.69.05-.19.03-.39.08-.6.15-.17.06-.37.16-.58.28-.21.13-.45.28-.72.45-.21.15-.42.27-.62.37-.21.12-.48.17-.77.17-.43 0-.81-.16-1.14-.47-.33-.32-.5-.73-.5-1.19 0-.33.14-.67.38-1 .24-.35.61-.66 1.08-.93.48-.29 1.06-.52 1.73-.7.7-.18 1.51-.27 2.42-.27 1.87 0 3.26.36 4.12 1.14.88.77 1.3 1.97 1.3 3.53v7.18c0 .5-.13.9-.43 1.17-.29.27-.75.37-1.33.37-.51 0-.94-.1-1.28-.33zm-3.24-5.09c-.76.16-1.2.37-1.39.63-.2.25-.29.51-.29.75 0 .37.11.64.31.83.19.17.56.28 1.17.28.97 0 1.68-.22 2.17-.62.5-.43.74-.96.74-1.62v-.66c-.52.06-1.02.12-1.5.19-.54.08-.94.15-1.21.22z" fill="white"/>
+      <path d="M77.13 16.4c-.22-.08-.36-.16-.45-.24-.17-.19-.25-.39-.25-.62 0-.24.11-.45.35-.62.25-.18.66-.29 1.27-.29.62 0 1.12.08 1.48.23.39.16.8.36 1.22.61.14.09.3.17.48.25.24.08.44.12.65.12.23 0 .44-.05.62-.15.17-.12.32-.26.46-.44.25-.32.36-.69.36-1.12 0-.21-.05-.42-.14-.62-.1-.22-.26-.42-.49-.61-.37-.29-.91-.57-1.63-.83-.74-.28-1.68-.42-2.82-.42-.79 0-1.52.09-2.2.27-.66.18-1.24.46-1.73.83-.5.36-.88.8-1.15 1.33-.28.53-.41 1.14-.41 1.81 0 .63.1 1.18.31 1.65.2.45.5.84.87 1.16.38.31.82.56 1.32.76.52.19 1.07.32 1.68.42l1.44.24c.33.06.59.13.8.21.2.08.33.17.4.25.19.21.28.42.28.65 0 .32-.12.56-.37.74-.25.18-.69.29-1.37.29-.55 0-.99-.07-1.33-.2-.36-.14-.67-.3-.95-.47-.27-.17-.52-.33-.74-.47-.26-.16-.53-.25-.82-.25-.32 0-.6.1-.85.29-.23.18-.41.41-.55.67-.18.32-.27.66-.27 1.02 0 .22.06.44.17.66.14.22.32.4.55.56.49.36 1.12.65 1.89.87.8.24 1.68.35 2.66.35 1.71 0 3.1-.34 4.12-1.05 1.05-.72 1.57-1.8 1.57-3.21 0-1.22-.34-2.17-1.06-2.81-.69-.64-1.79-1.08-3.27-1.35l-1.27-.24c-.35-.06-.64-.13-.86-.21z" fill="white"/>
+      <path d="M87.41 24.93c-.77-.22-1.4-.51-1.89-.87-.23-.16-.41-.34-.55-.56-.12-.22-.18-.44-.18-.66 0-.36.09-.7.27-1.02.14-.26.32-.49.55-.67.25-.19.53-.29.85-.29.29 0 .56.09.82.25.22.14.47.3.74.47.28.17.59.33.95.47.34.13.78.2 1.33.2.68 0 1.12-.11 1.37-.29.25-.18.37-.42.37-.74 0-.23-.09-.44-.28-.65-.07-.08-.2-.17-.4-.25-.2-.08-.47-.15-.8-.21l-1.44-.24c-.61-.1-1.16-.23-1.68-.42-.5-.2-.94-.45-1.32-.76-.37-.32-.67-.71-.87-1.16-.21-.47-.31-1.02-.31-1.65 0-.67.13-1.28.41-1.81.27-.53.65-.97 1.15-1.33.49-.37 1.07-.65 1.73-.83.68-.18 1.41-.27 2.2-.27 1.14 0 2.08.14 2.82.42.72.26 1.26.54 1.63.83.23.19.39.39.49.61.09.2.14.41.14.62 0 .43-.11.8-.36 1.12-.14.18-.29.32-.46.44-.18.1-.39.15-.62.15-.21 0-.41-.04-.65-.12-.18-.08-.34-.16-.48-.25-.42-.25-.83-.45-1.22-.61-.36-.15-.86-.23-1.48-.23-.61 0-1.02.11-1.27.29-.24.17-.35.38-.35.62 0 .23.08.43.25.62.09.08.23.16.45.24.22.08.51.15.86.21l1.27.24c1.48.27 2.58.71 3.27 1.35.72.64 1.06 1.59 1.06 2.81 0 1.41-.52 2.49-1.57 3.21-1.02.71-2.41 1.05-4.12 1.05-.98 0-1.86-.11-2.66-.35z" fill="white"/>
+      <path fill-rule="evenodd" d="M119.46 16.49v.25c-.64.05-1.25.1-1.82.16-.62.06-1.23.15-1.84.27-.57.1-1.12.24-1.65.42-.52.18-.98.43-1.39.74-.39.33-.71.73-.95 1.21-.22.49-.33 1.07-.33 1.73 0 1.16.38 2.11 1.15 2.84.79.7 1.85 1.04 3.16 1.04.56 0 1.06-.06 1.5-.18.43-.11.81-.26 1.14-.45.33-.18.61-.4.84-.65.08-.08.16-.16.23-.24.03.45.18.82.49 1.06.34.23.77.33 1.28.33.58 0 1.04-.1 1.33-.37.3-.27.43-.67.43-1.17v-7.18c0-1.56-.42-2.76-1.3-3.53-.86-.78-2.25-1.14-4.12-1.14-.91 0-1.72.09-2.42.27-.67.18-1.25.41-1.73.7-.47.27-.84.58-1.08.93-.24.33-.38.67-.38 1c0 .46.17.87.5 1.19.33.31.71.47 1.14.47.29 0 .56-.05.77-.17.2-.1.41-.22.62-.37.27-.17.51-.32.72-.45.21-.12.41-.22.58-.28.21-.07.41-.12.6-.15.21-.03.44-.05.69-.05.38 0 .69.06.93.15.24.1.42.23.53.38.14.17.24.36.3.57.06.21.09.42.09.64zm-2.72 3.13c.27-.07.67-.14 1.21-.22.48-.07.98-.13 1.5-.19v.66c0 .66-.24 1.19-.74 1.62-.49.4-1.2.62-2.17.62-.61 0-.98-.11-1.17-.28-.2-.19-.31-.46-.31-.83 0-.24.09-.5.29-.75.19-.24.63-.45 1.39-.63z" fill="white"/>
+      <defs><clipPath id="ca"><rect width="137" height="30" fill="white"/></clipPath><clipPath id="cb"><rect width="27.6" height="30" fill="white"/></clipPath></defs>
+    </svg>
+    <div class="cover-badge">Shooting Script · v2.0 · 2026</div>
+  </div>
+
+  <div class="cover-body">
+    <div class="cover-eyebrow">학원 소개 영상 촬영 콘티</div>
+    <div class="cover-headline">
+      학원 소개 영상<br>
+      <span class="grad-text">Shooting Script</span>
+    </div>
+    <div class="cover-desc">
+      "전임강사 40명이 전담합니다" 섹션 하단 배치.<br>
+      6개 핵심 기능 + 수업 전·중·후 3단계 관리 프로세스 중심 구성.<br>
+      MasterClass 무드 · 저채도 따뜻한 컬러 · 현장 컷 + 인터뷰 교차편집.
+    </div>
+  </div>
+
+  <div class="cover-footer">
+    <div class="cover-footer-l">
+      ClassDay Brand Consulting<br>
+      Confidential · Internal Use Only
+    </div>
+    <div class="cover-meta-r">
+      총 예상 러닝타임 <span>2분 — 2분 30초</span><br>
+      편집 전 촬영 분량 <span>3 — 4시간</span><br>
+      총 씬 구성 <span>9 Scenes</span>
+    </div>
+  </div>
+</div>
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━
+     TOC
+━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<div class="toc-wrap">
+  <div class="toc-inner">
+    <div class="sec-label">Contents</div>
+    <div class="toc-grid">
+      <div class="toc-row"><span class="toc-n">00</span><span class="toc-t">영상 개요 & 톤앤매너</span></div>
+      <div class="toc-row"><span class="toc-n">01</span><span class="toc-t">Act 1 — 오프닝 B-roll</span></div>
+      <div class="toc-row"><span class="toc-n">02</span><span class="toc-t">Act 2 — 인터뷰 ① 전담 철학</span></div>
+      <div class="toc-row"><span class="toc-n">03</span><span class="toc-t">Act 3 — 6개 기능 현장 컷</span></div>
+      <div class="toc-row"><span class="toc-n">04</span><span class="toc-t">Act 4 — 인터뷰 ② 3단계 연결</span></div>
+      <div class="toc-row"><span class="toc-n">05</span><span class="toc-t">Act 5 — 수업 전·중·후 현장 컷</span></div>
+      <div class="toc-row"><span class="toc-n">06</span><span class="toc-t">Act 6 — 인터뷰 ③ 클로징</span></div>
+      <div class="toc-row"><span class="toc-n">07</span><span class="toc-t">촬영 준비 체크리스트</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━
+     00 OVERVIEW
+━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<div class="section">
+  <div class="sec-inner">
+    <div class="sec-head">
+      <div class="sec-num">Section 00</div>
+      <div class="sec-title">영상 개요 &amp; <span class="it">톤앤매너</span></div>
+    </div>
+
+    <div class="overview-block">
+      <div class="ov-label">이 영상이 담아야 할 것</div>
+      <div class="ov-text">
+        좋은 작품이 아이의 마음에 오래 남는 건,<br>
+        그 안에 <span class="hi">진심으로 만든 사람들</span>이 있기 때문입니다.<br>
+        좋은 수업도 마찬가지입니다.
+      </div>
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat-item dark">
+        <div class="stat-n">9</div>
+        <div class="stat-lbl">씬 (Scenes)</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-n">3</div>
+        <div class="stat-lbl">인터뷰 파트</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-n">6</div>
+        <div class="stat-lbl">현장 컷 파트</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-n">6개</div>
+        <div class="stat-lbl">핵심 기능 커버</div>
+      </div>
+    </div>
+
+    <div class="sec-num" style="margin-bottom:16px;">톤앤매너 키워드</div>
+    <div class="kw-row">
+      <div class="kw-pill grad-pill">MasterClass 참고</div>
+      <div class="kw-pill on">저채도 · 따뜻한 컬러</div>
+      <div class="kw-pill on">차분하고 몰입감 있는 무드</div>
+      <div class="kw-pill">과도한 콘트라스트 지양</div>
+      <div class="kw-pill">현장 컷 + 인터뷰 교차편집</div>
+      <div class="kw-pill">메인 인터뷰어 1인 중심</div>
+      <div class="kw-pill">카메라 최대 2대 (1대 가능)</div>
+    </div>
+
+    <div class="flow-wrap">
+      <div class="flow-label">영상 전체 흐름</div>
+      <div class="flow-row">
+        <div class="flow-node dark">오프닝<span class="fn-sub">S.01</span></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node accent">인터뷰 ①<span class="fn-sub">S.02</span></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node">팀티칭·테스트<span class="fn-sub">S.03</span></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node">결과발송·첨삭<span class="fn-sub">S.04</span></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node">과제·온라인<span class="fn-sub">S.05</span></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node accent">인터뷰 ②<span class="fn-sub">S.06</span></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node">수업 전·중·후<span class="fn-sub">S.07</span></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node accent">인터뷰 ③<span class="fn-sub">S.08</span></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node dark">아웃트로<span class="fn-sub">S.09</span></div>
+      </div>
+    </div>
+
+    <div class="note">
+      <div class="note-lbl">사전 확인 필수</div>
+      <div class="note-body">
+        <strong>촬영 방식 확정 → 인력 구성 및 예산 산정</strong> 순서로 진행. 영상 내용은 학원 사전 협의 필수.
+        인터뷰 대상자 선정 및 질문 리스트는 학원과 공동 확인 요망.
+        실제 수업 장면 촬영 시 <strong>학생·학부모 동의서 수령 필요.</strong>
+        성적표·첨삭본 등 개인정보 포함 자료는 샘플 문서 또는 모자이크 처리로 대체.
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━
+     01 ACT 1 — OPENING
+━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<div class="section alt">
+  <div class="sec-inner">
+    <div class="sec-head">
+      <div class="sec-num">Section 01</div>
+      <div class="sec-title">Act 1 — <span class="it">오프닝</span></div>
+    </div>
+
+    <div class="scene-card">
+      <div class="scene-header">
+        <div class="scene-num">S.01</div>
+        <div class="scene-title-wrap">
+          <div class="scene-title">오프닝 B-roll — 학원 공간 & 분위기 확립</div>
+          <div class="scene-sub">No Dialogue · 배경음악 인트로 · 저채도 따뜻한 무드 첫 제시</div>
+        </div>
+        <div class="scene-badges">
+          <span class="badge b-broll">현장컷</span>
+          <span class="badge b-dur">15 — 20초</span>
+          <span class="badge b-cam">Cam A+B</span>
+        </div>
+      </div>
+      <div class="scene-body">
+        <div class="scene-col">
+          <div class="scene-col-lbl">촬영 컷 구성</div>
+          <div class="scene-col-body">
+            <strong>① 학원 외부 / 입구</strong><br>
+            학원 간판 또는 입구 전경. 학생들이 들어오는 장면. Wide shot에서 점차 교실 내부로 진입하는 흐름.<br><br>
+            <strong>② 교실 내부 전경</strong><br>
+            부드러운 dolly-in 또는 슬라이더 이동으로 진입. 학생들이 자리에 앉아 있는 정적 컷.<br><br>
+            <strong>③ 교실 디테일 클로즈업</strong><br>
+            책상 위 교재, 노트, 펜 등 질감 있는 소품 컷. 얕은 피사계심도(f1.8~2.8) 활용.
+          </div>
+        </div>
+        <div class="scene-col">
+          <div class="scene-col-lbl">카메라 / 색감 메모</div>
+          <div class="scene-col-body">
+            <strong>색온도:</strong> 화이트밸런스 3200K~4000K 세팅으로 따뜻한 톤 유지. 천장 형광등 직광 지양. 자연광 + 간접조명 선호. 커튼·블라인드로 광량 조절.<br><br>
+            <strong>편집 기준:</strong> 채도 -15~-20, 하이라이트 약간 롤오프. MasterClass 특유의 필름스러운 느낌 목표. 색보정 LUT는 사전 협의.<br><br>
+            <strong>음향:</strong> 이 씬은 환경음(ambient) + 배경음악 페이드인 위주. VO 없음.
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━
+     02 ACT 2 — INTERVIEW 1
+━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<div class="section">
+  <div class="sec-inner">
+    <div class="sec-head">
+      <div class="sec-num">Section 02</div>
+      <div class="sec-title">Act 2 — 인터뷰 ① <span class="it">전담 철학</span></div>
+    </div>
+
+    <div class="scene-card interview-card">
+      <div class="scene-header">
+        <div class="scene-num">S.02</div>
+        <div class="scene-title-wrap">
+          <div class="scene-title">메인 인터뷰 — 전임강사 40명 체제 & 전담 철학</div>
+          <div class="scene-sub">인터뷰이: 원장 또는 대표 강사 1인 (학원 사전 협의)</div>
+        </div>
+        <div class="scene-badges">
+          <span class="badge b-interview">인터뷰</span>
+          <span class="badge b-dur">25 — 35초</span>
+          <span class="badge b-cam">Cam A</span>
+        </div>
+      </div>
+      <div class="scene-body">
+        <div class="scene-col">
+          <div class="scene-col-lbl">인터뷰 유도 질문</div>
+          <div class="scene-col-body">
+            <strong>Q1.</strong> 전임강사 40명 체제로 운영되는 이유가 뭔가요?<br><br>
+            <strong>Q2.</strong> 비문학·문법·문학·클리닉, 각 영역에 전담 강사가 따로 있다는 게 학생들에게 어떤 차이를 만들어내나요?<br><br>
+            <em>* 자연스러운 말투 유도. 카메라 응시 방향: 약 15° 옆(인터뷰어 방향). 클린 룩 의상 권장. 핵심 멘트 1~2문장만 발췌 편집 예정.</em>
+          </div>
+        </div>
+        <div class="scene-col">
+          <div class="scene-col-lbl">촬영 세팅</div>
+          <div class="scene-col-body">
+            <strong>구도:</strong> 헤드·숄더 샷. 피사체가 프레임 좌측 1/3, 룩 룸 확보. 배경 교실 bokeh 처리 (f2.0 내외).<br><br>
+            <strong>조명:</strong> 키라이트 = 창문 자연광 + reflector 보조. 백라이트로 인물 분리. 플래시/스트로보 지양.<br><br>
+            <strong>Cam B 역할:</strong> 인터뷰 중 표정·손동작 cutaway용 동시 롤링.<br><br>
+            <strong>편집 활용:</strong> 직접 등장 30% / VO로 현장 컷 위에 올리는 방식 70% 권장.
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━
+     03 ACT 3 — 6 FEATURES
+━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<div class="section alt">
+  <div class="sec-inner">
+    <div class="sec-head">
+      <div class="sec-num">Section 03</div>
+      <div class="sec-title">Act 3 — <span class="it">6개 핵심 기능</span> 현장 컷</div>
+    </div>
+
+    <div class="note">
+      <div class="note-lbl">구성 방향</div>
+      <div class="note-body">
+        이미지의 6개 기능을 <strong>S.03 ~ S.05 세 씬에 2개씩 묶어 촬영.</strong>
+        씬당 현장 컷 위주로 구성하고, S.02 인터뷰 VO를 현장 컷 위에 올려 설명을 보완.
+        편집 시 각 기능 키워드 자막 하단 삽입. Pretendard Light 타이포, 흰 배경.
+      </div>
+    </div>
+
+    <!-- S.03 -->
+    <div class="scene-card" style="margin-bottom: 16px;">
+      <div class="scene-header">
+        <div class="scene-num">S.03</div>
+        <div class="scene-title-wrap">
+          <div class="scene-title">영역별 전담 팀티칭 + 매주 테스트 & 클리닉</div>
+          <div class="scene-sub">비문학·문법·문학·독서논술 전담 강사 / 기준 점수 미달 시 클리닉 자동 배정</div>
+        </div>
+        <div class="scene-badges">
+          <span class="badge b-broll">현장컷</span>
+          <span class="badge b-dur">25 — 30초</span>
+          <span class="badge b-cam">Cam A+B</span>
+        </div>
+      </div>
+      <div class="scene-body three-col">
+        <div class="scene-col">
+          <div class="scene-col-lbl">팀티칭 컷</div>
+          <div class="scene-col-body">
+            <strong>① 강사-학생 1:1 지도</strong><br>
+            강사가 개별 학생 노트를 보며 설명하는 장면. 50mm 이상 망원으로 자연스럽게 포착.<br><br>
+            <strong>② 팀 강사 전환 장면</strong><br>
+            한 강사에서 다른 영역 강사로 이동하는 장면. 전담 구조를 시각적으로 표현.<br><br>
+            <span class="feature-tag">영역별 전담 팀티칭</span>
+          </div>
+        </div>
+        <div class="scene-col">
+          <div class="scene-col-lbl">테스트 & 클리닉 컷</div>
+          <div class="scene-col-body">
+            <strong>① 학생 시험지 푸는 장면</strong><br>
+            집중하는 표정 클로즈업. 시험지 + 손 Over-the-shoulder 앵글.<br><br>
+            <strong>② 클리닉 배정 화면</strong><br>
+            기준 점수 미달 시 클리닉 자동 배정 UX. 앱 시연 또는 스크린레코딩.<br><br>
+            <span class="feature-tag">매주 테스트 + 클리닉</span>
+          </div>
+        </div>
+        <div class="scene-col">
+          <div class="scene-col-lbl">기술 메모</div>
+          <div class="scene-col-body">
+            이 씬이 영상의 에너지 피크. 편집 시 컷 전환을 조금 더 빠르게 해 생동감 부여.<br><br>
+            셔터스피드 1/100s 이하로 형광등 플리커 방지.<br><br>
+            교실 공간 제약으로 삼각대보다 <strong>짐벌 운용 권장.</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- S.04 -->
+    <div class="scene-card" style="margin-bottom: 16px;">
+      <div class="scene-header">
+        <div class="scene-num">S.04</div>
+        <div class="scene-title-wrap">
+          <div class="scene-title">매주 학부모 결과 발송 + 지면첨삭 & 대면 클리닉</div>
+          <div class="scene-sub">테스트 결과 문자 발송 / 논술 답안 첨삭 → 상위 득점자 대면 클리닉 연계</div>
+        </div>
+        <div class="scene-badges">
+          <span class="badge b-broll">현장컷</span>
+          <span class="badge b-dur">20 — 25초</span>
+          <span class="badge b-cam">Cam A</span>
+        </div>
+      </div>
+      <div class="scene-body three-col">
+        <div class="scene-col">
+          <div class="scene-col-lbl">결과 발송 컷</div>
+          <div class="scene-col-body">
+            <strong>① 문자 발송 화면</strong><br>
+            강사 또는 운영자가 스마트폰·태블릿으로 결과 발송. 발송 버튼 누르는 장면. 화면 클로즈업 + 손 포착.<br><br>
+            <strong>② 성적표 전달 장면</strong><br>
+            과정 마지막 주 성적표를 학생에게 전달하는 장면.<br><br>
+            <span class="feature-tag">매주 학부모 결과 발송</span>
+          </div>
+        </div>
+        <div class="scene-col">
+          <div class="scene-col-lbl">지면첨삭 & 클리닉 컷</div>
+          <div class="scene-col-body">
+            <strong>① 논술 답안 지면첨삭</strong><br>
+            강사가 학생 답안지에 붉은 펜으로 첨삭하는 장면. 손 클로즈업 위주.<br><br>
+            <strong>② 대면 클리닉 1:1 장면</strong><br>
+            상위 득점자와 강사의 1:1 대화. 조용하고 차분한 분위기.<br><br>
+            <span class="feature-tag">지면첨삭 + 대면 클리닉</span>
+          </div>
+        </div>
+        <div class="scene-col">
+          <div class="scene-col-lbl">기술 메모</div>
+          <div class="scene-col-body">
+            첨삭 장면 클로즈업 시 <strong>테이블 포인트라이트</strong>(스탠드 조명 등)로 따뜻한 느낌 강조.<br><br>
+            성적표 화면은 학생 개인정보 가림 처리 필요. 샘플 문서 또는 모자이크 처리로 대체.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- S.05 -->
+    <div class="scene-card">
+      <div class="scene-header">
+        <div class="scene-num">S.05</div>
+        <div class="scene-title-wrap">
+          <div class="scene-title">철저한 과제 점검 + 실시간 온라인 수강</div>
+          <div class="scene-sub">과제 미완성 시 선생님 지도 하에 완성 후 귀가 / 클래스데이 실시간 스트리밍 + 녹화 병행</div>
+        </div>
+        <div class="scene-badges">
+          <span class="badge b-broll">현장컷</span>
+          <span class="badge b-dur">20 — 25초</span>
+          <span class="badge b-cam">Cam A+B</span>
+        </div>
+      </div>
+      <div class="scene-body three-col">
+        <div class="scene-col">
+          <div class="scene-col-lbl">과제 점검 컷</div>
+          <div class="scene-col-body">
+            <strong>① 과제 점검 장면</strong><br>
+            강사가 학생 과제물을 체크하는 장면. 과제물 클로즈업.<br><br>
+            <strong>② 잔류 지도 장면</strong><br>
+            과제 미완성 학생이 강사와 함께 과제를 마무리하는 모습. 방과 후 조용한 교실 분위기.<br><br>
+            <span class="feature-tag">철저한 과제 점검</span>
+          </div>
+        </div>
+        <div class="scene-col">
+          <div class="scene-col-lbl">온라인 수강 컷</div>
+          <div class="scene-col-body">
+            <strong>① 클래스데이 라이브 스트리밍</strong><br>
+            실제 수업 화면 스크린레코딩. 클래스 내 과제 제출 UX 포함.<br><br>
+            <strong>② 집에서 온라인 수강하는 학생</strong><br>
+            창가 자연광 환경, 태블릿·노트북으로 수업 수강. 연출 가능.<br><br>
+            <span class="feature-tag">실시간 온라인 수강</span>
+          </div>
+        </div>
+        <div class="scene-col">
+          <div class="scene-col-lbl">기술 메모</div>
+          <div class="scene-col-body">
+            스크린레코딩은 별도 고해상도 파일 확보 <strong>(1080p 60fps 이상).</strong><br><br>
+            온라인 수강 장면은 창가 자연광 세팅. 화이트밸런스 S.01과 동일 톤 유지.<br><br>
+            앱 미완성 UI라면 목업 화면 사용 가능하나 사전 협의 필요.
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━
+     04 ACT 4 — INTERVIEW 2
+━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<div class="section">
+  <div class="sec-inner">
+    <div class="sec-head">
+      <div class="sec-num">Section 04</div>
+      <div class="sec-title">Act 4 — 인터뷰 ② <span class="it">3단계 연결</span></div>
+    </div>
+
+    <div class="scene-card interview-card">
+      <div class="scene-header">
+        <div class="scene-num">S.06</div>
+        <div class="scene-title-wrap">
+          <div class="scene-title">인터뷰 — "세 단계 모두에 전문가가 있습니다"</div>
+          <div class="scene-sub">수업 전·중·후 3단계 → 페이지 핵심 카피 연결</div>
+        </div>
+        <div class="scene-badges">
+          <span class="badge b-interview">인터뷰</span>
+          <span class="badge b-dur">20 — 25초</span>
+          <span class="badge b-cam">Cam A</span>
+        </div>
+      </div>
+      <div class="scene-body">
+        <div class="scene-col">
+          <div class="scene-col-lbl">인터뷰 유도 질문</div>
+          <div class="scene-col-body">
+            <strong>Q1.</strong> 수업 전 복습자료 배부부터, 수업 중 테스트, 수업 후 결과 발송까지—이 세 단계가 왜 중요한가요?<br><br>
+            <strong>Q2.</strong> 학부모님들이 가장 신뢰하는 부분이 어떤 거라고 느끼세요?<br><br>
+            <em>* 페이지 카피 "세 단계 모두에 전문가가 있습니다"를 자연스럽게 멘트로 이끌어내도록 유도. S.07 현장 컷과 바로 연결 편집.</em>
+          </div>
+        </div>
+        <div class="scene-col">
+          <div class="scene-col-lbl">촬영 세팅 / 편집 활용</div>
+          <div class="scene-col-body">
+            <strong>장소:</strong> S.02와 동일 세팅 유지 (연속성). 의상 동일하게 맞출 것.<br><br>
+            <strong>편집:</strong> 이 인터뷰 직후 수업 전·중·후 현장 컷(S.07)으로 자연스럽게 연결. 인터뷰 VO를 현장 컷 위에 올리는 방식 추천.<br><br>
+            <strong>Cam B:</strong> 인터뷰 중 손동작, 표정 클로즈업 cutaway용 동시 롤링.
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━
+     05 ACT 5 — 3 STEPS
+━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<div class="section alt">
+  <div class="sec-inner">
+    <div class="sec-head">
+      <div class="sec-num">Section 05</div>
+      <div class="sec-title">Act 5 — <span class="it">수업 전·중·후</span> 3단계 현장 컷</div>
+    </div>
+
+    <div class="note">
+      <div class="note-lbl">구성 방향</div>
+      <div class="note-body">
+        페이지 하단 "철저한 관리 프로세스" 섹션(①수업 전 / ②수업 중 / ③수업 후)을 영상으로 재현.
+        <strong>3단계를 하나의 연속된 흐름으로 촬영</strong>하되, 편집 시 각 단계 타이틀 자막으로 구분.
+        Act 3(S.03~05)에서 이미 촬영한 컷과 중복 활용 가능—추가 촬영 최소화.
+      </div>
+    </div>
+
+    <div class="scene-card">
+      <div class="scene-header">
+        <div class="scene-num">S.07</div>
+        <div class="scene-title-wrap">
+          <div class="scene-title">수업 전 → 수업 중 → 수업 후 (3단계 연속 흐름)</div>
+          <div class="scene-sub">자료 배부 / 팀티칭·테스트 / 결과 발송·클리닉 배정</div>
+        </div>
+        <div class="scene-badges">
+          <span class="badge b-broll">현장컷</span>
+          <span class="badge b-dur">30 — 35초</span>
+          <span class="badge b-cam">Cam A+B</span>
+        </div>
+      </div>
+      <div class="scene-body three-col">
+        <div class="scene-col">
+          <div class="scene-col-lbl">① 수업 전</div>
+          <div class="scene-col-body">
+            <strong>복습자료 배부</strong><br>
+            강사가 프린트 자료 나눠주는 장면. 손 클로즈업.<br><br>
+            <strong>논술 첨삭 배부</strong><br>
+            이전 수업 첨삭본 돌려받는 장면.<br><br>
+            <strong>예습 확인</strong><br>
+            학생이 자료를 훑어보는 장면.<br><br>
+            <em>편집 자막: "수업 전 · 매주"</em>
+          </div>
+        </div>
+        <div class="scene-col">
+          <div class="scene-col-lbl">② 수업 중</div>
+          <div class="scene-col-body">
+            <strong>팀티칭 수업 장면</strong><br>
+            활기차고 집중된 수업 분위기 포착.<br><br>
+            <strong>과제 점검</strong><br>
+            강사가 과제 확인하는 장면.<br><br>
+            <strong>국어 10~15문항 테스트</strong><br>
+            학생들 시험지 푸는 모습. 독서논술 퀴즈 포함.<br><br>
+            <em>편집 자막: "수업 중 · 매주"</em>
+          </div>
+        </div>
+        <div class="scene-col">
+          <div class="scene-col-lbl">③ 수업 후</div>
+          <div class="scene-col-body">
+            <strong>결과 문자 발송</strong><br>
+            스마트폰 화면 클로즈업. 발송 버튼 누르는 장면.<br><br>
+            <strong>클리닉 배정 확인</strong><br>
+            기준 미달 시 클리닉 배정 앱 화면.<br><br>
+            <strong>답안 제출 마감</strong><br>
+            월 pm11:59 마감 알림 화면.<br><br>
+            <em>편집 자막: "수업 후 · 문자발송"</em>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━
+     06 ACT 6 — CLOSING
+━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<div class="section">
+  <div class="sec-inner">
+    <div class="sec-head">
+      <div class="sec-num">Section 06</div>
+      <div class="sec-title">Act 6 — 인터뷰 ③ <span class="it">클로징</span></div>
+    </div>
+
+    <div class="scene-card interview-card" style="margin-bottom: 1px;">
+      <div class="scene-header">
+        <div class="scene-num">S.08</div>
+        <div class="scene-title-wrap">
+          <div class="scene-title">클로징 인터뷰 — 학부모·학생에게 전하는 말</div>
+          <div class="scene-sub">메인 인터뷰어 마무리 멘트</div>
+        </div>
+        <div class="scene-badges">
+          <span class="badge b-interview">인터뷰</span>
+          <span class="badge b-dur">15 — 20초</span>
+          <span class="badge b-cam">Cam A</span>
+        </div>
+      </div>
+      <div class="scene-body">
+        <div class="scene-col">
+          <div class="scene-col-lbl">인터뷰 유도 질문</div>
+          <div class="scene-col-body">
+            <strong>Q.</strong> 이 학원의 수업을 선택하는 학부모님과 학생들에게 마지막으로 꼭 하고 싶은 말이 있다면?<br><br>
+            <em>* 자연스럽고 진심이 담긴 1~2문장. 길지 않게. 오프닝 분위기와 수미상관 구조로 편집. S.09 엔딩 컷으로 바로 연결.</em>
+          </div>
+        </div>
+        <div class="scene-col">
+          <div class="scene-col-lbl">편집 연결 방향</div>
+          <div class="scene-col-body">
+            인터뷰 후 → 빈 교실 정적 컷(S.09)으로 자연스럽게 페이드.<br><br>
+            클로징 멘트 위에 배경음악 페이드인 시작.<br><br>
+            오프닝 컷(S.01)과 유사한 앵글의 정적 컷으로 <strong>수미상관 편집</strong> 권장.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="scene-card" style="margin-top: 16px;">
+      <div class="scene-header">
+        <div class="scene-num">S.09</div>
+        <div class="scene-title-wrap">
+          <div class="scene-title">엔딩 컷 + 브랜드 아웃트로</div>
+          <div class="scene-sub">여운 있는 정적 컷 → ClassDay 로고 · 슬로건 타이포그래피</div>
+        </div>
+        <div class="scene-badges">
+          <span class="badge b-broll">현장컷</span>
+          <span class="badge b-dur">10 — 15초</span>
+          <span class="badge b-cam">Cam A</span>
+        </div>
+      </div>
+      <div class="scene-body">
+        <div class="scene-col">
+          <div class="scene-col-lbl">엔딩 컷 구성</div>
+          <div class="scene-col-body">
+            <strong>① 수업 종료 후 빈 교실</strong><br>
+            학생들이 떠난 교실. 칠판에 판서가 남아 있는 정적 컷. 천천히 암전.<br><br>
+            <strong>② 강사 혼자 정리하는 뒷모습</strong><br>
+            다음 수업을 준비하거나 정리하는 조용한 뒷모습 컷.<br><br>
+            <strong>③ 디테일 클로즈업</strong><br>
+            책상 위 자료, 펜, 첨삭본 등 여운 있는 마무리 컷.
+          </div>
+        </div>
+        <div class="scene-col">
+          <div class="scene-col-lbl">아웃트로 그래픽</div>
+          <div class="scene-col-body">
+            <strong>로고 + 슬로건:</strong> ClassDay 로고 + "소수의 교실을, 모두의 교실로." 슬로건 타이포.<br><br>
+            <strong>도메인 표기:</strong> class.day (B2C) / pro.class.day (B2B) 화면 하단 표기.<br><br>
+            <strong>그래픽 스타일:</strong> 다크(#27282B) 배경에 브랜드 그라디언트 포인트 컬러. Inter 타이포.
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━
+     07 CHECKLIST
+━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<div class="section alt">
+  <div class="sec-inner">
+    <div class="sec-head">
+      <div class="sec-num">Section 07</div>
+      <div class="sec-title">촬영 준비 <span class="it">체크리스트</span></div>
+    </div>
+
+    <div class="note" style="margin-bottom: 36px;">
+      <div class="note-lbl">1대 촬영 시 권장 순서</div>
+      <div class="note-body">
+        <strong>인터뷰 세팅 먼저 촬영 (S.02 → S.06 → S.08)</strong> → 현장 컷 순으로 진행. 인터뷰 NG 분은 B-roll cutaway로 대체 가능. 앱 스크린레코딩은 사전 준비 후 촬영 당일 현장에서 최종 확인.
+      </div>
+    </div>
+
+    <div class="sec-num" style="margin-bottom:20px;">장비 & 인력</div>
+    <div class="checklist-grid" style="margin-bottom: 36px;">
+      <div class="check-item"><div class="check-box"></div>카메라 (최소 1대 / 권장 2대)</div>
+      <div class="check-item"><div class="check-box"></div>짐벌 / 슬라이더</div>
+      <div class="check-item"><div class="check-box"></div>50mm · 85mm 단렌즈 (bokeh용)</div>
+      <div class="check-item"><div class="check-box"></div>외장 마이크 (샷건 or 라발리에)</div>
+      <div class="check-item"><div class="check-box"></div>리플렉터 / LED 보조 조명</div>
+      <div class="check-item"><div class="check-box"></div>ND 필터 (자연광 제어)</div>
+      <div class="check-item"><div class="check-box"></div>촬영감독 1인 / 조명 보조 1인</div>
+      <div class="check-item"><div class="check-box"></div>현장 코디네이터 (학원 담당자)</div>
+    </div>
+
+    <div class="sec-num" style="margin-bottom:20px;">사전 준비 사항</div>
+    <div class="checklist-grid">
+      <div class="check-item"><div class="check-box"></div>학생·학부모 촬영 동의서 수령</div>
+      <div class="check-item"><div class="check-box"></div>인터뷰이 사전 섭외 및 질문 공유</div>
+      <div class="check-item"><div class="check-box"></div>클래스데이 앱 시연 화면 사전 준비</div>
+      <div class="check-item"><div class="check-box"></div>성적표·첨삭본 샘플 문서 준비 (개인정보 제거)</div>
+      <div class="check-item"><div class="check-box"></div>편집 색감 기준 LUT 사전 협의</div>
+      <div class="check-item"><div class="check-box"></div>촬영 당일 타임테이블 학원 공유</div>
+      <div class="check-item"><div class="check-box"></div>배경음악 방향 사전 선정</div>
+      <div class="check-item"><div class="check-box"></div>아웃트로 그래픽 소스 (로고, 슬로건) 준비</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━
+     FOOTER
+━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<div class="doc-footer">
+  <div>
+    <svg width="137" height="30" viewBox="0 0 137 30" fill="none" xmlns="http://www.w3.org/2000/svg" style="height:26px;width:auto;display:block;margin-bottom:10px;">
+      <g clip-path="url(#fa)"><g clip-path="url(#fb)">
+      <path d="M27.6 8.44C27.6 11.18 25.38 13.4 22.64 13.4 21.15 13.4 19.82 12.75 18.91 11.71 17.98 10.63 16.6 9.94 15.06 9.94 12.26 9.94 9.93 12.2 9.93 15c0 .01 0 .02 0 .03C9.93 17.77 7.71 20 4.97 20 2.23 20 .01 17.77.01 15.03.01 6.73 6.74 0 15.04 0c4.36 0 8.27 1.87 11.02 4.84C27.01 5.74 27.6 7.02 27.6 8.44z" fill="white"/>
+      <path d="M4.96 10C7.7 10 9.92 12.22 9.93 14.96V15c0 2.8 2.33 5.06 5.12 5.06 1.54 0 2.93-.69 3.85-1.78.91-1.03 2.25-1.68 3.73-1.68 2.74 0 4.96 2.22 4.96 4.96 0 1.42-.59 2.7-1.54 3.6C23.3 28.13 19.39 30 15.03 30c-2.91 0-5.62-.83-7.92-2.26C5.83 28.28 3.78 28.81 1.83 28.08c-.02-.01-.76-.28-.13-.55.02-.01 1.81-1.15 1.7-3.04C1.28 21.9 0 18.58 0 15c0-2.78 2.22-5 4.96-5z" fill="white"/>
+      </g>
+      <path d="M51.53 10.1C49.82 8.26 47.43 7.12 44.77 7.12c-5.03 0-9.12 4.05-9.17 9.07v.16c0 5.03 4.09 9.07 9.17 9.07 2.66 0 5.05-1.14 6.73-2.95l.06-.06c.41-.39.67-.94.67-1.55 0-1.18-.96-2.14-2.13-2.14-.64 0-1.21.28-1.6.72C47.6 20.48 46.27 21.15 44.79 21.15c-2.67 0-4.92-2.16-4.92-4.88v-.01c0-2.72 2.25-4.88 4.92-4.88 1.48 0 2.81.66 3.7 1.71.39.44.96.72 1.6.72 1.18 0 2.13-.96 2.13-2.14 0-.61-.25-1.16-.63-1.56l-.06-.07z" fill="white"/>
+      <path d="M57.62 8.62v14.85c0 .61-.15 1.09-.49 1.43-.33.33-.82.47-1.39.47-.58 0-1.06-.14-1.37-.47-.33-.34-.48-.82-.48-1.43V8.62c0-.63.15-1.13.48-1.48.33-.35.8-.5 1.36-.5.6 0 1.09.15 1.43.5.33.35.48.85.48 1.48z" fill="white"/>
+      <path fill-rule="evenodd" d="M106.06 8.62v4.62c-.77-.62-1.94-.9-3.14-.9-1.81 0-3.28.72-4.3 1.91-1.01 1.19-1.57 2.83-1.57 4.67 0 1.81.56 3.46 1.58 4.65 1.02 1.19 2.49 1.92 4.29 1.92.8 0 1.57-.18 2.21-.45.46-.2.87-.46 1.16-.75.27.64.85 1.1 1.6 1.1.62 0 1.11-.17 1.43-.53.32-.36.45-.87.45-1.48V8.62c0-.63-.14-1.14-.47-1.48-.32-.35-.8-.5-1.38-.5-.58 0-1.06.15-1.39.5-.33.35-.47.85-.47 1.48zm-5.3 10.29c0-1.57 1.12-2.86 2.65-2.86 1.53 0 2.65 1.29 2.65 2.86 0 1.62-1.12 2.86-2.65 2.86s-2.65-1.24-2.65-2.86z" fill="white"/>
+      <path d="M133.31 13.08l-2.71 6.49-2.57-6.51c-.14-.35-.35-.63-.62-.84-.28-.23-.69-.33-1.19-.33-.59 0-1.09.13-1.47.4-.38.29-.57.68-.57 1.16 0 .12.01.25.03.4.02.18.1.4.21.65l4.2 9.42-1.52 3.23c-.08.17-.16.36-.24.57-.09.25-.14.48-.14.7 0 .41.17.77.48 1.07.34.34.81.5 1.38.5.46 0 .86-.13 1.17-.41.32-.27.57-.63.76-1.07l6.26-13.99c.09-.19.14-.38.16-.56.03-.18.05-.34.05-.48 0-.45-.17-.83-.5-1.13-.34-.32-.83-.46-1.42-.46-.44 0-.81.09-1.08.31-.25.19-.45.49-.62.88z" fill="white"/>
+      <path fill-rule="evenodd" d="M67.8 24.71c-.31-.24-.47-.61-.49-1.06-.08.08-.16.16-.23.24-.23.25-.51.46-.84.65-.33.19-.71.34-1.14.45-.44.12-.94.18-1.5.18-1.31 0-2.37-.34-3.16-1.04-.77-.73-1.15-1.68-1.15-2.84 0-.66.11-1.24.33-1.73.24-.48.56-.88.95-1.21.41-.31.87-.56 1.39-.74.53-.18 1.08-.32 1.65-.42.61-.12 1.22-.21 1.84-.27.57-.06 1.18-.11 1.82-.16v-.25c0-.22-.03-.43-.09-.64-.06-.21-.16-.4-.3-.57-.11-.15-.29-.28-.53-.38-.24-.09-.55-.15-.93-.15-.25 0-.48.02-.69.05-.19.03-.39.08-.6.15-.17.06-.37.16-.58.28-.21.13-.45.28-.72.45-.21.15-.42.27-.62.37-.21.12-.48.17-.77.17-.43 0-.81-.16-1.14-.47-.33-.32-.5-.73-.5-1.19 0-.33.14-.67.38-1 .24-.35.61-.66 1.08-.93.48-.29 1.06-.52 1.73-.7.7-.18 1.51-.27 2.42-.27 1.87 0 3.26.36 4.12 1.14.88.77 1.3 1.97 1.3 3.53v7.18c0 .5-.13.9-.43 1.17-.29.27-.75.37-1.33.37-.51 0-.94-.1-1.28-.33zm-3.24-5.09c-.76.16-1.2.37-1.39.63-.2.25-.29.51-.29.75 0 .37.11.64.31.83.19.17.56.28 1.17.28.97 0 1.68-.22 2.17-.62.5-.43.74-.96.74-1.62v-.66c-.52.06-1.02.12-1.5.19-.54.08-.94.15-1.21.22z" fill="white"/>
+      <path d="M77.13 16.4c-.22-.08-.36-.16-.45-.24-.17-.19-.25-.39-.25-.62 0-.24.11-.45.35-.62.25-.18.66-.29 1.27-.29.62 0 1.12.08 1.48.23.39.16.8.36 1.22.61.14.09.3.17.48.25.24.08.44.12.65.12.23 0 .44-.05.62-.15.17-.12.32-.26.46-.44.25-.32.36-.69.36-1.12 0-.21-.05-.42-.14-.62-.1-.22-.26-.42-.49-.61-.37-.29-.91-.57-1.63-.83-.74-.28-1.68-.42-2.82-.42-.79 0-1.52.09-2.2.27-.66.18-1.24.46-1.73.83-.5.36-.88.8-1.15 1.33-.28.53-.41 1.14-.41 1.81 0 .63.1 1.18.31 1.65.2.45.5.84.87 1.16.38.31.82.56 1.32.76.52.19 1.07.32 1.68.42l1.44.24c.33.06.59.13.8.21.2.08.33.17.4.25.19.21.28.42.28.65 0 .32-.12.56-.37.74-.25.18-.69.29-1.37.29-.55 0-.99-.07-1.33-.2-.36-.14-.67-.3-.95-.47-.27-.17-.52-.33-.74-.47-.26-.16-.53-.25-.82-.25-.32 0-.6.1-.85.29-.23.18-.41.41-.55.67-.18.32-.27.66-.27 1.02 0 .22.06.44.17.66.14.22.32.4.55.56.49.36 1.12.65 1.89.87.8.24 1.68.35 2.66.35 1.71 0 3.1-.34 4.12-1.05 1.05-.72 1.57-1.8 1.57-3.21 0-1.22-.34-2.17-1.06-2.81-.69-.64-1.79-1.08-3.27-1.35l-1.27-.24c-.35-.06-.64-.13-.86-.21z" fill="white"/>
+      <path d="M87.41 24.93c-.77-.22-1.4-.51-1.89-.87-.23-.16-.41-.34-.55-.56-.12-.22-.18-.44-.18-.66 0-.36.09-.7.27-1.02.14-.26.32-.49.55-.67.25-.19.53-.29.85-.29.29 0 .56.09.82.25.22.14.47.3.74.47.28.17.59.33.95.47.34.13.78.2 1.33.2.68 0 1.12-.11 1.37-.29.25-.18.37-.42.37-.74 0-.23-.09-.44-.28-.65-.07-.08-.2-.17-.4-.25-.2-.08-.47-.15-.8-.21l-1.44-.24c-.61-.1-1.16-.23-1.68-.42-.5-.2-.94-.45-1.32-.76-.37-.32-.67-.71-.87-1.16-.21-.47-.31-1.02-.31-1.65 0-.67.13-1.28.41-1.81.27-.53.65-.97 1.15-1.33.49-.37 1.07-.65 1.73-.83.68-.18 1.41-.27 2.2-.27 1.14 0 2.08.14 2.82.42.72.26 1.26.54 1.63.83.23.19.39.39.49.61.09.2.14.41.14.62 0 .43-.11.8-.36 1.12-.14.18-.29.32-.46.44-.18.1-.39.15-.62.15-.21 0-.41-.04-.65-.12-.18-.08-.34-.16-.48-.25-.42-.25-.83-.45-1.22-.61-.36-.15-.86-.23-1.48-.23-.61 0-1.02.11-1.27.29-.24.17-.35.38-.35.62 0 .23.08.43.25.62.09.08.23.16.45.24.22.08.51.15.86.21l1.27.24c1.48.27 2.58.71 3.27 1.35.72.64 1.06 1.59 1.06 2.81 0 1.41-.52 2.49-1.57 3.21-1.02.71-2.41 1.05-4.12 1.05-.98 0-1.86-.11-2.66-.35z" fill="white"/>
+      <path fill-rule="evenodd" d="M119.46 16.49v.25c-.64.05-1.25.1-1.82.16-.62.06-1.23.15-1.84.27-.57.1-1.12.24-1.65.42-.52.18-.98.43-1.39.74-.39.33-.71.73-.95 1.21-.22.49-.33 1.07-.33 1.73 0 1.16.38 2.11 1.15 2.84.79.7 1.85 1.04 3.16 1.04.56 0 1.06-.06 1.5-.18.43-.11.81-.26 1.14-.45.33-.18.61-.4.84-.65.08-.08.16-.16.23-.24.03.45.18.82.49 1.06.34.23.77.33 1.28.33.58 0 1.04-.1 1.33-.37.3-.27.43-.67.43-1.17v-7.18c0-1.56-.42-2.76-1.3-3.53-.86-.78-2.25-1.14-4.12-1.14-.91 0-1.72.09-2.42.27-.67.18-1.25.41-1.73.7-.47.27-.84.58-1.08.93-.24.33-.38.67-.38 1c0 .46.17.87.5 1.19.33.31.71.47 1.14.47.29 0 .56-.05.77-.17.2-.1.41-.22.62-.37.27-.17.51-.32.72-.45.21-.12.41-.22.58-.28.21-.07.41-.12.6-.15.21-.03.44-.05.69-.05.38 0 .69.06.93.15.24.1.42.23.53.38.14.17.24.36.3.57.06.21.09.42.09.64zm-2.72 3.13c.27-.07.67-.14 1.21-.22.48-.07.98-.13 1.5-.19v.66c0 .66-.24 1.19-.74 1.62-.49.4-1.2.62-2.17.62-.61 0-.98-.11-1.17-.28-.2-.19-.31-.46-.31-.83 0-.24.09-.5.29-.75.19-.24.63-.45 1.39-.63z" fill="white"/>
+      <defs><clipPath id="fa"><rect width="137" height="30" fill="white"/></clipPath><clipPath id="fb"><rect width="27.6" height="30" fill="white"/></clipPath></defs>
+    </svg>
+    <div class="ft-tagline">소수의 교실을, 모두의 교실로.</div>
+  </div>
+  <div class="ft-meta">
+    ClassDay — video shoot conti<br>
+    Sections 00–07 · Scenes S.01–S.09<br>
+    © 2026 ClassDay. Confidential.
+  </div>
+</div>
+
+</body>
+</html>
