@@ -113,6 +113,11 @@ https://ssinaz-creator.github.io/classday.day/
 https://ssinaz-creator.github.io/classday.day/파일명.html
 ```
 
+GitHub Pages는 파일명을 그대로 URL로 쓰기 때문에, 파일명을 바꾸면 URL도 자동으로 바뀝니다.
+
+- 권장: `-`(하이픈) 사용
+- 가능: `_`(언더스코어) 사용
+
 예시:
 
 ```text

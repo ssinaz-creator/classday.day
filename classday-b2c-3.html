@@ -1,0 +1,2024 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Classday — B2C</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: #fff;
+  font-family: 'Pretendard Variable', 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+  display: flex;
+  justify-content: center;
+  overflow-x: hidden;
+}
+
+/* ── Outer container ── */
+.page {
+  display: flex;
+  width: 100%;
+  min-width: 320px;
+  flex-direction: column;
+  align-items: center;
+  background: #fff;
+}
+
+/* ════════════════════════════════════════
+   TOP UTILITY NAV
+════════════════════════════════════════ */
+.top-nav {
+  width: 100%;
+  height: auto;
+  min-height: 60px;
+  padding-bottom: 4px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+}
+.top-nav-inner {
+  width: calc(100% - 40px);
+  max-width: 1392px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+}
+.logo {
+  padding-right: 50px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.logo-mark {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  overflow: hidden;
+}
+.logo-icon {
+  width: 27.6px;
+  height: 30px;
+  position: relative;
+  overflow: hidden;
+}
+.logo-icon::before {
+  content: '';
+  position: absolute;
+  width: 27.6px;
+  height: 20px;
+  top: 0; left: 0;
+  background: #111;
+}
+.logo-wordmark {
+  width: 101.36px;
+  height: 23.36px;
+  background: #111;
+}
+.top-nav-right {
+  display: flex;
+  align-items: center;
+  gap: clamp(16px, 5vw, 200px);
+}
+.top-nav-cta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.top-nav-hint {
+  color: #BCBCBC;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 14.4px;
+}
+.top-nav-btns { display: flex; gap: 4px; }
+.btn-signup {
+  padding: 10px;
+  background: #fff;
+  border: none;
+  border-radius: 8px;
+  outline: 1px solid #E5E7EB;
+  outline-offset: -1px;
+  color: #000;
+  font-size: 14px;
+  font-family: 'Pretendard Variable', sans-serif;
+  font-weight: 300;
+  line-height: 18.4px;
+  cursor: pointer;
+}
+.btn-login {
+  padding: 10px;
+  background: #050505;
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 14px;
+  font-family: 'Pretendard Variable', sans-serif;
+  font-weight: 300;
+  line-height: 18.4px;
+  cursor: pointer;
+}
+
+/* ════════════════════════════════════════
+   MAIN NAV
+════════════════════════════════════════ */
+.main-nav {
+  width: 100%;
+  height: auto;
+  min-height: 74px;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.main-nav-inner {
+  width: calc(100% - 40px);
+  max-width: 1392px;
+  margin: 0 auto;
+  height: auto;
+  min-height: 44px;
+  padding: 15px 0;
+  position: static;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.nav-links {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: clamp(16px, 3vw, 50px);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #111827;
+  font-size: 18px;
+  font-family: 'Pretendard', sans-serif;
+  font-weight: 400;
+  line-height: 24.12px;
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.nav-link.active {
+  color: #000;
+  font-weight: 700;
+}
+.ext-icon {
+  width: 24px;
+  height: 24px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ext-icon::before {
+  content: '';
+  width: 10px;
+  height: 10px;
+  border: 1.67px solid #111827;
+  display: block;
+}
+
+/* ════════════════════════════════════════
+   HERO
+════════════════════════════════════════ */
+.hero-wrap {
+  align-self: stretch;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.hero {
+  align-self: stretch;
+  height: clamp(420px, 40vw, 760px);
+  position: relative;
+  background:
+    linear-gradient(180deg, rgba(244,244,244,0) 0%, rgba(244,244,244,0) 50%, rgba(244,244,244,.50) 75%, #F4F4F4 100%),
+    linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.21) 50%, rgba(0,0,0,.30) 100%),
+    url('https://placehold.co/1920x760') center/cover no-repeat;
+}
+.hero-content {
+  position: absolute;
+  left: max(20px, calc((100% - 1392px) / 2));
+  top: clamp(180px, 35%, 384px);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(20px, 3vw, 34px);
+  max-width: calc(100% - 40px);
+}
+.hero-text { display: flex; flex-direction: column; gap: 20px; }
+.hero-title {
+  color: #fff;
+  font-size: clamp(26px, 3.5vw, 50px);
+  font-family: 'Inter', sans-serif;
+  font-weight: 800;
+  line-height: 1.34;
+  text-shadow: 0 3px 10px rgba(0,0,0,.25);
+}
+.hero-sub {
+  color: #fff;
+  font-size: clamp(13px, 1.2vw, 18px);
+  font-family: 'Pretendard', sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+}
+.hero-btns { display: flex; align-items: center; gap: 10px; }
+.btn-enroll {
+  padding: 12px 72px;
+  background: #1D1D1F;
+  color: #fff;
+  font-size: 18.06px;
+  font-family: 'Pretendard', sans-serif;
+  font-weight: 400;
+  line-height: 27.09px;
+  border: none;
+  cursor: pointer;
+}
+.btn-consult {
+  padding: 12px 72px;
+  background: transparent;
+  color: #1D1D1F;
+  font-size: 18.06px;
+  font-family: 'Pretendard', sans-serif;
+  font-weight: 400;
+  line-height: 27.09px;
+  border: none;
+  outline: 1px solid #1D1D1F;
+  outline-offset: -1px;
+  cursor: pointer;
+}
+
+/* ════════════════════════════════════════
+   INFO BAR
+════════════════════════════════════════ */
+.info-bar {
+  align-self: stretch;
+  padding-top: 20px;
+  padding-bottom: 100px;
+  background: #F4F4F4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.info-bar-inner {
+  width: calc(100% - 40px);
+  max-width: 1392px;
+  margin: 0 auto;
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+/* Shared column */
+.info-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.info-col-fixed {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.info-col-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 10px;
+}
+.info-col-title {
+  color: #1D242D;
+  font-size: 18px;
+  font-family: 'Pretendard', sans-serif;
+  font-weight: 600;
+}
+.info-col-more {
+  color: #6E6E73;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 17.42px;
+  padding-top: 2px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.info-list {
+  border-top: 1px solid #9D9D9D;
+  display: flex;
+  flex-direction: column;
+}
+.info-item {
+  padding: 12px 0;
+  border-bottom: 1px solid #ECEEF1;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.info-item:first-child { border-bottom-color: #F4F4F4; }
+.info-item-text {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.info-item-title {
+  color: #1D242D;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22.4px;
+}
+.badge-new {
+  color: #2977FE;
+  font-size: 12px;
+  font-weight: 400;
+  white-space: nowrap;
+}
+.info-item-count {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+.icon-eye {
+  width: 16px;
+  height: 16px;
+  position: relative;
+  flex-shrink: 0;
+}
+.icon-eye::before {
+  content: '';
+  position: absolute;
+  width: 13.13px;
+  height: 9.33px;
+  left: 1.44px;
+  top: 3.33px;
+  border: 1.33px solid #4E575F;
+}
+.count-text {
+  color: #6A7581;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 20.02px;
+}
+
+/* Popular post column */
+.popular-post {
+  flex: 1;
+  padding-top: 16px;
+  position: relative;
+  border-top: 1px solid #9D9D9D;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+.popular-thumb {
+  width: 122px;
+  height: 122px;
+  object-fit: cover;
+  border: 1px solid #EAEAEA;
+  flex-shrink: 0;
+}
+.popular-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 6px;
+}
+.popular-title {
+  color: #1D242D;
+  font-size: 14px;
+  line-height: 22.4px;
+}
+.popular-title strong { font-weight: 700; }
+.popular-title span { font-weight: 400; }
+.popular-nav {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  height: 36px;
+}
+.popular-nav-btn {
+  width: 27px;
+  height: 27px;
+  background: rgba(210,210,215,.64);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: rgba(0,0,0,.56);
+  font-size: 16px;
+  line-height: 1;
+}
+.popular-nav-btn.prev { opacity: .42; }
+
+/* ════════════════════════════════════════
+   DARK / PHILOSOPHY SECTION
+════════════════════════════════════════ */
+.dark-section {
+  align-self: stretch;
+  padding: 120px 0;
+  background: #1D1D1F;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 120px;
+  position: relative;
+}
+.dark-inner {
+  width: calc(100% - 40px);
+  max-width: 1140px;
+  margin: 0 auto;
+  height: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
+}
+.dark-left {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.dark-title {
+  color: #fff;
+  font-size: clamp(32px, 4vw, 58px);
+  font-family: 'Pretendard', sans-serif;
+  font-weight: 300;
+  line-height: 1.49;
+}
+.dark-quote {
+  font-size: 20px;
+  font-family: 'Pretendard', sans-serif;
+  font-weight: 400;
+  line-height: 34px;
+}
+.dark-quote .muted { color: #787878; }
+.dark-quote .light { color: #E2E2E2; }
+.dark-right {
+  width: min(570px, 100%);
+  flex-shrink: 0;
+  padding-top: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 40px;
+}
+.dark-body {
+  color: rgba(255,255,255,.80);
+  font-size: clamp(16px, 1.8vw, 26px);
+  font-family: 'Pretendard', sans-serif;
+  font-weight: 400;
+  line-height: 1.8;
+}
+.dark-cta {
+  color: #fff;
+  font-size: 20px;
+  font-family: 'Pretendard', sans-serif;
+  font-weight: 600;
+  line-height: 36px;
+  mix-blend-mode: overlay;
+}
+
+/* ════════════════════════════════════════
+   ACADEMY SECTION
+════════════════════════════════════════ */
+.academy-section {
+  align-self: stretch;
+  padding: 160px 0 100px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 100px;
+}
+.academy-top {
+  width: calc(100% - 40px);
+  max-width: 1140px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
+}
+.academy-left {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.academy-sub {
+  color: #666;
+  font-size: 22px;
+  font-family: 'Pretendard', sans-serif;
+  font-weight: 400;
+  line-height: 35.06px;
+}
+.academy-title {
+  color: #1D1D1F;
+  font-size: clamp(28px, 3.2vw, 45px);
+  font-family: 'Pretendard', sans-serif;
+  font-weight: 600;
+  line-height: 1.35;
+}
+.academy-right {
+  width: min(570px, 100%);
+  flex-shrink: 0;
+  padding-top: 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 45px;
+}
+.academy-desc {
+  color: #444;
+  font-size: clamp(16px, 1.8vw, 24px);
+  font-family: 'Pretendard', sans-serif;
+  font-weight: 600;
+  line-height: 1.8;
+}
+
+/* ════════════════════════════════════════
+   COURSES
+════════════════════════════════════════ */
+.courses-wrap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 100px;
+  width: 100%;
+  align-items: center;
+}
+.courses-section {
+  width: calc(100% - 40px);
+  max-width: 1140px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.courses-label {
+  color: #6E6E73;
+  font-size: 24px;
+  font-family: 'Pretendard', sans-serif;
+  font-weight: 600;
+  line-height: 33.15px;
+}
+.courses-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+/* ── Course Card ── */
+.course-card {
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+}
+.card-thumb {
+  aspect-ratio: 16 / 9;
+  height: auto;
+  position: relative;
+  overflow: hidden;
+}
+.card-thumb-img {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  object-fit: cover;
+}
+.card-grade-shadow {
+  position: absolute;
+  left: 17.92px;
+  top: 76.96px;
+  color: rgba(51,255,0,.10);
+  font-size: 24px;
+  font-weight: 900;
+  line-height: 32.16px;
+}
+.card-grade {
+  position: absolute;
+  left: 17.92px;
+  top: 76.96px;
+  color: #fff;
+  font-size: 24px;
+  font-weight: 900;
+  line-height: 32.16px;
+  mix-blend-mode: overlay;
+}
+.card-grade-2 {
+  position: absolute;
+  left: 30.92px;
+  top: 92.46px;
+  color: #fff;
+  font-size: 24px;
+  font-weight: 900;
+  line-height: 32.16px;
+}
+.card-tags {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+.tag {
+  padding: 3px 5px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-family: 'Pretendard', sans-serif;
+  font-weight: 700;
+  line-height: 13.2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.tag-yellow { background: #E7FF49; color: #000; }
+.tag-grad   { background: linear-gradient(141deg,#2977FE 0%,#8144FF 50%,#E929FE 100%); color: #fff; height: 20px; }
+.tag-dark   { background: #121212; color: #fff; }
+.tag-blue   { background: #2977FE; color: #fff; height: 20px; }
+.tag-black  { background: #1D1D1F; color: #fff; }
+.tag-dim    { background: rgba(0,0,0,.5); color: #fff; }
+
+.card-body {
+  padding: 0 16px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.card-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 18px;
+  border: 1px solid #fff;
+  object-fit: cover;
+  margin-top: -18px;
+  position: relative;
+  z-index: 1;
+  background: #141414;
+}
+.card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+.card-date {
+  color: #2977FE;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 14.37px;
+}
+.card-name {
+  color: #121212;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 26.1px;
+}
+.card-meta {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+.card-meta-item {
+  color: #747678;
+  font-size: 12px;
+  font-family: 'Pretendard Variable', sans-serif;
+  font-weight: 400;
+  line-height: 18.86px;
+}
+.card-meta-sep {
+  color: #CFD0D1;
+  font-size: 12px;
+  line-height: 18.86px;
+}
+.card-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.card-rating {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.star-icon {
+  width: 13.5px;
+  height: 12px;
+  background: #FCC419;
+  clip-path: polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);
+  flex-shrink: 0;
+}
+.rating-score {
+  color: #555;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 21px;
+}
+.rating-count {
+  color: #555;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 21px;
+}
+.student-icon {
+  width: 10.5px;
+  height: 12px;
+  background: #555;
+  flex-shrink: 0;
+}
+.student-count {
+  color: #555;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 21px;
+}
+.card-seats {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 18.2px;
+}
+.seats-gray { color: #ADADAD; }
+.seats-red  { color: #EF004E; }
+.seats-dark { color: #333333; }
+
+/* ══════════════════════════════════════════════════════
+   RESPONSIVE — 섹션별 공통 inner 컨테이너
+══════════════════════════════════════════════════════ */
+.section-inner-wide {
+  width: calc(100% - 40px);
+  max-width: 1392px;
+  margin: 0 auto;
+}
+.section-inner {
+  width: calc(100% - 40px);
+  max-width: 1140px;
+  margin: 0 auto;
+}
+
+/* Reviews */
+.reviews-section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 50px;
+  position: relative;
+  overflow: hidden;
+}
+.reviews-inner {
+  width: calc(100% - 40px);
+  max-width: 1140px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.reviews-scroll {
+  display: flex;
+  gap: 34px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 4px;
+  scroll-snap-type: x mandatory;
+}
+.reviews-scroll > div { scroll-snap-align: start; }
+
+/* System section */
+.system-section {
+  align-self: stretch;
+  padding: clamp(60px, 8vw, 160px) 0;
+  background: linear-gradient(180deg, #F6F8FB 0%, white 100%);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(50px, 6vw, 100px);
+}
+.system-cols {
+  width: calc(100% - 40px);
+  max-width: 1140px;
+  margin: 0 auto;
+  display: flex;
+  gap: 40px;
+  align-items: flex-end;
+}
+
+/* Content section */
+.content-section {
+  align-self: stretch;
+  padding: clamp(40px, 6vw, 80px) 0 clamp(80px, 10vw, 160px);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(50px, 6vw, 100px);
+}
+.content-two-col {
+  width: calc(100% - 40px);
+  max-width: 1140px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
+}
+.content-left {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+.content-right {
+  position: relative;
+  flex-shrink: 0;
+}
+.content-right img {
+  width: min(570px, 100%);
+  display: block;
+}
+
+/* Completion section */
+.completion-section {
+  align-self: stretch;
+  padding: clamp(40px, 6vw, 80px) 0 clamp(80px, 10vw, 160px);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(50px, 6vw, 100px);
+}
+.feature-rows-wrap {
+  width: calc(100% - 40px);
+  max-width: 1140px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.feature-row-item {
+  align-self: stretch;
+  outline: 1px solid #E5E5E5;
+  outline-offset: -1px;
+  display: flex;
+  align-items: center;
+  gap: 50px;
+  overflow: hidden;
+}
+.feature-row-item img.feature-img {
+  width: min(570px, 50%);
+  height: 400px;
+  flex-shrink: 0;
+  object-fit: cover;
+  display: block;
+}
+.feature-row-text {
+  flex: 1;
+  min-width: 0;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Footer */
+.footer-section {
+  align-self: stretch;
+  padding: 40px 0;
+  background: #F9FAFB;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.footer-inner {
+  width: calc(100% - 40px);
+  max-width: 1392px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
+}
+.footer-links {
+  display: flex;
+  gap: 60px;
+  flex-wrap: wrap;
+}
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.footer-awards {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+/* ══════════════════════════════════════════════════════
+   TABLET  (≤ 1100px)
+══════════════════════════════════════════════════════ */
+@media (max-width: 1100px) {
+  .courses-grid { grid-template-columns: repeat(3, 1fr); }
+
+  .dark-inner { flex-direction: column; }
+  .dark-right { width: 100%; padding-top: 40px; }
+
+  .academy-top { flex-direction: column; }
+  .academy-right { width: 100%; padding-top: 40px; }
+
+  .system-cols { flex-direction: column; align-items: stretch; }
+
+  .content-two-col { flex-direction: column; }
+  .content-right { width: 100%; }
+  .content-right img { width: 100%; }
+
+  .feature-row-item { flex-direction: column; align-items: stretch; }
+  .feature-row-item img.feature-img { width: 100%; height: 300px; }
+  .feature-row-text { padding: 30px; }
+}
+
+/* ══════════════════════════════════════════════════════
+   MOBILE  (≤ 767px)
+══════════════════════════════════════════════════════ */
+@media (max-width: 767px) {
+  /* Top nav */
+  .top-nav-hint { display: none; }
+  .top-nav-cta { gap: 8px; }
+  .logo { padding-right: 0; }
+
+  /* Main nav */
+  .main-nav-inner { overflow-x: auto; padding: 10px 0; }
+  .nav-links { gap: 20px; flex-wrap: nowrap; }
+  .nav-link { font-size: 14px; }
+
+  /* Hero */
+  .hero { height: clamp(360px, 70vw, 500px); }
+  .hero-content { top: clamp(140px, 30vw, 220px); gap: 16px; }
+  .hero-title { font-size: clamp(20px, 5.5vw, 30px); }
+  .hero-sub { display: none; }
+  .hero-btns { flex-wrap: wrap; gap: 8px; }
+  .btn-enroll, .btn-consult { padding: 12px 28px; font-size: 14px; }
+
+  /* Info bar */
+  .info-bar { padding-top: 20px; padding-bottom: 50px; }
+  .info-bar-inner { flex-direction: column; gap: 32px; }
+  .info-col-fixed { width: 100%; }
+
+  /* Dark section */
+  .dark-section { padding: 60px 0; gap: 60px; }
+  .dark-inner { flex-direction: column; gap: 32px; }
+  .dark-right { padding-top: 0; gap: 24px; }
+  .dark-cta { font-size: 15px; line-height: 1.6; }
+
+  /* Academy */
+  .academy-section { padding: 80px 0 60px; gap: 60px; }
+  .academy-top { flex-direction: column; gap: 32px; }
+  .academy-right { padding-top: 0; gap: 30px; }
+  .academy-sub { font-size: 16px; }
+
+  /* Courses */
+  .courses-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .courses-wrap { gap: 60px; }
+  .courses-label { font-size: 18px; }
+  .card-name { font-size: 15px; }
+  .card-body { padding: 0 10px 12px; gap: 12px; }
+
+  /* Reviews */
+  .reviews-section { gap: 30px; }
+  .reviews-scroll { gap: 16px; }
+
+  /* System section inner */
+  .system-section { padding: 60px 0; gap: 50px; }
+
+  /* Content section */
+  .content-section { padding: 40px 0 80px; gap: 50px; }
+  .content-two-col { flex-direction: column; gap: 30px; }
+
+  /* Completion */
+  .completion-section { padding: 40px 0 80px; gap: 50px; }
+  .feature-row-item { flex-direction: column; }
+  .feature-row-item img.feature-img { width: 100%; height: 220px; }
+  .feature-row-text { padding: 24px 20px; }
+
+  /* Footer */
+  .footer-top { flex-direction: column; gap: 24px; }
+  .footer-links { gap: 32px; }
+  .footer-bottom { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .footer-awards { flex-direction: column; align-items: flex-start; gap: 12px; }
+}
+
+/* ══════════════════════════════════════════════════════
+   SMALL MOBILE  (≤ 479px)
+══════════════════════════════════════════════════════ */
+@media (max-width: 479px) {
+  .courses-grid { grid-template-columns: 1fr; }
+  .hero-btns { flex-direction: column; }
+  .btn-enroll, .btn-consult { width: 100%; text-align: center; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ══ TOP NAV ══ -->
+  <div class="top-nav">
+    <div class="top-nav-inner">
+      <div class="logo">
+        <div class="logo-mark">
+          <div class="logo-icon"></div>
+          <div class="logo-wordmark"></div>
+        </div>
+      </div>
+      <div class="top-nav-right">
+        <div class="top-nav-cta">
+          <span class="top-nav-hint">로그인하신 후 더 편리하게 이용하세요.</span>
+          <div class="top-nav-btns">
+            <button class="btn-signup">회원가입</button>
+            <button class="btn-login">로그인</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ MAIN NAV ══ -->
+  <div class="main-nav">
+    <div class="main-nav-inner">
+      <div class="nav-links">
+        <a class="nav-link active">학원소개</a>
+        <a class="nav-link">강좌소개</a>
+        <a class="nav-link">학교기출</a>
+        <a class="nav-link">커뮤니티</a>
+        <a class="nav-link">고객센터</a>
+        <a class="nav-link">선생님·학원 전용<span class="ext-icon"></span></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ HERO + INFO BAR ══ -->
+  <div class="hero-wrap">
+
+    <div class="hero">
+      <div class="hero-content">
+        <div class="hero-text">
+          <div class="hero-title">이제 전국 어디서나<br>대치동 프리미엄 학습을 경험하세요</div>
+          <div class="hero-sub">차원이 다른 강의와 콘텐츠, 그리고 끝까지 이해시킬 때 까지 관리하는 시스템<br>온라인에서도 1:1 과외를 받듯 학생별 맞춤 관리가 이루어집니다.</div>
+        </div>
+        <div class="hero-btns">
+          <button class="btn-enroll">수강신청하기</button>
+          <button class="btn-consult">상담신청하기</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- INFO BAR -->
+    <div class="info-bar">
+      <div class="info-bar-inner">
+
+        <!-- 공지사항 -->
+        <div class="info-col">
+          <div class="info-col-header">
+            <div class="info-col-title">공지사항</div>
+            <div class="info-col-more">+ 더보기</div>
+          </div>
+          <div class="info-list">
+            <div class="info-item" style="border-bottom-color:#F4F4F4">
+              <div class="info-item-text">
+                <span class="info-item-title">약관 및 개인정보 처리방침 개정 안내</span>
+                <span class="badge-new">NEW</span>
+              </div>
+              <div class="info-item-count">
+                <div class="icon-eye"></div>
+                <span class="count-text">1232</span>
+              </div>
+            </div>
+            <div class="info-item">
+              <div class="info-item-text">
+                <span class="info-item-title">산김영준 교습소 반환 기준</span>
+                <span class="badge-new">NEW</span>
+              </div>
+              <div class="info-item-count">
+                <div class="icon-eye"></div>
+                <span class="count-text">3432</span>
+              </div>
+            </div>
+            <div class="info-item">
+              <div class="info-item-text">
+                <span class="info-item-title">클래스데이 문의 안내</span>
+              </div>
+              <div class="info-item-count">
+                <div class="icon-eye"></div>
+                <span class="count-text">5432</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 의대 합격생 인기글 -->
+        <div class="info-col" style="align-self:stretch">
+          <div class="info-col-header">
+            <div class="info-col-title">의대 합격생&nbsp; 인기글</div>
+            <div class="info-col-more">+ 더보기</div>
+          </div>
+          <div class="popular-post">
+            <img class="popular-thumb" src="https://placehold.co/122x122" alt="인기글 썸네일">
+            <div class="popular-body">
+              <div class="popular-title">
+                <strong>[지방 일반고/수시/서울대 의대]</strong>
+                <span> 완벽하지 않았던 일반고 학생이 서울대 의대에 합격하기까지</span>
+              </div>
+              <span class="badge-new">NEW</span>
+              <div class="info-item-count">
+                <div class="icon-eye"></div>
+                <span class="count-text">3832</span>
+              </div>
+            </div>
+            <div class="popular-nav">
+              <div class="popular-nav-btn prev">&#8249;</div>
+              <div class="popular-nav-btn">&#8250;</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 실시간 학교별 기출 -->
+        <div class="info-col-fixed">
+          <div class="info-col-header">
+            <div class="info-col-title">실시간 학교별 기출</div>
+            <div class="info-col-more">+ 더보기</div>
+          </div>
+          <div class="info-list">
+            <div class="info-item" style="border-bottom-color:#F4F4F4">
+              <div class="info-item-text">
+                <span class="info-item-title">25 1-2 기말 휘문고등학교</span>
+                <span class="badge-new">NEW</span>
+              </div>
+              <div class="info-item-count">
+                <div class="icon-eye"></div>
+                <span class="count-text">1232</span>
+              </div>
+            </div>
+            <div class="info-item">
+              <div class="info-item-text">
+                <span class="info-item-title">25 1-2 기말 장안중학교</span>
+                <span class="badge-new">NEW</span>
+              </div>
+              <div class="info-item-count">
+                <div class="icon-eye"></div>
+                <span class="count-text">3432</span>
+              </div>
+            </div>
+            <div class="info-item">
+              <div class="info-item-text">
+                <span class="info-item-title">25 1-2 기말 귀인중학교</span>
+              </div>
+              <div class="info-item-count">
+                <div class="icon-eye"></div>
+                <span class="count-text">5432</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div><!-- /hero-wrap -->
+
+  <!-- ══ DARK / PHILOSOPHY ══ -->
+  <div class="dark-section">
+    <div class="dark-inner">
+      <div class="dark-left">
+        <div class="dark-title">누군가는 <br>더 나은 교육을 위해<br>지역을 선택합니다.</div>
+        <div class="dark-quote">
+          <span class="muted">"서울대 의대 합격생 5명 중 1명 이상이 강남 3구 출신."<br></span>
+          <span class="light">이 격차는 우연이 아닙니다.</span>
+          <span class="muted"><br>대치동에는 오랜 시간 축적된 <br>대한민국 최고 수준의 교육 시스템이 존재하기 때문입니다.</span>
+        </div>
+      </div>
+      <div class="dark-right">
+        <div class="dark-body">수능 출제위원 출신이 참여한 정교한 분석,<br>매일의 테스트로 드러나는 약점 진단,<br>그리고 학생이 완전히 이해할 때까지 이어지는<br>1:1 맞춤형 보완 학습.<br>대치동의 경쟁력은 단순히 좋은 강의에 있지 않습니다.<br>끝내 성과를 만들어내는 구조에 있습니다.</div>
+        <div class="dark-cta">클래스데이는 이 대치동의 학습 구조를 온라인으로 옮겼습니다.<br>지역과 거리의 한계를 넘어, 누구나 같은 밀도의 교육을 경험할 수 있도록.<br>이제 교육의 격차는, 사는 곳으로 결정되어서는 안 됩니다.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ ACADEMY SECTION ══ -->
+  <div class="academy-section">
+    <div class="academy-top">
+      <div class="academy-left">
+        <div class="academy-sub">클래스데이와 함께하는 첫 번째 학원,</div>
+        <div class="academy-title">3천명 학생들이 <br>선택한 <br>대치동 최상위 학원</div>
+      </div>
+      <div class="academy-right">
+        <!-- 산김영준 logo (Figma colored block representation) -->
+        <svg width="270" height="54" viewBox="0 0 270 54" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="산김영준국어논술전문학원 로고">
+          <rect x="0"      y="15.10" width="20.24" height="26.18" fill="#DF2024"/>
+          <rect x="25.19"  y="0"     width="21.43" height="40.13" fill="#DF2024"/>
+          <rect x="51.55"  y="15.10" width="15.28" height="35.72" fill="#DF2024"/>
+          <rect x="71.41"  y="31.61" width="15.28" height="17.81" fill="#222"/>
+          <rect x="73.38"  y="15.08" width="10.32" height="10.42" fill="#222"/>
+          <rect x="91.22"  y="7.23"  width="21.33" height="18.26" fill="#222"/>
+          <rect x="117.58" y="14.90" width="15.28" height="33.63" fill="#222"/>
+          <rect x="137.44" y="13.92" width="15.28" height="40.08" fill="#222"/>
+          <rect x="157.36" y="5.68"  width="26.19" height="34.45" fill="#222"/>
+          <rect x="188.55" y="5.68"  width="15.28" height="35.47" fill="#222"/>
+          <rect x="208.46" y="5.68"  width="31.15" height="34.06" fill="#222"/>
+          <rect x="242.21" y="5.68"  width="27.54" height="34.27" fill="#222"/>
+        </svg>
+        <div class="academy-desc">김영준국어논술전문학원은<br>대치동에서 20년간 국어만 가르쳐온 국어 전문 학원입니다.<br>수능 출제위원 출신 3명을 포함한 전임 강사진, <br>석박사 연구진, 학생관리팀까지 <br>총 90명의 국어 전문 인력이 국어 한 과목을 위해 움직입니다.<br><br>산김영준은 대형 학원이지만,<br>학생 개개인의 학습 수준과 목표에 맞춘 <br>과외식 관리 시스템을 통해<br>오랜 시간 대치동 최상위권의 자리를 지켜온 브랜드입니다.</div>
+      </div>
+    </div>
+
+    <!-- COURSES -->
+    <div class="courses-wrap">
+      <div class="courses-section">
+        <div class="courses-label">가장 정교한 국어 수업</div>
+        <div class="courses-grid">
+
+          <!-- Card 1: 고3·N수 -->
+          <div class="course-card">
+            <div class="card-thumb">
+              <img class="card-thumb-img" src="https://placehold.co/273x154/E94525/ffffff" alt="고3 N수 강좌" style="background:linear-gradient(204deg,#E94525 0%,#990021 100%)">
+              <div class="card-grade-shadow">고3</div>
+              <div class="card-grade">고3</div>
+              <div class="card-grade">고3</div>
+              <div class="card-grade">고3</div>
+              <div class="card-grade">고3</div>
+              <div class="card-grade-2">N수</div>
+              <div class="card-tags">
+                <span class="tag tag-yellow">여름특강</span>
+                <span class="tag tag-grad">마감임박</span>
+              </div>
+            </div>
+            <div class="card-body">
+              <img class="card-avatar" src="https://placehold.co/36x36" alt="강사">
+              <div class="card-info">
+                <div class="card-date">5/1(개강)~6/28</div>
+                <div class="card-name">고3·N수 수능국어+내신 정규반</div>
+                <div class="card-meta">
+                  <span class="card-meta-item">정규반 8주</span>
+                  <span class="card-meta-sep">|</span>
+                  <span class="card-meta-item">EBS 무료특강</span>
+                  <span class="card-meta-sep">|</span>
+                  <span class="card-meta-item">한대부고3 내신반</span>
+                </div>
+                <div class="card-stats">
+                  <div class="card-rating">
+                    <div class="star-icon"></div>
+                    <span class="rating-score">5.0</span>
+                    <span class="rating-count">(13,579)</span>
+                    <div class="student-icon"></div>
+                    <span class="student-count">100+</span>
+                  </div>
+                  <div class="card-seats">
+                    <span class="seats-gray">마감까지 </span><span class="seats-red">2좌석 남음</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2: 고2 -->
+          <div class="course-card">
+            <div class="card-thumb">
+              <img class="card-thumb-img" src="https://placehold.co/273x154" alt="고2 강좌">
+              <div class="card-grade" style="top:84.96px;color:rgba(51,255,0,.10)">고2</div>
+              <div class="card-grade" style="top:84.96px">고2</div>
+              <div class="card-tags" style="left:180.31px;right:auto">
+                <span class="tag tag-dark">Prime</span>
+                <span class="tag tag-blue">모집중</span>
+              </div>
+            </div>
+            <div class="card-body">
+              <img class="card-avatar" src="https://placehold.co/36x36" alt="강사">
+              <div class="card-info">
+                <div class="card-date" style="flex:1">정시반 5/2(개강)~6/21 / 내신반 5/7(개강)~직전 보강</div>
+                <div class="card-name">고2 정시대비반+학교별 내신</div>
+                <div class="card-meta">
+                  <span class="card-meta-item">정시대비반 8주</span>
+                  <span class="card-meta-sep">|</span>
+                  <span class="card-meta-item">1학기 기말고사 학교별 내신</span>
+                </div>
+                <div class="card-stats">
+                  <div class="card-rating">
+                    <div class="star-icon"></div>
+                    <span class="rating-score">5.0</span>
+                    <span class="rating-count">(13,579)</span>
+                    <div class="student-icon"></div>
+                    <span class="student-count">100+</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3: 고1 학교별 내신 -->
+          <div class="course-card">
+            <div class="card-thumb">
+              <img class="card-thumb-img" src="https://placehold.co/273x154" alt="고1 강좌">
+              <div class="card-grade" style="top:84.96px;color:rgba(51,255,0,.10)">고1</div>
+              <div class="card-grade" style="top:84.96px">고1</div>
+              <div class="card-tags" style="left:180.31px;right:auto">
+                <span class="tag tag-dark">Prime</span>
+                <span class="tag tag-blue">모집중</span>
+              </div>
+            </div>
+            <div class="card-body">
+              <img class="card-avatar" src="https://placehold.co/36x36" alt="강사">
+              <div class="card-info">
+                <div class="card-date" style="flex:1">5/8(개강)~직전 보강</div>
+                <div class="card-name">고1 학교별 내신</div>
+                <div class="card-meta">
+                  <span class="card-meta-item">1학기 기말고사 학교별 내신</span>
+                </div>
+                <div class="card-stats">
+                  <div class="card-rating">
+                    <div class="star-icon"></div>
+                    <span class="rating-score">5.0</span>
+                    <span class="rating-count">(13,579)</span>
+                    <div class="student-icon"></div>
+                    <span class="student-count">100+</span>
+                  </div>
+                  <div class="card-seats">
+                    <span class="seats-gray">마감까지 </span><span class="seats-dark">200좌석 남음</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 4: 산논술 -->
+          <div class="course-card">
+            <div class="card-thumb">
+              <img class="card-thumb-img" src="https://placehold.co/273x154" alt="산논술 강좌">
+              <div class="card-grade" style="top:84.96px;color:rgba(255,37,39,.37)">산논술</div>
+              <div class="card-grade" style="top:84.96px">산논술</div>
+              <div class="card-tags" style="left:170.31px;right:auto">
+                <span class="tag tag-dark">Prime</span>
+                <span class="tag tag-grad">마감임박</span>
+              </div>
+            </div>
+            <div class="card-body">
+              <img class="card-avatar" src="https://placehold.co/36x36" alt="강사">
+              <div class="card-info">
+                <div class="card-date">5/1(개강)~6/14</div>
+                <div class="card-name">산논술</div>
+                <div class="card-meta">
+                  <span class="card-meta-item">프리미엄 5월 신규반</span>
+                  <span class="card-meta-sep">|</span>
+                  <span class="card-meta-item">프리미엄 진행반</span>
+                </div>
+                <div class="card-stats">
+                  <div class="card-rating">
+                    <div class="star-icon"></div>
+                    <span class="rating-score">5.0</span>
+                    <span class="rating-count">(13,579)</span>
+                    <div class="student-icon"></div>
+                    <span class="student-count">100+</span>
+                  </div>
+                  <div class="card-seats">
+                    <span class="seats-gray">마감까지 </span><span class="seats-red">2좌석 남음</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 5: 중3 -->
+          <div class="course-card">
+            <div class="card-thumb">
+              <img class="card-thumb-img" src="https://placehold.co/273x154" alt="중3 강좌">
+              <div class="card-grade" style="top:84.96px;color:rgba(255,37,39,.09)">중3</div>
+              <div class="card-grade" style="top:84.96px">중3</div>
+              <div class="card-tags" style="left:180.31px;right:auto">
+                <span class="tag tag-dark">Prime</span>
+                <span class="tag tag-blue">모집중</span>
+              </div>
+            </div>
+            <div class="card-body">
+              <img class="card-avatar" src="https://placehold.co/36x36" alt="강사">
+              <div class="card-info">
+                <div class="card-date" style="flex:1">정규반 5/1(개강)~5/24 / 내신반 5/29(개강)~직전 보강</div>
+                <div class="card-name">중3 정규+학교별내신</div>
+                <div class="card-meta">
+                  <span class="card-meta-item">정규반 4주</span>
+                  <span class="card-meta-sep">|</span>
+                  <span class="card-meta-item">1학기 기말고사 학교별 내신</span>
+                </div>
+                <div class="card-stats">
+                  <div class="card-rating">
+                    <div class="star-icon"></div>
+                    <span class="rating-score">5.0</span>
+                    <span class="rating-count">(13,579)</span>
+                    <div class="student-icon"></div>
+                    <span class="student-count">100+</span>
+                  </div>
+                  <div class="card-seats">
+                    <span class="seats-gray">마감까지 </span><span class="seats-dark">200좌석 남음</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 6: 중2 -->
+          <div class="course-card">
+            <div class="card-thumb">
+              <img class="card-thumb-img" src="https://placehold.co/273x154" alt="중2 강좌">
+              <div class="card-grade" style="top:84.96px;color:rgba(89,255,178,.41)">중2</div>
+              <div class="card-grade" style="top:84.96px">중2</div>
+              <div class="card-tags" style="left:170.31px;right:auto">
+                <span class="tag tag-dark">Prime</span>
+                <span class="tag tag-grad">마감임박</span>
+              </div>
+            </div>
+            <div class="card-body">
+              <img class="card-avatar" src="https://placehold.co/36x36" alt="강사">
+              <div class="card-info">
+                <div class="card-date" style="flex:1">정규반 5/1(개강)~5/24 / 내신반 5/29(개강)~직전 보강</div>
+                <div class="card-name">중2 정규+학교별 내신</div>
+                <div class="card-meta">
+                  <span class="card-meta-item">정규반 4주</span>
+                  <span class="card-meta-sep">|</span>
+                  <span class="card-meta-item">1학기 기말고사 학교별 내신</span>
+                </div>
+                <div class="card-stats">
+                  <div class="card-rating">
+                    <div class="star-icon"></div>
+                    <span class="rating-score">5.0</span>
+                    <span class="rating-count">(13,579)</span>
+                    <div class="student-icon"></div>
+                    <span class="student-count">100+</span>
+                  </div>
+                  <div class="card-seats">
+                    <span class="seats-gray">마감까지 </span><span class="seats-red">2좌석 남음</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 7: 중1 -->
+          <div class="course-card">
+            <div class="card-thumb">
+              <img class="card-thumb-img" src="https://placehold.co/273x154" alt="중1 강좌">
+              <div class="card-grade" style="top:84.96px;color:rgba(198,255,244,.26)">중1</div>
+              <div class="card-grade" style="top:84.96px">중1</div>
+              <div class="card-tags" style="left:170.31px;right:auto">
+                <span class="tag tag-dark">Prime</span>
+                <span class="tag tag-grad">마감임박</span>
+              </div>
+            </div>
+            <div class="card-body">
+              <img class="card-avatar" src="https://placehold.co/36x36" alt="강사">
+              <div class="card-info">
+                <div class="card-date" style="flex:1">정규반 5/1(개강)~6/28 / 내신반 6/6(개강)~직전 보강</div>
+                <div class="card-name">중1 정규+학교별 내신</div>
+                <div class="card-meta">
+                  <span class="card-meta-item">정규반 9주</span>
+                  <span class="card-meta-sep">|</span>
+                  <span class="card-meta-item">1학기 기말고사 학교별 내신</span>
+                </div>
+                <div class="card-stats">
+                  <div class="card-rating">
+                    <div class="star-icon"></div>
+                    <span class="rating-score">5.0</span>
+                    <span class="rating-count">(13,579)</span>
+                    <div class="student-icon"></div>
+                    <span class="student-count">100+</span>
+                  </div>
+                  <div class="card-seats">
+                    <span class="seats-gray">마감까지 </span><span class="seats-red">2좌석 남음</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 8: 초6·초5 -->
+          <div class="course-card">
+            <div class="card-thumb">
+              <img class="card-thumb-img" src="https://placehold.co/273x154" alt="초등 강좌">
+              <div class="card-grade" style="left:18px;top:77px;color:#FF2A2A">초5</div>
+              <div class="card-grade" style="left:18px;top:77px">초5</div>
+              <div class="card-grade" style="left:18px;top:77px">초5</div>
+              <div class="card-grade-2" style="left:31px;top:92.5px">초6</div>
+              <div class="card-tags" style="left:180.31px;right:auto">
+                <span class="tag tag-dark">Prime</span>
+                <span class="tag tag-blue">모집중</span>
+              </div>
+            </div>
+            <div class="card-body">
+              <img class="card-avatar" src="https://placehold.co/36x36" alt="강사">
+              <div class="card-info">
+                <div class="card-date" style="flex:1">정규반 5/1(개강)~6/28 / 내신반 6/6(개강)~직전 보강</div>
+                <div class="card-name">초6·초5 국어+독서논술+일요 스쿨</div>
+                <div class="card-meta">
+                  <span class="card-meta-item">정규반 9주</span>
+                  <span class="card-meta-sep">|</span>
+                  <span class="card-meta-item">초등 일요 스쿨</span>
+                  <span class="card-meta-sep">|</span>
+                  <span class="card-meta-item">초6 우수 장학생반(입시 논술 심화반)</span>
+                </div>
+                <div class="card-stats">
+                  <div class="card-rating">
+                    <div class="star-icon"></div>
+                    <span class="rating-score">5.0</span>
+                    <span class="rating-count">(13,579)</span>
+                    <div class="student-icon"></div>
+                    <span class="student-count">100+</span>
+                  </div>
+                  <div class="card-seats">
+                    <span class="seats-gray">마감까지 </span><span class="seats-dark">200좌석 남음</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /courses-grid -->
+      </div><!-- /courses-section -->
+
+      <!-- ── 수강후기 ── -->
+      <div class="reviews-section">
+        <div class="reviews-inner">
+          <div style="height:34px;display:flex;align-items:center">
+            <span style="color:#6E6E73;font-size:24px;font-family:Pretendard;font-weight:600;line-height:33.15px">학생들의 수강후기</span>
+          </div>
+          <div class="reviews-scroll" style="align-items:stretch">
+            <!-- Review 1 (full) -->
+            <div style="min-width:280px;flex:1;padding:clamp(20px,3vw,40px);background:#F8F8F8;flex-direction:column;gap:16px;display:flex">
+              <div style="font-size:14px;font-weight:600;line-height:21px">★★★★★</div>
+              <div style="color:#1D1D1F;font-size:24px;font-family:Pretendard;font-weight:600;line-height:35.7px">체계적 학습으로 자신감<br>자기주도 학습까지 성장</div>
+              <div style="color:#AAAAAA;font-size:13px;font-family:Pretendard;font-weight:300;line-height:21px">정신여고3 황*리</div>
+              <div style="color:#6E6E73;font-size:16px;font-family:Pretendard;font-weight:400;line-height:28.9px">김영준 국어학원을 선택한 이유는 예전에 다녔던 경험이 있고 그때마다 높은 수준의 자료와 체계적인 수업 방식에 만족했던 기억이 있어 다시 선택하게 되었습니다. 수능 국어를 어떻게 풀어야 하는지 잘 몰랐고 자신감도 없었는데, 수업 시간에 기출문제를 통해 풀이 방법을 배울 수 있어 매우 유익했습니다. 꾸준한 복습과 공부를 통해 자신감도 점점 높아졌습니다.</div>
+            </div>
+            <!-- Review 2 -->
+            <div style="min-width:280px;flex:1;padding:clamp(20px,3vw,40px);background:#F8F8F8;flex-direction:column;gap:16px;display:flex">
+              <div style="display:flex;justify-content:space-between;align-items:center">
+                <span style="font-size:14px;font-weight:600;line-height:21px">★★★★★</span>
+                <span style="color:#6E6E73;font-size:14px;font-family:Pretendard;font-weight:400;line-height:18.76px">+ 더보기</span>
+              </div>
+              <div style="color:#1D1D1F;font-size:24px;font-family:Pretendard;font-weight:600;line-height:35.7px">지문이 더 이상 <br>무섭지 않습니다</div>
+              <div style="color:#AAAAAA;font-size:13px;font-family:Pretendard;font-weight:300;line-height:21px">중대부중 26년 졸업생 박*인</div>
+              <div style="color:#6E6E73;font-size:16px;font-family:Pretendard;font-weight:400;line-height:28.9px">고등학생이 되며 시작되는 국어 내신 경쟁이 저에게는 매우 두려운 일이었습니다. 결론적으로 지난 두 달 동안을 다니면서 국어에 대한 자신감이 무척 상승하였습니다! 문법을 체계적이고 꼼꼼히 가르쳐 주셔서 이제 제대로 이해하고 있다는 느낌이 들어 정말 뿌듯했습니다.</div>
+            </div>
+            <!-- Review 3 -->
+            <div style="min-width:280px;flex:1;padding:clamp(20px,3vw,40px);background:#F8F8F8;flex-direction:column;gap:16px;display:flex">
+              <div style="display:flex;justify-content:space-between;align-items:center">
+                <span style="font-size:14px;font-weight:600;line-height:21px">★★★★★</span>
+                <span style="color:#6E6E73;font-size:14px;font-family:Pretendard;font-weight:400;line-height:18.76px">+ 더보기</span>
+              </div>
+              <div style="color:#1D1D1F;font-size:24px;font-family:Pretendard;font-weight:600;line-height:35.7px">과목별 전문 수업과 체계적 관리로 <br>1등급 자신감 확보</div>
+              <div style="color:#AAAAAA;font-size:13px;font-family:Pretendard;font-weight:300;line-height:21px">배명고1 박*우</div>
+              <div style="color:#6E6E73;font-size:16px;font-family:Pretendard;font-weight:400;line-height:28.9px">논술 전문 학원이라고 하면 김영준 국어학원이 빠지는 곳 없이 언급되었고, 수업 질도 좋다고 하여 선택하게 되었습니다. 비문학, 고전소설, 현대문학 등 각 과목별로 특화된 수업을 들을 수 있어 더욱 전문적인 지식과 기출 포인트를 습득할 수 있었습니다.</div>
+            </div>
+            <!-- Review 4 -->
+            <div style="min-width:280px;flex:1;padding:clamp(20px,3vw,40px);background:#F8F8F8;flex-direction:column;gap:16px;display:flex">
+              <div style="display:flex;justify-content:space-between;align-items:center">
+                <span style="font-size:14px;font-weight:600;line-height:21px">★★★★★</span>
+                <span style="color:#6E6E73;font-size:14px;font-family:Pretendard;font-weight:400;line-height:18.76px">+ 더보기</span>
+              </div>
+              <div style="color:#1D1D1F;font-size:24px;font-family:Pretendard;font-weight:600;line-height:35.7px">문법·문학·비문학 이해 확립으로 <br>학습 자신감 형성</div>
+              <div style="color:#AAAAAA;font-size:13px;font-family:Pretendard;font-weight:300;line-height:21px">언남고1 이*효</div>
+              <div style="color:#6E6E73;font-size:16px;font-family:Pretendard;font-weight:400;line-height:28.9px">국어공부를 해야겠다고는 생각했지만 어떻게 해야할지 몰랐는데, 김영준국어학원이 대형학원이고 믿음직할 것 같아서 선택했습니다. 문법에 대해서는 선생님께서 이해하기 쉽게 알려주시는 동시에 여러가지 조심해야 할 점도 짚어주셔서 매우 편리했습니다.</div>
+            </div>
+          </div>
+        </div>
+        <!-- Nav arrows -->
+        <div style="display:flex;justify-content:flex-end;align-items:center;gap:16px">
+          <div style="width:36px;height:36px;background:rgba(210,210,215,.64);border-radius:36px;display:flex;align-items:center;justify-content:center;opacity:.42;cursor:pointer;font-size:18px;color:rgba(0,0,0,.56)">&#8249;</div>
+          <div style="width:36px;height:36px;background:rgba(210,210,215,.64);border-radius:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px;color:rgba(0,0,0,.56)">&#8250;</div>
+        </div>
+        </div><!-- /reviews-inner -->
+      </div>
+
+    </div><!-- /courses-wrap -->
+  </div><!-- /academy-section -->
+
+  <!-- ══ 대치동 관리 시스템 ══ -->
+  <div class="system-section">
+
+    <div class="section-inner" style="display:flex;justify-content:space-between;align-items:flex-start;gap:40px;flex-wrap:wrap">
+      <div style="display:flex;flex-direction:column;gap:24px">
+        <div style="color:#2F71E3;font-size:22px;font-family:Pretendard;font-weight:400;line-height:35.06px">대치동 관리 시스템</div>
+        <div style="color:#1D1D1F;font-size:clamp(28px,3.2vw,45px);font-family:Pretendard;font-weight:600;line-height:1.35">수업이 끝나도 <br>배움이 끝나야 종료되는<br>과외식 밀착관리 시스템</div>
+      </div>
+      <div style="max-width:570px;flex:1;min-width:280px">
+        <div style="color:#444;font-size:clamp(16px,1.8vw,24px);font-family:Pretendard;font-weight:600;line-height:1.8">상위권은 아는 문제에 시간을 쓰지 않습니다. 모르는 문제, 자주 틀리는 유형, 반복되는 실수와 약점에 시간을 집중합니다.<br>클래스데이는 주간 테스트를 통해 학생별 수준과 취약 유형을 세밀하게 분석하고, 학생마다 필요한 강의와 문제만 집중적으로 학습합니다.<br>그리고 단순히 수업만 끝내는 것이 아니라, 배운 내용을 완전히 자기 것으로 만들 때까지 반복 관리합니다.</div>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:50px;width:100%;align-items:center">
+      <div class="section-inner">
+        <div style="color:#CDCDCD;font-size:clamp(16px,1.8vw,24px);font-family:Pretendard;font-weight:700;line-height:1.56">복습 → 점검 → 학습 → 보완 → 확장</div>
+        <div style="color:#1D1D1F;font-size:clamp(26px,3vw,40px);font-family:Pretendard;font-weight:600;line-height:1.4">완전학습 구조</div>
+      </div>
+
+      <div class="system-cols">
+
+        <!-- 테스트 시스템 -->
+        <div style="flex:1;align-self:stretch;padding:16px;background:#F6F8FB;display:flex;flex-direction:column;gap:10px">
+          <div style="padding:10px 0;display:flex;flex-direction:column;align-items:center;gap:4px">
+            <div style="width:18px;height:19.71px;border:2px solid #0C5DDF"></div>
+            <div style="color:#0C5DDF;font-size:20px;font-family:Pretendard;font-weight:700;line-height:26.8px;text-align:center">테스트 시스템</div>
+          </div>
+          <!-- 3단계 진단 평가 -->
+          <div style="padding:24px;background:white;outline:1px solid #E6E6E6;outline-offset:-1px;display:flex;flex-direction:column;align-items:center;gap:20px">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:16px">
+              <div style="width:32px;height:32px;background:#F0F9FF;border-radius:6.96px;display:flex;align-items:center;justify-content:center">
+                <div style="width:12.52px;height:12.52px;border:1.5px solid #568ADE"></div>
+              </div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
+                <div style="color:#121212;font-size:18px;font-family:Pretendard;font-weight:700;line-height:24.12px">3단계 진단 평가</div>
+                <div style="color:#999;font-size:13px;font-family:Pretendard;font-weight:500;line-height:21.97px;text-align:center">단순 점수 확인을 넘어, 3단계 주기별 테스트로<br>강점과 약점을 입체적으로 분석합니다.</div>
+              </div>
+            </div>
+            <div style="align-self:stretch;height:0;border-top:1px solid rgba(0,0,0,.10)"></div>
+            <div style="align-self:stretch;display:flex;gap:10px">
+              <div style="flex:1;display:flex;flex-direction:column;gap:6px">
+                <div style="display:flex;gap:4px;align-items:center">
+                  <div style="width:15.5px;height:15.5px;background:#404145"></div>
+                  <span style="color:#666;font-size:13px;font-family:Pretendard;font-weight:600">일일</span>
+                </div>
+                <div style="color:#666;font-size:12px;font-family:Pretendard;font-weight:300;line-height:16.08px;text-align:center">당일 학습 즉시 점검, 실수 패턴 조기 차단</div>
+              </div>
+              <div style="flex:1;display:flex;flex-direction:column;gap:6px">
+                <div style="display:flex;gap:4px;align-items:center">
+                  <div style="width:15.5px;height:15.5px;background:#404145"></div>
+                  <span style="color:#666;font-size:13px;font-family:Pretendard;font-weight:600">월간</span>
+                </div>
+                <div style="color:#666;font-size:12px;font-family:Pretendard;font-weight:300;line-height:16.08px;text-align:center">월간 종합<br>진단으로 구조적<br>취약점 파악</div>
+              </div>
+              <div style="flex:1;display:flex;flex-direction:column;gap:6px">
+                <div style="display:flex;gap:4px;align-items:center">
+                  <div style="width:15.5px;height:15.5px;background:#404145"></div>
+                  <span style="color:#666;font-size:13px;font-family:Pretendard;font-weight:600">시험 대비</span>
+                </div>
+                <div style="color:#666;font-size:12px;font-family:Pretendard;font-weight:300;line-height:16.08px;text-align:center">실전 환경 취약 영역 최종 점검, 보완 전략 제시</div>
+              </div>
+            </div>
+          </div>
+          <!-- 끝장 오답 관리 -->
+          <div style="padding:24px;background:white;outline:1px solid #E6E6E6;outline-offset:-1px;display:flex;flex-direction:column;align-items:center;gap:34px">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
+              <div style="width:32px;height:32px;background:#F0F9FF;border-radius:6.96px;display:flex;align-items:center;justify-content:center">
+                <div style="width:15px;height:15px;border:1.5px solid #568ADE"></div>
+              </div>
+              <div style="color:#121212;font-size:18px;font-family:Pretendard;font-weight:700;line-height:24.12px">끝장 오답 관리</div>
+              <div style="color:#999;font-size:13px;font-family:Pretendard;font-weight:500;line-height:21.97px;text-align:center">오답 해결 전 하원 불가,<br>유사 문항으로 반복 확인하여 같은 실수를<br>두 번 다시 하지 않도록 완벽히 잡아냅니다.</div>
+            </div>
+          </div>
+          <!-- 성취감·동기부여 -->
+          <div style="padding:24px;background:white;outline:1px solid #E6E6E6;outline-offset:-1px;display:flex;flex-direction:column;align-items:center;gap:34px">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
+              <div style="width:32px;height:32px;background:#F6F8FB;border-radius:6.96px;display:flex;align-items:center;justify-content:center">
+                <div style="width:15px;height:15px;border:1.5px solid #4F4F4F"></div>
+              </div>
+              <div style="color:#121212;font-size:18px;font-family:Pretendard;font-weight:700;line-height:24.12px">성취감 · 동기부여</div>
+              <div style="color:#999;font-size:13px;font-family:Pretendard;font-weight:500;line-height:21.97px;text-align:center">명예의 전당과 리워드로 학습 의지를 강화하고,<br>작은 성공의 경험을 쌓아<br>스스로 공부하는 힘을 키웁니다.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 완전학습 Flow -->
+        <div style="padding:16px;background:#F6F8FB;display:flex;flex-direction:column;gap:10px">
+          <div style="padding:10px 0;display:flex;flex-direction:column;align-items:center;gap:4px">
+            <div style="width:18px;height:19.71px;border:2px solid #0C5DDF"></div>
+            <div style="color:#0C5DDF;font-size:20px;font-family:Pretendard;font-weight:700;line-height:26.8px;text-align:center">완전학습 Flow</div>
+          </div>
+          <div style="width:354px;display:flex;flex-direction:column;gap:6px">
+            <!-- Step 1 -->
+            <div style="padding:18px 50px;background:white;outline:1px solid #E6E6E6;outline-offset:-1px;display:flex;flex-direction:column;align-items:center;gap:4px">
+              <div style="width:22px;height:22px;background:#212121;border-radius:20px;display:flex;align-items:center;justify-content:center"><span style="color:white;font-size:12px;font-weight:800;line-height:16.8px">1</span></div>
+              <div style="color:#121212;font-size:18px;font-family:Pretendard;font-weight:700;line-height:24.12px;text-align:center">라이브 등원 · 출결</div>
+              <div style="color:#666;font-size:13px;font-family:Pretendard;font-weight:300;line-height:17.42px;text-align:center">PC · 태블릿으로 실시간 등원, 출결 현황 학부모 알림</div>
+            </div>
+            <!-- Step 2 -->
+            <div style="padding:18px 50px;background:white;outline:1px solid #E6E6E6;outline-offset:-1px;display:flex;flex-direction:column;align-items:center;gap:4px">
+              <div style="width:22px;height:22px;background:#212121;border-radius:20px;display:flex;align-items:center;justify-content:center"><span style="color:white;font-size:12px;font-weight:800;line-height:16.8px">2</span></div>
+              <div style="color:#121212;font-size:18px;font-family:Pretendard;font-weight:700;line-height:24.12px;text-align:center">대치동 라이브 본 수업</div>
+              <div style="color:#666;font-size:13px;font-family:Pretendard;font-weight:300;line-height:17.42px;text-align:center">개념 강의 · 유형 풀이 후 수업 내용 기반 과제 부여</div>
+            </div>
+            <!-- Step 3 (blue tint) -->
+            <div style="padding:18px 50px;background:#F0F9FF;outline:1px solid #B5D3E8;outline-offset:-1px;display:flex;flex-direction:column;align-items:center;gap:4px">
+              <div style="width:22px;height:22px;background:#212121;border-radius:20px;display:flex;align-items:center;justify-content:center"><span style="color:white;font-size:12px;font-weight:800;line-height:16.8px">3</span></div>
+              <div style="color:#121212;font-size:18px;font-family:Pretendard;font-weight:700;line-height:24.12px;text-align:center">일일 테스트</div>
+              <div style="color:#666;font-size:13px;font-family:Pretendard;font-weight:300;line-height:17.42px;text-align:center">수업 직후 당일 학습 체화 여부 점검</div>
+            </div>
+            <!-- Step 4 (blue tint) -->
+            <div style="padding:18px 50px;background:#F0F9FF;outline:1px solid #B5D3E8;outline-offset:-1px;display:flex;flex-direction:column;align-items:center;gap:4px">
+              <div style="width:22px;height:22px;background:#212121;border-radius:20px;display:flex;align-items:center;justify-content:center"><span style="color:white;font-size:12px;font-weight:800;line-height:16.8px">4</span></div>
+              <div style="color:#121212;font-size:18px;font-family:Pretendard;font-weight:700;line-height:24.12px;text-align:center">오답 해결</div>
+              <div style="color:#666;font-size:13px;font-family:Pretendard;font-weight:300;line-height:17.42px;text-align:center">테스트 · 과제 오답을 맞힐 때까지 재풀이</div>
+            </div>
+            <!-- Step 5 (blue tint) -->
+            <div style="padding:18px 50px;background:#F0F9FF;outline:1px solid #B5D3E8;outline-offset:-1px;display:flex;flex-direction:column;align-items:center;gap:4px">
+              <div style="width:22px;height:22px;background:#212121;border-radius:20px;display:flex;align-items:center;justify-content:center"><span style="color:white;font-size:12px;font-weight:800;line-height:16.8px">5</span></div>
+              <div style="color:#121212;font-size:18px;font-family:Pretendard;font-weight:700;line-height:24.12px;text-align:center">나머지 학습</div>
+              <div style="color:#666;font-size:13px;font-family:Pretendard;font-weight:300;line-height:17.42px;text-align:center">과제 수행 · 밀착 검사 · 오답 해결 통과 시 하원</div>
+              <div style="color:#A6A6A6;font-size:12px;font-family:Pretendard;font-weight:300;line-height:16.08px;text-align:center">※ 테스트 미통과자 및 과제 미수행자 대상</div>
+            </div>
+            <!-- Step 6 -->
+            <div style="padding:18px 50px;background:white;outline:1px solid #E6E6E6;outline-offset:-1px;display:flex;flex-direction:column;align-items:center;gap:4px">
+              <div style="width:22px;height:22px;background:#212121;border-radius:20px;display:flex;align-items:center;justify-content:center"><span style="color:white;font-size:12px;font-weight:800;line-height:16.8px">6</span></div>
+              <div style="color:#121212;font-size:18px;font-family:Pretendard;font-weight:700;line-height:24.12px;text-align:center">완벽 하원 · 리포트</div>
+              <div style="color:#666;font-size:13px;font-family:Pretendard;font-weight:300;line-height:17.42px;text-align:center">최종 하원 안내와 일일 학습 리포트 발송</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 과제 시스템 -->
+        <div style="flex:1;align-self:stretch;padding:16px;background:#F6F8FB;display:flex;flex-direction:column;gap:10px">
+          <div style="padding:10px 0;display:flex;flex-direction:column;align-items:center;gap:4px">
+            <div style="width:18px;height:19.86px;border:2px solid #0C5DDF"></div>
+            <div style="color:#0C5DDF;font-size:20px;font-family:Pretendard;font-weight:700;line-height:26.8px;text-align:center">과제 시스템</div>
+          </div>
+          <!-- 완벽 숙달용 3중 과제 -->
+          <div style="flex:1;padding:34px 24px;background:white;outline:1px solid #E6E6E6;outline-offset:-1px;display:flex;flex-direction:column;align-items:center;gap:34px">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:24px">
+              <div style="width:32px;height:32px;background:#F0F9FF;border-radius:6.96px;display:flex;align-items:center;justify-content:center">
+                <div style="width:14.5px;height:14.5px;border:1.5px solid #568ADE"></div>
+              </div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
+                <div style="color:#121212;font-size:18px;font-family:Pretendard;font-weight:700;line-height:24.12px;text-align:center">완벽 숙달용 3중 과제</div>
+                <div style="width:263px;color:#999;font-size:13px;font-family:Pretendard;font-weight:500;line-height:21.97px;text-align:center">한 번 배운 내용을 완전히 내 것으로 만들 때까지,<br>3중으로 반복하고 확인합니다.</div>
+              </div>
+              <div style="align-self:stretch;height:0;border-top:1px solid rgba(0,0,0,.10)"></div>
+              <div style="display:flex;gap:34px">
+                <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
+                  <div style="width:16px;height:20px;border:2px solid #4F4F4F"></div>
+                  <div style="color:#666;font-size:13px;font-weight:600;text-align:center">수업내용<br>과제</div>
+                </div>
+                <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
+                  <div style="width:20px;height:20px;border:2px solid #4F4F4F"></div>
+                  <div style="color:#666;font-size:13px;font-weight:600;text-align:center">테스트 오답<br>유사문항</div>
+                </div>
+                <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
+                  <div style="width:18px;height:20px;border:2px solid #4F4F4F"></div>
+                  <div style="color:#666;font-size:13px;font-weight:600;text-align:center">과제 오답<br>유사문항</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- 일일 밀착 과제 관리 -->
+          <div style="flex:1;padding:34px 24px;background:white;outline:1px solid #E6E6E6;outline-offset:-1px;display:flex;flex-direction:column;align-items:center;gap:34px">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:24px">
+              <div style="width:32px;height:32px;background:#F0F9FF;border-radius:6.96px;display:flex;align-items:center;justify-content:center">
+                <div style="width:15px;height:15px;border:1.5px solid #568ADE"></div>
+              </div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
+                <div style="color:#121212;font-size:18px;font-family:Pretendard;font-weight:700;line-height:24.12px;text-align:center">일일 밀착 과제 관리</div>
+                <div style="width:263px;color:#999;font-size:13px;font-family:Pretendard;font-weight:500;line-height:21.97px;text-align:center">하루도 빠짐없이 관리합니다.<br>분량 배부부터 풀이과정 점검, 학부모 보고까지<br>매일의 학습이 꼼꼼하게 쌓여 실력이 됩니다.</div>
+              </div>
+              <div style="align-self:stretch;height:0;border-top:1px solid rgba(0,0,0,.10)"></div>
+              <div style="display:flex;gap:34px">
+                <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
+                  <div style="width:18px;height:20px;border:2px solid #4F4F4F"></div>
+                  <div style="color:#666;font-size:13px;font-weight:600;text-align:center">하루 분량<br>배부</div>
+                </div>
+                <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
+                  <div style="width:18px;height:18px;border:2px solid #4F4F4F"></div>
+                  <div style="color:#666;font-size:13px;font-weight:600;text-align:center">풀이과정<br>정밀 체크</div>
+                </div>
+                <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
+                  <div style="width:20px;height:16px;border:2px solid #4F4F4F"></div>
+                  <div style="color:#666;font-size:13px;font-weight:600;text-align:center">학부모<br>일일 리포트</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /system-cols -->
+      <div class="section-inner" style="text-align:center;color:#AEAEAE;font-size:12px;font-family:Pretendard;font-weight:400;line-height:18.72px">※ 모든 과정은 학부모님께 현황을 실시간 확인할 수 있도록 안내됩니다.</div>
+    </div>
+  </div><!-- /관리 시스템 -->
+
+  <!-- ══ 대치동 최상위 콘텐츠 ══ -->
+  <div class="content-section">
+
+    <div class="section-inner" style="display:flex;justify-content:space-between;align-items:flex-start;gap:40px;flex-wrap:wrap">
+      <div style="display:flex;flex-direction:column;gap:24px">
+        <div style="color:#2F71E3;font-size:22px;font-family:Pretendard;font-weight:400;line-height:35.06px">대치동 최상위 콘텐츠</div>
+        <div style="color:#1D1D1F;font-size:clamp(28px,3.2vw,45px);font-family:Pretendard;font-weight:600;line-height:1.35">매주 <br>대치동 연구진이 만든<br>개인 맞춤 교재가 <br>집 앞에 도착해요</div>
+      </div>
+      <div style="max-width:570px;flex:1;min-width:280px">
+        <div style="color:#444;font-size:clamp(16px,1.8vw,24px);font-family:Pretendard;font-weight:600;line-height:1.8">국어를 뒤늦게 시작한 아이들은 집을 팔아도 성적이 잘 오르지 않는다는 말이 있습니다.<br>대치동 학생들의 대입 성적이 높은 이유는 어려서부터 좋은 지문과 좋은 문제를 통해 꾸준히 훈련하기 때문입니다.<br><br>그래서 클래스데이는 학생별 수준과 취약 유형을 분석하여 수능 출제위원 및 대치동 연구진이 직접 선별한 개인 맞춤 교재를 매주 제공합니다.</div>
+      </div>
+    </div>
+
+    <div class="content-two-col">
+      <div class="content-left">
+        <!-- 약점보완 -->
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <div style="color:#1D1D1F;font-size:30px;font-family:Pretendard;font-weight:600;line-height:45px">수능출제위원 · 연구진이 선별한 <br>1:1 약점보완 문제</div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="display:flex;align-items:center;gap:10px">
+              <div style="width:15.5px;height:15.5px;background:#444;flex-shrink:0"></div>
+              <span style="color:#444;font-size:16px;font-family:Pretendard;font-weight:400;line-height:28.9px">매주 테스트를 바탕으로 학생별 실력과 취약 유형을 파악</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px">
+              <div style="width:15.5px;height:15.5px;background:#444;flex-shrink:0"></div>
+              <span style="color:#444;font-size:16px;font-family:Pretendard;font-weight:400;line-height:28.9px">개인별 약점 개선을 위한 문제를 주차별 배송</span>
+            </div>
+          </div>
+        </div>
+        <!-- 내신·수능 통합 -->
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <div style="color:#1D1D1F;font-size:30px;font-family:Pretendard;font-weight:600;line-height:45px">전국 학교별 내신 · 수능 통합 훈련</div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="display:flex;align-items:center;gap:10px">
+              <div style="width:15.5px;height:15.5px;background:#444;flex-shrink:0"></div>
+              <span style="color:#444;font-size:16px;font-family:Pretendard;font-weight:400;line-height:28.9px">학교별 출판사와 시험 범위에 맞춘 강의를 제공</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px">
+              <div style="width:15.5px;height:15.5px;background:#444;flex-shrink:0"></div>
+              <span style="color:#444;font-size:16px;font-family:Pretendard;font-weight:400;line-height:28.9px">강남권 주요 학교 기출과 수능 유형을 연계하여 내신과 수능을 동시에 대비</span>
+            </div>
+          </div>
+        </div>
+        <!-- 프리미엄 교재 -->
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <div style="color:#1D1D1F;font-size:30px;font-family:Pretendard;font-weight:600;line-height:45px">현장과 100% 동일한 <br>대치동 프리미엄 교재</div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="display:flex;align-items:center;gap:10px">
+              <div style="width:15.5px;height:15.5px;background:#444;flex-shrink:0"></div>
+              <span style="color:#444;font-size:16px;font-family:Pretendard;font-weight:400;line-height:28.9px">최신 내신 및 출제 트렌드를 완벽하게 분석</span>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:10px">
+              <div style="width:15.5px;height:15.5px;background:#444;flex-shrink:0;margin-top:6px"></div>
+              <span style="color:#444;font-size:16px;font-family:Pretendard;font-weight:400;line-height:28.9px">논술·수능, 독서·문학·문법·비문학 등 <br>90명의 각 영역별 전문 강사진이 온라인에서 동일하게 제공</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div><!-- /content-left -->
+      <!-- 교재 이미지 + nav arrows -->
+      <div class="content-right">
+        <img style="width:min(570px,100%);display:block" src="https://placehold.co/570x600" alt="교재">
+        <div style="position:absolute;right:0;top:19.74px;display:flex;gap:8px;align-items:center">
+          <div style="width:27px;height:27px;background:rgba(210,210,215,.64);border-radius:27px;display:flex;align-items:center;justify-content:center;opacity:.42;cursor:pointer;font-size:14px;color:rgba(0,0,0,.56)">&#8249;</div>
+          <div style="width:27px;height:27px;background:rgba(210,210,215,.64);border-radius:27px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;color:rgba(0,0,0,.56)">&#8250;</div>
+        </div>
+      </div>
+    </div><!-- /content-two-col -->
+
+  </div><!-- /콘텐츠 -->
+
+  <!-- ══ 강의를 끝까지 완주하는 경험 ══ -->
+  <div class="completion-section">
+
+    <div class="section-inner" style="display:flex;justify-content:space-between;align-items:flex-start;gap:40px;flex-wrap:wrap">
+      <div style="display:flex;flex-direction:column;gap:24px">
+        <div style="color:#2F71E3;font-size:22px;font-family:Pretendard;font-weight:400;line-height:35.06px">강의를 끝까지 완주하는 경험</div>
+        <div style="color:#1D1D1F;font-size:clamp(28px,3.2vw,45px);font-family:Pretendard;font-weight:600;line-height:1.35">끝까지 해내는 <br>마음을 가르치고<br>스스로 공부에 몰입하는 <br>경험을 선사합니다</div>
+      </div>
+      <div style="max-width:570px;flex:1;min-width:280px">
+        <div style="color:#444;font-size:clamp(16px,1.8vw,24px);font-family:Pretendard;font-weight:600;line-height:1.8">공부는 억지로 오래 앉혀놓는다고 완성되지 않습니다.<br>중요한 것은 아이 스스로 책을 펼치고, 강의를 끝까지 완주하며, 몰입하는 경험을 반복하는 것입니다.<br><br>클래스데이는 혼자가 아닌 함께하는 학습 환경과 성취감을 느끼는 시스템을 통해 공부가 지속되는 습관을 만들어갑니다.</div>
+      </div>
+    </div>
+
+    <div class="feature-rows-wrap">
+
+      <!-- 강제 자습실 -->
+      <div class="feature-row-item" style="flex-direction:row">
+        <img class="feature-img" src="https://placehold.co/570x400" alt="강제 자습실">
+        <div class="feature-row-text">
+          <div style="color:#1D1D1F;font-size:clamp(20px,2vw,28px);font-family:Pretendard;font-weight:600;line-height:1.3">진짜 학원같은<br>온라인 강제 자습실</div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="display:flex;align-items:center;gap:10px"><div style="width:15.5px;height:15.5px;background:#404145;flex-shrink:0"></div><span style="color:#6E6E73;font-size:clamp(14px,1.2vw,18px);font-family:Pretendard;font-weight:400;line-height:1.6">선생님이 돌아다니며 자습 감독</span></div>
+            <div style="display:flex;align-items:center;gap:10px"><div style="width:15.5px;height:15.5px;background:#404145;flex-shrink:0"></div><span style="color:#6E6E73;font-size:clamp(14px,1.2vw,18px);font-family:Pretendard;font-weight:400;line-height:1.6">숙제 안 하면 못 나가는 '강제 자습실'</span></div>
+            <div style="display:flex;align-items:center;gap:10px"><div style="width:15.5px;height:15.5px;background:#404145;flex-shrink:0"></div><span style="color:#6E6E73;font-size:clamp(14px,1.2vw,18px);font-family:Pretendard;font-weight:400;line-height:1.6">옆 친구가 공부하는 게 보이는 현장감</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 동기부여 시스템 -->
+      <div class="feature-row-item" style="flex-direction:row-reverse">
+        <div style="position:relative;overflow:hidden;flex-shrink:0;width:min(570px,50%)">
+          <img class="feature-img" style="width:100%;height:400px;position:relative" src="https://placehold.co/570x400" alt="동기부여">
+        </div>
+        <div class="feature-row-text">
+          <div style="color:#1D1D1F;font-size:clamp(20px,2vw,28px);font-family:Pretendard;font-weight:600;line-height:1.3">게임처럼 성취감이 쌓이는<br>동기부여 시스템</div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="display:flex;align-items:center;gap:10px"><div style="width:15.5px;height:15.5px;background:#404145;flex-shrink:0"></div><span style="color:#6E6E73;font-size:clamp(14px,1.2vw,18px);font-family:Pretendard;font-weight:400;line-height:1.6">순공시간 기반 레벨업하는 시스템</span></div>
+            <div style="display:flex;align-items:center;gap:10px"><div style="width:15.5px;height:15.5px;background:#404145;flex-shrink:0"></div><span style="color:#6E6E73;font-size:clamp(14px,1.2vw,18px);font-family:Pretendard;font-weight:400;line-height:1.6">나의 학습성과에 따라 캐릭터가 진화하고 성장</span></div>
+            <div style="display:flex;align-items:flex-start;gap:10px"><div style="width:15.5px;height:15.5px;background:#404145;flex-shrink:0;margin-top:4px"></div><span style="color:#6E6E73;font-size:clamp(14px,1.2vw,18px);font-family:Pretendard;font-weight:400;line-height:1.6">목표 레벨, 출석, 과제 수행 등 뚜렷한 성취에 대해 즉각적인 리워드를 제공</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 의대 합격생 멘토링 -->
+      <div class="feature-row-item" style="flex-direction:row">
+        <img class="feature-img" src="https://placehold.co/570x400" alt="멘토링">
+        <div class="feature-row-text">
+          <div style="color:#1D1D1F;font-size:clamp(20px,2vw,28px);font-family:Pretendard;font-weight:600;line-height:1.3">47명의 의대 합격생과<br>실시간으로 연결되는 학습 멘토링</div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="display:flex;align-items:center;gap:10px"><div style="width:15.5px;height:15.5px;background:#404145;flex-shrink:0"></div><span style="color:#6E6E73;font-size:clamp(14px,1.2vw,18px);font-family:Pretendard;font-weight:400;line-height:1.6">공부법, 문제풀이, 학습 루틴까지 실시간 상담</span></div>
+            <div style="display:flex;align-items:center;gap:10px"><div style="width:15.5px;height:15.5px;background:#404145;flex-shrink:0"></div><span style="color:#6E6E73;font-size:clamp(14px,1.2vw,18px);font-family:Pretendard;font-weight:400;line-height:1.6">시기별 학습 전략과 실제 공부흐름 공유</span></div>
+            <div style="display:flex;align-items:center;gap:10px"><div style="width:15.5px;height:15.5px;background:#404145;flex-shrink:0"></div><span style="color:#6E6E73;font-size:clamp(14px,1.2vw,18px);font-family:Pretendard;font-weight:400;line-height:1.6">먼저 합격한 선배들과의 소통을 통해 학습 동기 형성</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /feature-rows-wrap -->
+  </div><!-- /강의 완주 -->
+
+  <!-- ══ FOOTER ══ -->
+  <div class="footer-section">
+    <div class="footer-inner">
+
+      <!-- Top: logo + links -->
+      <div class="footer-top">
+        <div style="display:flex;align-items:flex-end;gap:8px;overflow:hidden;flex-shrink:0">
+          <div style="width:27.6px;height:30px;position:relative;overflow:hidden">
+            <div style="width:27.6px;height:20px;position:absolute;top:0;left:0;background:#909DAD"></div>
+          </div>
+          <div style="width:101.36px;height:23.36px;background:#909DAD"></div>
+        </div>
+        <div class="footer-links">
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <span style="color:#909DAD;font-size:18px;font-family:Pretendard;font-weight:700;line-height:25px">Classday</span>
+            <span style="color:#909DAD;font-size:14px;font-family:Pretendard;font-weight:700;line-height:25px">설명회</span>
+            <span style="color:#909DAD;font-size:14px;font-family:Pretendard;font-weight:700;line-height:25px">이벤트</span>
+            <span style="color:#909DAD;font-size:14px;font-family:Pretendard;font-weight:700;line-height:25px">새소식</span>
+            <span style="color:#909DAD;font-size:14px;font-family:Pretendard;font-weight:700;line-height:25px">블로그</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <span style="color:#909DAD;font-size:18px;font-family:Pretendard;font-weight:700;line-height:25px">Service Policies</span>
+            <span style="color:#909DAD;font-size:14px;font-family:Pretendard;font-weight:700;line-height:25px">서비스 이용약관</span>
+            <span style="color:#909DAD;font-size:14px;font-family:Pretendard;font-weight:700;line-height:25px">개인정보 처리방침</span>
+            <span style="color:#909DAD;font-size:14px;font-family:Pretendard;font-weight:700;line-height:25px">문의하기</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom: biz info + awards -->
+      <div class="footer-bottom">
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <div style="color:#909DAD;font-size:12px;font-family:Pretendard;font-weight:500;line-height:21px">
+            주식회사 베코&nbsp;&nbsp;대표 유신아<br>
+            사업자 등록번호&nbsp;&nbsp;630-87-03298<br>
+            전화 : 070-7770-3216&nbsp;&nbsp;I&nbsp;&nbsp;주소 : 서울특별시 강남구 도곡로 112, 2층 B4-5호 (도곡동, 서한빌딩)
+          </div>
+          <div style="color:#909DAD;font-size:12px;font-family:Pretendard;font-weight:500;line-height:21px">COPYRIGHT Classday. All Rights Reserved.</div>
+        </div>
+        <div class="footer-awards">
+          <div style="display:flex;align-items:center;gap:8px">
+            <img style="width:52px;height:52px" src="https://placehold.co/52x52" alt="수상 배지">
+            <div style="display:flex;flex-direction:column">
+              <span style="color:#3D4C5E;font-size:15px;font-family:Pretendard;font-weight:700;line-height:21px">2025 한국고객만족도 1위 수상</span>
+              <span style="color:#3D4C5E;font-size:12px;font-family:Pretendard;font-weight:400;line-height:16.8px;opacity:.5">* 한경비즈니스 2025 한국 고객만족도 1위 수상</span>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px">
+            <img style="width:54px;height:54px;border-radius:135px" src="https://placehold.co/54x54" alt="인증 마크">
+            <span style="color:#3D4C5E;font-size:15px;font-family:Pretendard;font-weight:700;line-height:21px">대량문자 전송 자격 인증</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div><!-- /footer -->
+
+</div><!-- /page -->
+</body>
+</html>

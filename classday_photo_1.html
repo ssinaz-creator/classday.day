@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ClassDay — 산김영준 촬영 콘티</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+<style>
+  :root {
+    --white:       #FFFFFF;
+    --surface:     #F5F5F7;
+    --ink:         #27282B;
+    --blue:        #2977FE;
+    --purple:      #8144FF;
+    --pink:        #E929FE;
+    --grad:        linear-gradient(100deg, #2977FE -6.15%, #8144FF 49.54%, #E929FE 105.24%);
+    --mid-gray:    #6E6E73;
+    --light-border:#E2E2E7;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+
+  body {
+    background: var(--white);
+    color: var(--ink);
+    font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.75;
+  }
+
+  /* ══ COVER ══════════════════════ */
+  .cover {
+    min-height: 100vh;
+    background: var(--ink);
+    color: var(--white);
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    padding: 56px 64px;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover-glow {
+    position: absolute; top: -200px; right: -200px;
+    width: 700px; height: 700px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(41,119,254,0.18) 0%, rgba(129,68,255,0.1) 40%, transparent 70%);
+    pointer-events: none;
+  }
+  .cover-glow-2 {
+    position: absolute; bottom: -100px; left: -100px;
+    width: 400px; height: 400px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(233,41,254,0.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .cover-nav {
+    display: flex; justify-content: space-between; align-items: center;
+    position: relative; z-index: 1;
+  }
+  .cover-badge {
+    font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.35);
+  }
+  .cover-body {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 60px 0; position: relative; z-index: 1;
+  }
+  .cover-eyebrow {
+    font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: rgba(255,255,255,0.4); margin-bottom: 28px;
+  }
+  .cover-headline {
+    font-size: clamp(48px, 7vw, 88px); font-weight: 400;
+    line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 32px;
+  }
+  .cover-headline .grad-text {
+    background: var(--grad);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+  .cover-desc { font-size: 16px; color: rgba(255,255,255,0.5); max-width: 520px; line-height: 1.75; }
+  .cover-desc strong { color: rgba(255,255,255,0.8); font-weight: 400; }
+  .cover-footer {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    padding-top: 36px; border-top: 1px solid rgba(255,255,255,0.08);
+    position: relative; z-index: 1;
+  }
+  .cover-footer-l {
+    font-size: 10px; color: rgba(255,255,255,0.25); letter-spacing: 0.06em; line-height: 1.9; text-transform: uppercase;
+  }
+  .cover-count { text-align: right; }
+  .cover-count-n {
+    font-size: 64px; line-height: 1;
+    background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+  .cover-count-l {
+    font-size: 10px; color: rgba(255,255,255,0.25); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 4px;
+  }
+
+  /* ══ SHARED SECTION ═════════════ */
+  .section { padding: 80px 64px; border-bottom: 1px solid var(--light-border); }
+  .section.alt { background: var(--surface); }
+  .sec-inner { max-width: 960px; margin: 0 auto; }
+  .sec-head { margin-bottom: 52px; }
+  .sec-num {
+    font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--blue);
+    margin-bottom: 12px; display: flex; align-items: center; gap: 14px;
+  }
+  .sec-num::after { content: ''; flex: 1; height: 1px; background: var(--light-border); }
+  .sec-title {
+    font-size: clamp(28px, 4vw, 46px); font-weight: 400; line-height: 1.15; letter-spacing: -0.02em;
+  }
+  .sec-title .it { font-style: italic; }
+  .grad-word {
+    background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+
+  /* ══ TOC ════════════════════════ */
+  .toc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 0; margin-top: 36px; }
+  .toc-row {
+    padding: 18px 0; border-bottom: 1px solid var(--light-border);
+    display: flex; gap: 16px; align-items: center;
+  }
+  .toc-n { font-size: 10px; color: var(--blue); min-width: 52px; opacity: 0.7; flex-shrink: 0; }
+  .toc-t { font-size: 15px; font-weight: 400; color: var(--ink); flex: 1; }
+  .toc-badge {
+    font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 3px 9px; border: 1px solid var(--light-border); color: var(--mid-gray); white-space: nowrap;
+    border-radius: 100px;
+  }
+  .toc-note { margin-top: 24px; font-size: 13px; color: var(--mid-gray); text-align: right; }
+
+  /* ══ SHOT LAYOUT ════════════════ */
+  .shot-header { display: grid; grid-template-columns: 56px 1fr; gap: 20px; align-items: start; margin-bottom: 40px; }
+  .shot-badge {
+    width: 48px; height: 48px; background: var(--ink); color: var(--white); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0; margin-top: 2px;
+  }
+  .shot-badge.grad-badge { background: var(--grad); }
+  .shot-eyebrow {
+    font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue); margin-bottom: 6px; opacity: 0.8;
+  }
+  .shot-title {
+    font-size: clamp(20px, 2.8vw, 30px); font-weight: 400; letter-spacing: -0.01em; line-height: 1.2; margin-bottom: 14px;
+  }
+  .tag-row { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tag {
+    font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase;
+    border: 1px solid var(--light-border); color: var(--mid-gray); padding: 4px 12px; border-radius: 100px;
+  }
+  .shot-body { display: grid; grid-template-columns: 300px 1fr; gap: 44px; align-items: start; }
+
+  /* Frame mock */
+  .frame-mock {
+    aspect-ratio: 4/3; background: var(--surface);
+    border: 1px solid var(--light-border); position: relative; overflow: hidden;
+  }
+  .frame-thirds { position: absolute; inset: 0; }
+  .frame-thirds::before, .frame-thirds::after {
+    content: ''; position: absolute; top: 0; bottom: 0; width: 1px;
+    background: repeating-linear-gradient(to bottom, var(--light-border) 0, var(--light-border) 4px, transparent 4px, transparent 8px);
+  }
+  .frame-thirds::before { left: 33.33%; }
+  .frame-thirds::after  { left: 66.66%; }
+  .frame-thirds-h { position: absolute; inset: 0; }
+  .frame-thirds-h::before, .frame-thirds-h::after {
+    content: ''; position: absolute; left: 0; right: 0; height: 1px;
+    background: repeating-linear-gradient(to right, var(--light-border) 0, var(--light-border) 4px, transparent 4px, transparent 8px);
+  }
+  .frame-thirds-h::before { top: 33.33%; }
+  .frame-thirds-h::after  { top: 66.66%; }
+  .frame-label {
+    position: absolute; bottom: 8px; right: 10px;
+    font-size: 9px; color: var(--light-border); letter-spacing: 0.06em;
+  }
+  .frame-note {
+    margin-top: 10px; font-size: 10px; color: var(--mid-gray); letter-spacing: 0.04em;
+    text-align: center; opacity: 0.7;
+  }
+
+  /* Spec grid */
+  .spec-grid { display: grid; gap: 1px; background: var(--light-border); border: 1px solid var(--light-border); }
+  .spec-row { display: grid; grid-template-columns: 88px 1fr; gap: 1px; background: var(--light-border); }
+  .spec-label {
+    background: var(--surface); padding: 13px 14px;
+    font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--blue);
+    display: flex; align-items: flex-start; padding-top: 15px;
+  }
+  .spec-value { background: var(--white); padding: 13px 16px; font-size: 14px; line-height: 1.65; color: var(--mid-gray); }
+  .spec-value.key { font-weight: 500; color: var(--ink); }
+  .spec-value ul { list-style: none; }
+  .spec-value ul li {
+    padding: 7px 0; border-bottom: 1px solid var(--light-border);
+    display: flex; gap: 10px; font-size: 14px; line-height: 1.6;
+  }
+  .spec-value ul li:last-child { border-bottom: none; padding-bottom: 0; }
+  .li-n { font-size: 9px; color: var(--blue); opacity: 0.7; flex-shrink: 0; padding-top: 3px; }
+
+  /* Note box */
+  .note-box {
+    margin-top: 28px;
+    border-left: 3px solid transparent; border-image: var(--grad) 1;
+    padding: 18px 28px; background: var(--surface);
+  }
+  .note-label {
+    font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue); margin-bottom: 8px; opacity: 0.7;
+  }
+  .note-text { font-size: 14px; color: var(--mid-gray); line-height: 1.75; }
+  .note-text strong { color: var(--ink); font-weight: 500; }
+
+  /* Shot divider */
+  .shot-divider { border: none; border-top: 1px solid var(--light-border); margin: 48px 0; }
+
+  /* ══ PURPOSE BANNER ═════════════ */
+  .purpose-banner {
+    background: var(--ink); padding: 48px 64px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .purpose-inner {
+    max-width: 960px; margin: 0 auto;
+    display: grid; grid-template-columns: 180px 1fr; gap: 40px; align-items: start;
+  }
+  .purpose-label {
+    font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: rgba(255,255,255,0.3); padding-top: 3px; line-height: 1.9;
+  }
+  .purpose-body { font-size: 16px; color: rgba(255,255,255,0.7); line-height: 1.85; }
+  .purpose-body strong { color: var(--white); font-weight: 400; }
+  .purpose-body .grad-text {
+    background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    font-weight: 500;
+  }
+
+  /* ══ USAGE TABLE ════════════════ */
+  .usage-grid { display: grid; gap: 1px; background: var(--light-border); border: 1px solid var(--light-border); margin-top: 40px; }
+  .usage-row { display: grid; grid-template-columns: 180px 1fr; gap: 1px; background: var(--light-border); }
+  .usage-label {
+    background: var(--surface); padding: 14px 18px;
+    font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--blue);
+    display: flex; align-items: center;
+  }
+  .usage-value { background: var(--white); padding: 14px 18px; font-size: 14px; color: var(--mid-gray); line-height: 1.7; }
+
+  /* ══ CHECKLIST ══════════════════ */
+  .check-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    gap: 1px; background: var(--light-border); border: 1px solid var(--light-border); margin-top: 40px;
+  }
+  .check-card { background: var(--white); padding: 32px; }
+  .check-card.dark { background: var(--ink); color: var(--white); }
+  .check-cat {
+    font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--blue);
+    margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--light-border);
+  }
+  .check-card.dark .check-cat { color: rgba(255,255,255,0.3); border-color: rgba(255,255,255,0.08); }
+  .check-items { list-style: none; }
+  .check-items li {
+    padding: 9px 0; border-bottom: 1px solid var(--light-border);
+    font-size: 14px; color: var(--mid-gray); display: flex; gap: 12px; line-height: 1.55;
+  }
+  .check-card.dark .check-items li { color: rgba(255,255,255,0.45); border-color: rgba(255,255,255,0.06); }
+  .check-items li:last-child { border-bottom: none; }
+  .check-dot { font-size: 11px; color: var(--blue); flex-shrink: 0; margin-top: 1px; }
+  .check-card.dark .check-dot { color: rgba(255,255,255,0.2); }
+
+  /* ══ FOOTER ══════════════════════ */
+  .doc-footer {
+    background: var(--ink); color: var(--white);
+    padding: 56px 64px; display: flex; justify-content: space-between; align-items: flex-end;
+  }
+  .ft-sub { font-size: 13px; color: rgba(255,255,255,0.3); }
+  .ft-meta {
+    font-size: 10px; color: rgba(255,255,255,0.2); text-align: right; line-height: 1.9;
+    letter-spacing: 0.06em; text-transform: uppercase;
+  }
+
+  @media (max-width: 760px) {
+    .cover, .section, .purpose-banner, .doc-footer { padding-left: 24px; padding-right: 24px; }
+    .shot-body { grid-template-columns: 1fr; }
+    .check-grid { grid-template-columns: 1fr; }
+    .toc-grid { grid-template-columns: 1fr; }
+    .purpose-inner { grid-template-columns: 1fr; gap: 16px; }
+    .usage-row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ━━━━━ COVER ━━━━━━━━━━━━━━━ -->
+<div class="cover">
+  <div class="cover-glow"></div>
+  <div class="cover-glow-2"></div>
+  <div class="cover-nav">
+    <svg width="137" height="30" viewBox="0 0 137 30" fill="none" xmlns="http://www.w3.org/2000/svg" style="height:22px;width:auto;">
+      <g clip-path="url(#ca)"><g clip-path="url(#cb)">
+      <path d="M27.6 8.44C27.6 11.18 25.38 13.4 22.64 13.4 21.15 13.4 19.82 12.75 18.91 11.71 17.98 10.63 16.6 9.94 15.06 9.94 12.26 9.94 9.93 12.2 9.93 15c0 .01 0 .02 0 .03C9.93 17.77 7.71 20 4.97 20 2.23 20 .01 17.77.01 15.03.01 6.73 6.74 0 15.04 0c4.36 0 8.27 1.87 11.02 4.84C27.01 5.74 27.6 7.02 27.6 8.44z" fill="white"/>
+      <path d="M4.96 10C7.7 10 9.92 12.22 9.93 14.96V15c0 2.8 2.33 5.06 5.12 5.06 1.54 0 2.93-.69 3.85-1.78.91-1.03 2.25-1.68 3.73-1.68 2.74 0 4.96 2.22 4.96 4.96 0 1.42-.59 2.7-1.54 3.6C23.3 28.13 19.39 30 15.03 30c-2.91 0-5.62-.83-7.92-2.26C5.83 28.28 3.78 28.81 1.83 28.08c-.02-.01-.76-.28-.13-.55.02-.01 1.81-1.15 1.7-3.04C1.28 21.9 0 18.58 0 15c0-2.78 2.22-5 4.96-5z" fill="white"/>
+      </g>
+      <path d="M51.53 10.1C49.82 8.26 47.43 7.12 44.77 7.12c-5.03 0-9.12 4.05-9.17 9.07v.16c0 5.03 4.09 9.07 9.17 9.07 2.66 0 5.05-1.14 6.73-2.95l.06-.06c.41-.39.67-.94.67-1.55 0-1.18-.96-2.14-2.13-2.14-.64 0-1.21.28-1.6.72C47.6 20.48 46.27 21.15 44.79 21.15c-2.67 0-4.92-2.16-4.92-4.88v-.01c0-2.72 2.25-4.88 4.92-4.88 1.48 0 2.81.66 3.7 1.71.39.44.96.72 1.6.72 1.18 0 2.13-.96 2.13-2.14 0-.61-.25-1.16-.63-1.56l-.06-.07z" fill="white"/>
+      <path d="M57.62 8.62v14.85c0 .61-.15 1.09-.49 1.43-.33.33-.82.47-1.39.47-.58 0-1.06-.14-1.37-.47-.33-.34-.48-.82-.48-1.43V8.62c0-.63.15-1.13.48-1.48.33-.35.8-.5 1.36-.5.6 0 1.09.15 1.43.5.33.35.48.85.48 1.48z" fill="white"/>
+      <path fill-rule="evenodd" d="M106.06 8.62v4.62c-.77-.62-1.94-.9-3.14-.9-1.81 0-3.28.72-4.3 1.91-1.01 1.19-1.57 2.83-1.57 4.67 0 1.81.56 3.46 1.58 4.65 1.02 1.19 2.49 1.92 4.29 1.92.8 0 1.57-.18 2.21-.45.46-.2.87-.46 1.16-.75.27.64.85 1.1 1.6 1.1.62 0 1.11-.17 1.43-.53.32-.36.45-.87.45-1.48V8.62c0-.63-.14-1.14-.47-1.48-.32-.35-.8-.5-1.38-.5-.58 0-1.06.15-1.39.5-.33.35-.47.85-.47 1.48zm-5.3 10.29c0-1.57 1.12-2.86 2.65-2.86 1.53 0 2.65 1.29 2.65 2.86 0 1.62-1.12 2.86-2.65 2.86s-2.65-1.24-2.65-2.86z" fill="white"/>
+      <path d="M133.31 13.08l-2.71 6.49-2.57-6.51c-.14-.35-.35-.63-.62-.84-.28-.23-.69-.33-1.19-.33-.59 0-1.09.13-1.47.4-.38.29-.57.68-.57 1.16 0 .12.01.25.03.4.02.18.1.4.21.65l4.2 9.42-1.52 3.23c-.08.17-.16.36-.24.57-.09.25-.14.48-.14.7 0 .41.17.77.48 1.07.34.34.81.5 1.38.5.46 0 .86-.13 1.17-.41.32-.27.57-.63.76-1.07l6.26-13.99c.09-.19.14-.38.16-.56.03-.18.05-.34.05-.48 0-.45-.17-.83-.5-1.13-.34-.32-.83-.46-1.42-.46-.44 0-.81.09-1.08.31-.25.19-.45.49-.62.88z" fill="white"/>
+      <path fill-rule="evenodd" d="M67.8 24.71c-.31-.24-.47-.61-.49-1.06-.08.08-.16.16-.23.24-.23.25-.51.46-.84.65-.33.19-.71.34-1.14.45-.44.12-.94.18-1.5.18-1.31 0-2.37-.34-3.16-1.04-.77-.73-1.15-1.68-1.15-2.84 0-.66.11-1.24.33-1.73.24-.48.56-.88.95-1.21.41-.31.87-.56 1.39-.74.53-.18 1.08-.32 1.65-.42.61-.12 1.22-.21 1.84-.27.57-.06 1.18-.11 1.82-.16v-.25c0-.22-.03-.43-.09-.64-.06-.21-.16-.4-.3-.57-.11-.15-.29-.28-.53-.38-.24-.09-.55-.15-.93-.15-.25 0-.48.02-.69.05-.19.03-.39.08-.6.15-.17.06-.37.16-.58.28-.21.13-.45.28-.72.45-.21.15-.42.27-.62.37-.21.12-.48.17-.77.17-.43 0-.81-.16-1.14-.47-.33-.32-.5-.73-.5-1.19 0-.33.14-.67.38-1 .24-.35.61-.66 1.08-.93.48-.29 1.06-.52 1.73-.7.7-.18 1.51-.27 2.42-.27 1.87 0 3.26.36 4.12 1.14.88.77 1.3 1.97 1.3 3.53v7.18c0 .5-.13.9-.43 1.17-.29.27-.75.37-1.33.37-.51 0-.94-.1-1.28-.33zm-3.24-5.09c-.76.16-1.2.37-1.39.63-.2.25-.29.51-.29.75 0 .37.11.64.31.83.19.17.56.28 1.17.28.97 0 1.68-.22 2.17-.62.5-.43.74-.96.74-1.62v-.66c-.52.06-1.02.12-1.5.19-.54.08-.94.15-1.21.22z" fill="white"/>
+      <path d="M77.13 16.4c-.22-.08-.36-.16-.45-.24-.17-.19-.25-.39-.25-.62 0-.24.11-.45.35-.62.25-.18.66-.29 1.27-.29.62 0 1.12.08 1.48.23.39.16.8.36 1.22.61.14.09.3.17.48.25.24.08.44.12.65.12.23 0 .44-.05.62-.15.17-.12.32-.26.46-.44.25-.32.36-.69.36-1.12 0-.21-.05-.42-.14-.62-.1-.22-.26-.42-.49-.61-.37-.29-.91-.57-1.63-.83-.74-.28-1.68-.42-2.82-.42-.79 0-1.52.09-2.2.27-.66.18-1.24.46-1.73.83-.5.36-.88.8-1.15 1.33-.28.53-.41 1.14-.41 1.81 0 .63.1 1.18.31 1.65.2.45.5.84.87 1.16.38.31.82.56 1.32.76.52.19 1.07.32 1.68.42l1.44.24c.33.06.59.13.8.21.2.08.33.17.4.25.19.21.28.42.28.65 0 .32-.12.56-.37.74-.25.18-.69.29-1.37.29-.55 0-.99-.07-1.33-.2-.36-.14-.67-.3-.95-.47-.27-.17-.52-.33-.74-.47-.26-.16-.53-.25-.82-.25-.32 0-.6.1-.85.29-.23.18-.41.41-.55.67-.18.32-.27.66-.27 1.02 0 .22.06.44.17.66.14.22.32.4.55.56.49.36 1.12.65 1.89.87.8.24 1.68.35 2.66.35 1.71 0 3.1-.34 4.12-1.05 1.05-.72 1.57-1.8 1.57-3.21 0-1.22-.34-2.17-1.06-2.81-.69-.64-1.79-1.08-3.27-1.35l-1.27-.24c-.35-.06-.64-.13-.86-.21z" fill="white"/>
+      <path d="M87.41 24.93c-.77-.22-1.4-.51-1.89-.87-.23-.16-.41-.34-.55-.56-.12-.22-.18-.44-.18-.66 0-.36.09-.7.27-1.02.14-.26.32-.49.55-.67.25-.19.53-.29.85-.29.29 0 .56.09.82.25.22.14.47.3.74.47.28.17.59.33.95.47.34.13.78.2 1.33.2.68 0 1.12-.11 1.37-.29.25-.18.37-.42.37-.74 0-.23-.09-.44-.28-.65-.07-.08-.2-.17-.4-.25-.2-.08-.47-.15-.8-.21l-1.44-.24c-.61-.1-1.16-.23-1.68-.42-.5-.2-.94-.45-1.32-.76-.37-.32-.67-.71-.87-1.16-.21-.47-.31-1.02-.31-1.65 0-.67.13-1.28.41-1.81.27-.53.65-.97 1.15-1.33.49-.37 1.07-.65 1.73-.83.68-.18 1.41-.27 2.2-.27 1.14 0 2.08.14 2.82.42.72.26 1.26.54 1.63.83.23.19.39.39.49.61.09.2.14.41.14.62 0 .43-.11.8-.36 1.12-.14.18-.29.32-.46.44-.18.1-.39.15-.62.15-.21 0-.41-.04-.65-.12-.18-.08-.34-.16-.48-.25-.42-.25-.83-.45-1.22-.61-.36-.15-.86-.23-1.48-.23-.61 0-1.02.11-1.27.29-.24.17-.35.38-.35.62 0 .23.08.43.25.62.09.08.23.16.45.24.22.08.51.15.86.21l1.27.24c1.48.27 2.58.71 3.27 1.35.72.64 1.06 1.59 1.06 2.81 0 1.41-.52 2.49-1.57 3.21-1.02.71-2.41 1.05-4.12 1.05-.98 0-1.86-.11-2.66-.35z" fill="white"/>
+      <path fill-rule="evenodd" d="M119.46 16.49v.25c-.64.05-1.25.1-1.82.16-.62.06-1.23.15-1.84.27-.57.1-1.12.24-1.65.42-.52.18-.98.43-1.39.74-.39.33-.71.73-.95 1.21-.22.49-.33 1.07-.33 1.73 0 1.16.38 2.11 1.15 2.84.79.7 1.85 1.04 3.16 1.04.56 0 1.06-.06 1.5-.18.43-.11.81-.26 1.14-.45.33-.18.61-.4.84-.65.08-.08.16-.16.23-.24.03.45.18.82.49 1.06.34.23.77.33 1.28.33.58 0 1.04-.1 1.33-.37.3-.27.43-.67.43-1.17v-7.18c0-1.56-.42-2.76-1.3-3.53-.86-.78-2.25-1.14-4.12-1.14-.91 0-1.72.09-2.42.27-.67.18-1.25.41-1.73.7-.47.27-.84.58-1.08.93-.24.33-.38.67-.38 1c0 .46.17.87.5 1.19.33.31.71.47 1.14.47.29 0 .56-.05.77-.17.2-.1.41-.22.62-.37.27-.17.51-.32.72-.45.21-.12.41-.22.58-.28.21-.07.41-.12.6-.15.21-.03.44-.05.69-.05.38 0 .69.06.93.15.24.1.42.23.53.38.14.17.24.36.3.57.06.21.09.42.09.64zm-2.72 3.13c.27-.07.67-.14 1.21-.22.48-.07.98-.13 1.5-.19v.66c0 .66-.24 1.19-.74 1.62-.49.4-1.2.62-2.17.62-.61 0-.98-.11-1.17-.28-.2-.19-.31-.46-.31-.83 0-.24.09-.5.29-.75.19-.24.63-.45 1.39-.63z" fill="white"/>
+      <defs><clipPath id="ca"><rect width="137" height="30" fill="white"/></clipPath><clipPath id="cb"><rect width="27.6" height="30" fill="white"/></clipPath></defs>
+    </svg>
+    <div class="cover-badge">Photo Conti · 2026</div>
+  </div>
+  <div class="cover-body">
+    <div class="cover-eyebrow">사진 촬영 콘티 — 산김영준국어논술전문학원 전용</div>
+    <div class="cover-headline">
+      촬영 가이드<br>
+      <span class="grad-text">독립 콘티.</span>
+    </div>
+    <div class="cover-desc">
+      산 김영준국어논술전문학원<br>
+      학원소개 · 강좌소개 · 설명회 랜딩 · 모집관 · 홍보물 활용을 위한<br>
+      사진 촬영 가이드 문서입니다.<br><br>
+      <strong>예쁜 공간 사진보다</strong> '좋은 공부가 이루어지는 환경', '콘텐츠 전문성', '체계적 학생 관리'가 느껴지는 장면 위주.
+    </div>
+  </div>
+  <div class="cover-footer">
+    <div class="cover-footer-l">
+      ClassDay Brand Consulting<br>
+      Confidential · Internal Use Only
+    </div>
+    <div class="cover-count">
+      <div class="cover-count-n">5</div>
+      <div class="cover-count-l">촬영 카테고리</div>
+    </div>
+  </div>
+</div>
+
+<!-- ━━━━━ PURPOSE BANNER ━━━━━━━ -->
+<div class="purpose-banner">
+  <div class="purpose-inner">
+    <div class="purpose-label">촬영 목적<br>및 방향</div>
+    <div class="purpose-body">
+      <span class="grad-text">'좋은 공부가 이루어지는 환경'</span>, <strong>'콘텐츠의 전문성'</strong>, <strong>'체계적인 학생 관리'</strong>가<br>
+      자연스럽게 전달될 수 있는 장면 위주로 촬영합니다.<br>
+      학생 얼굴 노출 최소화 — <strong>뒷모습·측면·손 위주</strong>. 연출 포즈 지양, 자연스러운 순간 포착.
+    </div>
+  </div>
+</div>
+
+<!-- ━━━━━ OVERVIEW ━━━━━━━━━━━━ -->
+<div class="section alt">
+  <div class="sec-inner">
+    <div class="sec-head">
+      <div class="sec-num">Contents</div>
+      <div class="sec-title">촬영 구성 <span class="it">개요</span></div>
+    </div>
+    <div class="toc-grid">
+      <div class="toc-row"><span class="toc-n">Cat. 01</span><span class="toc-t">수업 및 학습 분위기</span></div>
+      <div class="toc-row"><span class="toc-n">Cat. 02</span><span class="toc-t">교재 및 콘텐츠</span></div>
+      <div class="toc-row"><span class="toc-n">Cat. 03</span><span class="toc-t">학생 관리 시스템</span></div>
+      <div class="toc-row"><span class="toc-n">Cat. 04</span><span class="toc-t">캠퍼스 공간</span></div>
+      <div class="toc-row"><span class="toc-n">Cat. 05</span><span class="toc-t">활용 목적 매핑</span></div>
+    </div>
+    <div class="toc-note">* 모든 공간 촬영 — 사람 없는 버전 + 자연스럽게 포함된 버전 두 가지 확보</div>
+  </div>
+</div>
+
+<!-- ━━━━━ CAT 01 : 수업 분위기 ━━ -->
+<div class="section">
+  <div class="sec-inner">
+    <div class="sec-head">
+      <div class="sec-num">Category 01</div>
+      <div class="sec-title">수업 및 <span class="it grad-word">학습 분위기</span></div>
+    </div>
+
+    <!-- SHOT A -->
+    <div class="shot-header">
+      <div class="shot-badge grad-badge" style="font-size:14px;">A</div>
+      <div>
+        <div class="shot-eyebrow">강의실 전경 · 수업 진행</div>
+        <div class="shot-title">강의실 전체 전경 · 수업 진행 장면</div>
+        <div class="tag-row"><span class="tag">실내</span><span class="tag">다수 인물</span><span class="tag">수업 중</span></div>
+      </div>
+    </div>
+    <div class="shot-body" style="margin-bottom:40px;">
+      <div>
+        <div class="frame-mock"><div class="frame-thirds"></div><div class="frame-thirds-h"></div><div class="frame-label">SHOT A</div></div>
+        <div class="frame-note">교실 후면 → 칠판 방향 광각</div>
+      </div>
+      <div class="spec-grid">
+        <div class="spec-row"><div class="spec-label">장면 목록</div>
+          <div class="spec-value key">
+            <ul>
+              <li><span class="li-n">①</span>강의실 전체 전경 — 광각, 교실 후면에서 칠판 방향</li>
+              <li><span class="li-n">②</span>수업 진행 장면 — 강사 수업 중인 모습</li>
+              <li><span class="li-n">③</span>판서 및 수업 자료 활용 장면 — 칠판·화이트보드 클로즈업</li>
+            </ul>
+          </div>
+        </div>
+        <div class="spec-row"><div class="spec-label">버전</div><div class="spec-value">사람 없는 버전 + 수업 중 버전 — 모두 촬영 필수</div></div>
+        <div class="spec-row"><div class="spec-label">주의사항</div><div class="spec-value">학생 얼굴 노출 최소화. 뒷모습·측면 위주</div></div>
+      </div>
+    </div>
+
+    <hr class="shot-divider">
+
+    <!-- SHOT B -->
+    <div class="shot-header">
+      <div class="shot-badge grad-badge" style="font-size:14px;">B</div>
+      <div>
+        <div class="shot-eyebrow">학생 학습 클로즈업</div>
+        <div class="shot-title">필기 · 교재 · 노트 · 문제풀이 장면</div>
+        <div class="tag-row"><span class="tag">클로즈업</span><span class="tag">손</span><span class="tag">오브젝트</span></div>
+      </div>
+    </div>
+    <div class="shot-body">
+      <div>
+        <div class="frame-mock"><div class="frame-thirds"></div><div class="frame-thirds-h"></div><div class="frame-label">SHOT B</div></div>
+        <div class="frame-note">30–45° 하이앵글 / 손·펜 위주</div>
+      </div>
+      <div class="spec-grid">
+        <div class="spec-row"><div class="spec-label">장면 목록</div>
+          <div class="spec-value key">
+            <ul>
+              <li><span class="li-n">①</span>학생 필기 모습 — 펜을 든 손, 노트 위 클로즈업</li>
+              <li><span class="li-n">②</span>교재를 보는 모습 — 손가락으로 짚거나 읽는 장면</li>
+              <li><span class="li-n">③</span>노트 작성 장면 — 필기 흔적·밑줄·메모 선명하게</li>
+              <li><span class="li-n">④</span>문제풀이 장면 — 연필/펜 들고 풀이 중인 순간</li>
+            </ul>
+          </div>
+        </div>
+        <div class="spec-row"><div class="spec-label">주의사항</div><div class="spec-value">얼굴 프레임 밖 또는 아웃포커스. 연출보다 실제 집중하는 자연스러운 순간 포착</div></div>
+      </div>
+    </div>
+    <div class="note-box">
+      <div class="note-label">Cat. 01 공통</div>
+      <div class="note-text"><strong>손·펜·교재 위주 클로즈업.</strong> 학생 얼굴이 드러나는 경우 반드시 아웃포커스 또는 프레임 밖 처리. 실제 수업 중 자연스러운 순간 포착을 최우선으로.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ━━━━━ CAT 02 : 교재/콘텐츠 ━━ -->
+<div class="section alt">
+  <div class="sec-inner">
+    <div class="sec-head">
+      <div class="sec-num">Category 02</div>
+      <div class="sec-title">교재 및 <span class="it grad-word">콘텐츠</span></div>
+    </div>
+
+    <!-- SHOT C -->
+    <div class="shot-header">
+      <div class="shot-badge grad-badge" style="font-size:14px;">C</div>
+      <div>
+        <div class="shot-eyebrow">자체 교재 · 플랫레이</div>
+        <div class="shot-title">교재 · 과제집 · 핵심정리 자료</div>
+        <div class="tag-row"><span class="tag">오브젝트</span><span class="tag">플랫레이</span><span class="tag">탑뷰</span></div>
+      </div>
+    </div>
+    <div class="shot-body" style="margin-bottom:40px;">
+      <div>
+        <div class="frame-mock"><div class="frame-thirds"></div><div class="frame-thirds-h"></div><div class="frame-label">SHOT C</div></div>
+        <div class="frame-note">탑뷰 또는 40° 하이앵글</div>
+      </div>
+      <div class="spec-grid">
+        <div class="spec-row"><div class="spec-label">장면 목록</div>
+          <div class="spec-value key">
+            <ul>
+              <li><span class="li-n">①</span>자체 교재 — 표지 및 펼쳐놓은 내지</li>
+              <li><span class="li-n">②</span>과제집 — 학생이 풀어놓은 흔적 포함</li>
+              <li><span class="li-n">③</span>핵심정리 자료 — 밑줄·형광펜 표시 선명하게</li>
+            </ul>
+          </div>
+        </div>
+        <div class="spec-row"><div class="spec-label">조명</div><div class="spec-value">균일 확산광. 그림자 극소화. 종이 질감 살리는 사이드 보조광 약하게</div></div>
+      </div>
+    </div>
+
+    <hr class="shot-divider">
+
+    <!-- SHOT D -->
+    <div class="shot-header">
+      <div class="shot-badge grad-badge" style="font-size:14px;">D</div>
+      <div>
+        <div class="shot-eyebrow">첨삭 · 분석 · 커리큘럼</div>
+        <div class="shot-title">첨삭 자료 · 문항 분석 · 커리큘럼 자료</div>
+        <div class="tag-row"><span class="tag">디테일 컷</span><span class="tag">클로즈업</span><span class="tag">전문성</span></div>
+      </div>
+    </div>
+    <div class="shot-body">
+      <div>
+        <div class="frame-mock"><div class="frame-thirds"></div><div class="frame-thirds-h"></div><div class="frame-label">SHOT D</div></div>
+        <div class="frame-note">빨간 펜 첨삭 선명 / 탑뷰</div>
+      </div>
+      <div class="spec-grid">
+        <div class="spec-row"><div class="spec-label">장면 목록</div>
+          <div class="spec-value key">
+            <ul>
+              <li><span class="li-n">①</span>첨삭 자료 — 빨간 펜 표시·코멘트가 선명하게 보이는 클로즈업</li>
+              <li><span class="li-n">②</span>문항 분석 자료 — 분석 내용 일부 보이도록</li>
+              <li><span class="li-n">③</span>커리큘럼 자료 — 체계적 구성이 느껴지는 컷</li>
+            </ul>
+          </div>
+        </div>
+        <div class="spec-row"><div class="spec-label">주의사항</div><div class="spec-value">교재를 <strong>펼쳐놓은 상태</strong>로 촬영. 필기 흔적·첨삭 내용이 보이는 <strong>디테일 컷 필수</strong></div></div>
+      </div>
+    </div>
+    <div class="note-box">
+      <div class="note-label">Cat. 02 공통</div>
+      <div class="note-text"><strong>콘텐츠의 전문성</strong>이 전달되어야 합니다. 단순히 책이 놓인 컷보다 실제 사용 흔적(필기·밑줄·첨삭)이 보이는 컷을 우선 확보해 주세요.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ━━━━━ CAT 03 : 학생 관리 ━━━━ -->
+<div class="section">
+  <div class="sec-inner">
+    <div class="sec-head">
+      <div class="sec-num">Category 03</div>
+      <div class="sec-title">학생 <span class="it grad-word">관리 시스템</span></div>
+    </div>
+
+    <!-- SHOT E -->
+    <div class="shot-header">
+      <div class="shot-badge grad-badge" style="font-size:14px;">E</div>
+      <div>
+        <div class="shot-eyebrow">상담 · 관리팀 · 출결</div>
+        <div class="shot-title">상담 · 학습 계획 · 과제 및 출결 관리</div>
+        <div class="tag-row"><span class="tag">인물</span><span class="tag">상담</span><span class="tag">관리</span></div>
+      </div>
+    </div>
+    <div class="shot-body">
+      <div>
+        <div class="frame-mock"><div class="frame-thirds"></div><div class="frame-thirds-h"></div><div class="frame-label">SHOT E</div></div>
+        <div class="frame-note">45° 사선 / 모니터 + 직원 + 학생</div>
+      </div>
+      <div class="spec-grid">
+        <div class="spec-row"><div class="spec-label">장면 목록</div>
+          <div class="spec-value key">
+            <ul>
+              <li><span class="li-n">①</span>상담 장면 — 직원이 학생/학부모와 소통하는 자연스러운 모습</li>
+              <li><span class="li-n">②</span>학습 계획표 확인 — 직원과 학생이 함께 계획표 검토</li>
+              <li><span class="li-n">③</span>과제 및 출결 관리 — 모니터/태블릿 화면 포함</li>
+              <li><span class="li-n">④</span>학생 현황 체크 / 관리팀 업무 장면</li>
+            </ul>
+          </div>
+        </div>
+        <div class="spec-row"><div class="spec-label">버전</div><div class="spec-value">상담 장면 포함 버전 + 공간만(정돈된 상태) 버전 — 두 가지 모두 촬영</div></div>
+        <div class="spec-row"><div class="spec-label">주의사항</div><div class="spec-value"><strong>단순 사무 업무 느낌 지양</strong> — 학생을 관리·지원하는 과정이 느껴지는 장면 위주. 모니터 화면 포함 필수</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ━━━━━ CAT 04 : 캠퍼스 공간 ━━ -->
+<div class="section alt">
+  <div class="sec-inner">
+    <div class="sec-head">
+      <div class="sec-num">Category 04</div>
+      <div class="sec-title">캠퍼스 <span class="it grad-word">공간</span></div>
+    </div>
+
+    <!-- SHOT F -->
+    <div class="shot-header">
+      <div class="shot-badge" style="font-size:14px;">F</div>
+      <div>
+        <div class="shot-eyebrow">외부 · 간판</div>
+        <div class="shot-title">학원 외부 전경 · 간판</div>
+        <div class="tag-row"><span class="tag">외부</span><span class="tag">간판</span></div>
+      </div>
+    </div>
+    <div class="shot-body" style="margin-bottom:40px;">
+      <div>
+        <div class="frame-mock"><div class="frame-thirds"></div><div class="frame-thirds-h"></div><div class="frame-label">SHOT F</div></div>
+        <div class="frame-note">정면 광각 / 야간 버전 포함</div>
+      </div>
+      <div class="spec-grid">
+        <div class="spec-row"><div class="spec-label">장면 목록</div>
+          <div class="spec-value key">
+            <ul>
+              <li><span class="li-n">①</span>학원 외부 전경 — 정면 광각</li>
+              <li><span class="li-n">②</span>간판 클로즈업 — 주간 + 야간(조명) 모두 촬영 권장</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="shot-divider">
+
+    <!-- SHOT G -->
+    <div class="shot-header">
+      <div class="shot-badge" style="font-size:14px;">G</div>
+      <div>
+        <div class="shot-eyebrow">실내 공간</div>
+        <div class="shot-title">복도 · 강의실 · 상담 공간 · 책장</div>
+        <div class="tag-row"><span class="tag">실내</span><span class="tag">공간</span><span class="tag">학습 환경</span></div>
+      </div>
+    </div>
+    <div class="shot-body">
+      <div>
+        <div class="frame-mock"><div class="frame-thirds"></div><div class="frame-thirds-h"></div><div class="frame-label">SHOT G</div></div>
+        <div class="frame-note">광각 / 원근감 활용</div>
+      </div>
+      <div class="spec-grid">
+        <div class="spec-row"><div class="spec-label">장면 목록</div>
+          <div class="spec-value key">
+            <ul>
+              <li><span class="li-n">①</span>복도 — 원근감 활용, 학생 이동 장면 포함 버전 권장</li>
+              <li><span class="li-n">②</span>강의실 내부 — 수업 전 정돈된 상태 + 수업 중 버전</li>
+              <li><span class="li-n">③</span>상담 공간 — 깔끔하게 정돈된 상태</li>
+              <li><span class="li-n">④</span>책장 및 학습 공간 — 자료·교재 잘 보이도록</li>
+            </ul>
+          </div>
+        </div>
+        <div class="spec-row"><div class="spec-label">버전</div><div class="spec-value">모든 공간 — <strong>사람 없는 버전 + 자연스럽게 사람이 포함된 버전</strong> 모두 촬영</div></div>
+      </div>
+    </div>
+    <div class="note-box">
+      <div class="note-label">Cat. 04 공통</div>
+      <div class="note-text">'예쁜 인테리어' 느낌보다 <strong>'공부가 이루어지는 환경'</strong> 분위기 위주. 공간이 학습·관리에 최적화되어 있다는 인상을 줄 수 있는 컷을 우선으로.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ━━━━━ CAT 05 : 활용 목적 ━━━━ -->
+<div class="section">
+  <div class="sec-inner">
+    <div class="sec-head">
+      <div class="sec-num">Category 05</div>
+      <div class="sec-title">활용 <span class="it">목적</span> 매핑</div>
+    </div>
+    <div class="usage-grid">
+      <div class="usage-row">
+        <div class="usage-label">학원소개 페이지</div>
+        <div class="usage-value">강의실 전경 (A), 캠퍼스 공간 (F·G), 학생 관리 시스템 (E)</div>
+      </div>
+      <div class="usage-row">
+        <div class="usage-label">강좌소개 페이지</div>
+        <div class="usage-value">수업 진행 (A), 필기·문제풀이 클로즈업 (B), 교재·콘텐츠 디테일 (C·D)</div>
+      </div>
+      <div class="usage-row">
+        <div class="usage-label">설명회 랜딩</div>
+        <div class="usage-value">강의실 분위기 (A·B), 교재 전문성 (D), 상담 장면 (E), 캠퍼스 공간 (G)</div>
+      </div>
+      <div class="usage-row">
+        <div class="usage-label">모집관 · 홍보물</div>
+        <div class="usage-value">필기·클로즈업 디테일 (B), 첨삭 자료 (D), 간판 및 외부 전경 (F)</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ━━━━━ CHECKLIST ━━━━━━━━━━━━ -->
+<div class="section alt">
+  <div class="sec-inner">
+    <div class="sec-head">
+      <div class="sec-num">Final Check</div>
+      <div class="sec-title">촬영 <span class="it">체크리스트</span></div>
+    </div>
+    <div class="check-grid">
+      <div class="check-card dark">
+        <div class="check-cat">전체 공통</div>
+        <ul class="check-items">
+          <li><span class="check-dot">→</span>학생 얼굴 노출 최소화 (뒷모습·측면·손 위주)</li>
+          <li><span class="check-dot">→</span>연출 포즈 지양, 자연스러운 순간 포착</li>
+          <li><span class="check-dot">→</span>모든 공간 빈 버전 + 사람 포함 버전 확보</li>
+          <li><span class="check-dot">→</span>'예쁜 공간'보다 '좋은 공부 환경' 분위기</li>
+        </ul>
+      </div>
+      <div class="check-card">
+        <div class="check-cat">수업 분위기 (A · B)</div>
+        <ul class="check-items">
+          <li><span class="check-dot">→</span>강의실 광각 + 판서 클로즈업</li>
+          <li><span class="check-dot">→</span>손·펜·교재 위주 클로즈업</li>
+          <li><span class="check-dot">→</span>필기 흔적·밑줄 선명하게</li>
+          <li><span class="check-dot">→</span>집중하는 자연스러운 순간</li>
+        </ul>
+      </div>
+      <div class="check-card">
+        <div class="check-cat">교재 · 콘텐츠 (C · D)</div>
+        <ul class="check-items">
+          <li><span class="check-dot">→</span>교재 펼쳐놓은 상태 촬영</li>
+          <li><span class="check-dot">→</span>첨삭·밑줄 디테일 컷 필수</li>
+          <li><span class="check-dot">→</span>균일 확산광, 그림자 극소화</li>
+          <li><span class="check-dot">→</span>빨간 펜 첨삭 선명하게</li>
+        </ul>
+      </div>
+      <div class="check-card">
+        <div class="check-cat">학생 관리 (E)</div>
+        <ul class="check-items">
+          <li><span class="check-dot">→</span>단순 사무 느낌 지양</li>
+          <li><span class="check-dot">→</span>관리·지원 과정이 느껴지는 장면</li>
+          <li><span class="check-dot">→</span>모니터 화면 포함</li>
+          <li><span class="check-dot">→</span>상담 장면 + 공간만 두 버전</li>
+        </ul>
+      </div>
+      <div class="check-card">
+        <div class="check-cat">캠퍼스 공간 (F · G)</div>
+        <ul class="check-items">
+          <li><span class="check-dot">→</span>간판 주간 + 야간 모두 촬영</li>
+          <li><span class="check-dot">→</span>복도 원근감 + 학생 이동 버전</li>
+          <li><span class="check-dot">→</span>각 공간 빈 버전 + 인물 포함 버전</li>
+          <li><span class="check-dot">→</span>학습 환경 분위기 강조</li>
+        </ul>
+      </div>
+      <div class="check-card dark">
+        <div class="check-cat">활용 목적 재확인</div>
+        <ul class="check-items">
+          <li><span class="check-dot">→</span>학원소개 · 강좌소개 페이지</li>
+          <li><span class="check-dot">→</span>설명회 랜딩페이지</li>
+          <li><span class="check-dot">→</span>모집관 · 홍보물</li>
+          <li><span class="check-dot">→</span>전문성·관리·환경 모두 커버</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ━━━━━ FOOTER ━━━━━━━━━━━━━━ -->
+<div class="doc-footer">
+  <div>
+    <svg width="137" height="30" viewBox="0 0 137 30" fill="none" xmlns="http://www.w3.org/2000/svg" style="height:26px;width:auto;display:block;margin-bottom:10px;">
+      <g clip-path="url(#fa)"><g clip-path="url(#fb)">
+      <path d="M27.6 8.44C27.6 11.18 25.38 13.4 22.64 13.4 21.15 13.4 19.82 12.75 18.91 11.71 17.98 10.63 16.6 9.94 15.06 9.94 12.26 9.94 9.93 12.2 9.93 15c0 .01 0 .02 0 .03C9.93 17.77 7.71 20 4.97 20 2.23 20 .01 17.77.01 15.03.01 6.73 6.74 0 15.04 0c4.36 0 8.27 1.87 11.02 4.84C27.01 5.74 27.6 7.02 27.6 8.44z" fill="white"/>
+      <path d="M4.96 10C7.7 10 9.92 12.22 9.93 14.96V15c0 2.8 2.33 5.06 5.12 5.06 1.54 0 2.93-.69 3.85-1.78.91-1.03 2.25-1.68 3.73-1.68 2.74 0 4.96 2.22 4.96 4.96 0 1.42-.59 2.7-1.54 3.6C23.3 28.13 19.39 30 15.03 30c-2.91 0-5.62-.83-7.92-2.26C5.83 28.28 3.78 28.81 1.83 28.08c-.02-.01-.76-.28-.13-.55.02-.01 1.81-1.15 1.7-3.04C1.28 21.9 0 18.58 0 15c0-2.78 2.22-5 4.96-5z" fill="white"/>
+      </g>
+      <path d="M51.53 10.1C49.82 8.26 47.43 7.12 44.77 7.12c-5.03 0-9.12 4.05-9.17 9.07v.16c0 5.03 4.09 9.07 9.17 9.07 2.66 0 5.05-1.14 6.73-2.95l.06-.06c.41-.39.67-.94.67-1.55 0-1.18-.96-2.14-2.13-2.14-.64 0-1.21.28-1.6.72C47.6 20.48 46.27 21.15 44.79 21.15c-2.67 0-4.92-2.16-4.92-4.88v-.01c0-2.72 2.25-4.88 4.92-4.88 1.48 0 2.81.66 3.7 1.71.39.44.96.72 1.6.72 1.18 0 2.13-.96 2.13-2.14 0-.61-.25-1.16-.63-1.56l-.06-.07z" fill="white"/>
+      <path d="M57.62 8.62v14.85c0 .61-.15 1.09-.49 1.43-.33.33-.82.47-1.39.47-.58 0-1.06-.14-1.37-.47-.33-.34-.48-.82-.48-1.43V8.62c0-.63.15-1.13.48-1.48.33-.35.8-.5 1.36-.5.6 0 1.09.15 1.43.5.33.35.48.85.48 1.48z" fill="white"/>
+      <path fill-rule="evenodd" d="M106.06 8.62v4.62c-.77-.62-1.94-.9-3.14-.9-1.81 0-3.28.72-4.3 1.91-1.01 1.19-1.57 2.83-1.57 4.67 0 1.81.56 3.46 1.58 4.65 1.02 1.19 2.49 1.92 4.29 1.92.8 0 1.57-.18 2.21-.45.46-.2.87-.46 1.16-.75.27.64.85 1.1 1.6 1.1.62 0 1.11-.17 1.43-.53.32-.36.45-.87.45-1.48V8.62c0-.63-.14-1.14-.47-1.48-.32-.35-.8-.5-1.38-.5-.58 0-1.06.15-1.39.5-.33.35-.47.85-.47 1.48zm-5.3 10.29c0-1.57 1.12-2.86 2.65-2.86 1.53 0 2.65 1.29 2.65 2.86 0 1.62-1.12 2.86-2.65 2.86s-2.65-1.24-2.65-2.86z" fill="white"/>
+      <path d="M133.31 13.08l-2.71 6.49-2.57-6.51c-.14-.35-.35-.63-.62-.84-.28-.23-.69-.33-1.19-.33-.59 0-1.09.13-1.47.4-.38.29-.57.68-.57 1.16 0 .12.01.25.03.4.02.18.1.4.21.65l4.2 9.42-1.52 3.23c-.08.17-.16.36-.24.57-.09.25-.14.48-.14.7 0 .41.17.77.48 1.07.34.34.81.5 1.38.5.46 0 .86-.13 1.17-.41.32-.27.57-.63.76-1.07l6.26-13.99c.09-.19.14-.38.16-.56.03-.18.05-.34.05-.48 0-.45-.17-.83-.5-1.13-.34-.32-.83-.46-1.42-.46-.44 0-.81.09-1.08.31-.25.19-.45.49-.62.88z" fill="white"/>
+      <path fill-rule="evenodd" d="M67.8 24.71c-.31-.24-.47-.61-.49-1.06-.08.08-.16.16-.23.24-.23.25-.51.46-.84.65-.33.19-.71.34-1.14.45-.44.12-.94.18-1.5.18-1.31 0-2.37-.34-3.16-1.04-.77-.73-1.15-1.68-1.15-2.84 0-.66.11-1.24.33-1.73.24-.48.56-.88.95-1.21.41-.31.87-.56 1.39-.74.53-.18 1.08-.32 1.65-.42.61-.12 1.22-.21 1.84-.27.57-.06 1.18-.11 1.82-.16v-.25c0-.22-.03-.43-.09-.64-.06-.21-.16-.4-.3-.57-.11-.15-.29-.28-.53-.38-.24-.09-.55-.15-.93-.15-.25 0-.48.02-.69.05-.19.03-.39.08-.6.15-.17.06-.37.16-.58.28-.21.13-.45.28-.72.45-.21.15-.42.27-.62.37-.21.12-.48.17-.77.17-.43 0-.81-.16-1.14-.47-.33-.32-.5-.73-.5-1.19 0-.33.14-.67.38-1 .24-.35.61-.66 1.08-.93.48-.29 1.06-.52 1.73-.7.7-.18 1.51-.27 2.42-.27 1.87 0 3.26.36 4.12 1.14.88.77 1.3 1.97 1.3 3.53v7.18c0 .5-.13.9-.43 1.17-.29.27-.75.37-1.33.37-.51 0-.94-.1-1.28-.33zm-3.24-5.09c-.76.16-1.2.37-1.39.63-.2.25-.29.51-.29.75 0 .37.11.64.31.83.19.17.56.28 1.17.28.97 0 1.68-.22 2.17-.62.5-.43.74-.96.74-1.62v-.66c-.52.06-1.02.12-1.5.19-.54.08-.94.15-1.21.22z" fill="white"/>
+      <path d="M77.13 16.4c-.22-.08-.36-.16-.45-.24-.17-.19-.25-.39-.25-.62 0-.24.11-.45.35-.62.25-.18.66-.29 1.27-.29.62 0 1.12.08 1.48.23.39.16.8.36 1.22.61.14.09.3.17.48.25.24.08.44.12.65.12.23 0 .44-.05.62-.15.17-.12.32-.26.46-.44.25-.32.36-.69.36-1.12 0-.21-.05-.42-.14-.62-.1-.22-.26-.42-.49-.61-.37-.29-.91-.57-1.63-.83-.74-.28-1.68-.42-2.82-.42-.79 0-1.52.09-2.2.27-.66.18-1.24.46-1.73.83-.5.36-.88.8-1.15 1.33-.28.53-.41 1.14-.41 1.81 0 .63.1 1.18.31 1.65.2.45.5.84.87 1.16.38.31.82.56 1.32.76.52.19 1.07.32 1.68.42l1.44.24c.33.06.59.13.8.21.2.08.33.17.4.25.19.21.28.42.28.65 0 .32-.12.56-.37.74-.25.18-.69.29-1.37.29-.55 0-.99-.07-1.33-.2-.36-.14-.67-.3-.95-.47-.27-.17-.52-.33-.74-.47-.26-.16-.53-.25-.82-.25-.32 0-.6.1-.85.29-.23.18-.41.41-.55.67-.18.32-.27.66-.27 1.02 0 .22.06.44.17.66.14.22.32.4.55.56.49.36 1.12.65 1.89.87.8.24 1.68.35 2.66.35 1.71 0 3.1-.34 4.12-1.05 1.05-.72 1.57-1.8 1.57-3.21 0-1.22-.34-2.17-1.06-2.81-.69-.64-1.79-1.08-3.27-1.35l-1.27-.24c-.35-.06-.64-.13-.86-.21z" fill="white"/>
+      <path d="M87.41 24.93c-.77-.22-1.4-.51-1.89-.87-.23-.16-.41-.34-.55-.56-.12-.22-.18-.44-.18-.66 0-.36.09-.7.27-1.02.14-.26.32-.49.55-.67.25-.19.53-.29.85-.29.29 0 .56.09.82.25.22.14.47.3.74.47.28.17.59.33.95.47.34.13.78.2 1.33.2.68 0 1.12-.11 1.37-.29.25-.18.37-.42.37-.74 0-.23-.09-.44-.28-.65-.07-.08-.2-.17-.4-.25-.2-.08-.47-.15-.8-.21l-1.44-.24c-.61-.1-1.16-.23-1.68-.42-.5-.2-.94-.45-1.32-.76-.37-.32-.67-.71-.87-1.16-.21-.47-.31-1.02-.31-1.65 0-.67.13-1.28.41-1.81.27-.53.65-.97 1.15-1.33.49-.37 1.07-.65 1.73-.83.68-.18 1.41-.27 2.2-.27 1.14 0 2.08.14 2.82.42.72.26 1.26.54 1.63.83.23.19.39.39.49.61.09.2.14.41.14.62 0 .43-.11.8-.36 1.12-.14.18-.29.32-.46.44-.18.1-.39.15-.62.15-.21 0-.41-.04-.65-.12-.18-.08-.34-.16-.48-.25-.42-.25-.83-.45-1.22-.61-.36-.15-.86-.23-1.48-.23-.61 0-1.02.11-1.27.29-.24.17-.35.38-.35.62 0 .23.08.43.25.62.09.08.23.16.45.24.22.08.51.15.86.21l1.27.24c1.48.27 2.58.71 3.27 1.35.72.64 1.06 1.59 1.06 2.81 0 1.41-.52 2.49-1.57 3.21-1.02.71-2.41 1.05-4.12 1.05-.98 0-1.86-.11-2.66-.35z" fill="white"/>
+      <path fill-rule="evenodd" d="M119.46 16.49v.25c-.64.05-1.25.1-1.82.16-.62.06-1.23.15-1.84.27-.57.1-1.12.24-1.65.42-.52.18-.98.43-1.39.74-.39.33-.71.73-.95 1.21-.22.49-.33 1.07-.33 1.73 0 1.16.38 2.11 1.15 2.84.79.7 1.85 1.04 3.16 1.04.56 0 1.06-.06 1.5-.18.43-.11.81-.26 1.14-.45.33-.18.61-.4.84-.65.08-.08.16-.16.23-.24.03.45.18.82.49 1.06.34.23.77.33 1.28.33.58 0 1.04-.1 1.33-.37.3-.27.43-.67.43-1.17v-7.18c0-1.56-.42-2.76-1.3-3.53-.86-.78-2.25-1.14-4.12-1.14-.91 0-1.72.09-2.42.27-.67.18-1.25.41-1.73.7-.47.27-.84.58-1.08.93-.24.33-.38.67-.38 1c0 .46.17.87.5 1.19.33.31.71.47 1.14.47.29 0 .56-.05.77-.17.2-.1.41-.22.62-.37.27-.17.51-.32.72-.45.21-.12.41-.22.58-.28.21-.07.41-.12.6-.15.21-.03.44-.05.69-.05.38 0 .69.06.93.15.24.1.42.23.53.38.14.17.24.36.3.57.06.21.09.42.09.64zm-2.72 3.13c.27-.07.67-.14 1.21-.22.48-.07.98-.13 1.5-.19v.66c0 .66-.24 1.19-.74 1.62-.49.4-1.2.62-2.17.62-.61 0-.98-.11-1.17-.28-.2-.19-.31-.46-.31-.83 0-.24.09-.5.29-.75.19-.24.63-.45 1.39-.63z" fill="white"/>
+      <defs><clipPath id="fa"><rect width="137" height="30" fill="white"/></clipPath><clipPath id="fb"><rect width="27.6" height="30" fill="white"/></clipPath></defs>
+    </svg>
+    <div class="ft-sub">사진 촬영 콘티 — 산김영준국어논술전문학원 독립본</div>
+  </div>
+  <div class="ft-meta">
+    Photo Conti · 5 Categories · 7 Shots<br>
+    산 김영준국어논술전문학원<br>
+    © 2026 ClassDay. Confidential.
+  </div>
+</div>
+
+</body>
+</html>
